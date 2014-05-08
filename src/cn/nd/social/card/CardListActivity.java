@@ -3,8 +3,7 @@ package cn.nd.social.card;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import com.example.ofdmtransport.Modulation;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -37,9 +36,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -49,7 +48,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 import cn.nd.social.R;
-import cn.nd.social.SocialApplication;
 import cn.nd.social.account.CAConstant;
 import cn.nd.social.account.CloundServer;
 import cn.nd.social.card.CardUtil.CardData;
@@ -59,10 +57,13 @@ import cn.nd.social.common.FlyAnimation;
 import cn.nd.social.common.PopMenu;
 import cn.nd.social.common.PopMenuItem;
 import cn.nd.social.common.RecordAudioThread;
-import cn.nd.social.contacts.ImportContact;
-import cn.nd.social.contacts.ImportContact.ImportContactCallBack;
+import cn.nd.social.contacts.manager.ContactDBHelper;
+import cn.nd.social.contacts.manager.ContactManager;
+import cn.nd.social.contacts.manager.ContactManagerCallBack;
+import cn.nd.social.contacts.manager.ImportContact;
+import cn.nd.social.contacts.manager.ImportContact.ImportContactCallBack;
+import cn.nd.social.contacts.manager.MemberContact;
 import cn.nd.social.data.CardProvider;
-import cn.nd.social.prishare.PriShareRecvActivity.ActionState;
 import cn.nd.social.sendfile.SendFilesActivity;
 import cn.nd.social.ui.controls.HFGridView;
 import cn.nd.social.ui.controls.RadarAnimalLayout;
@@ -70,10 +71,10 @@ import cn.nd.social.util.AudioDataPacker;
 import cn.nd.social.util.DataFactory;
 import cn.nd.social.util.FilePathHelper;
 import cn.nd.social.util.Utils;
-import cn.nd.social.util.WifiInfoDataPacket;
-import cn.nd.social.util.WifiInfoDataPacket.WifiInfoHolder;
 
-public class CardListActivity extends Activity implements OnCompletionListener {
+import com.example.ofdmtransport.Modulation;
+
+public class CardListActivity extends Activity implements OnCompletionListener, ContactManagerCallBack {
 	CardListQueryHandler mQueryHandler;
 	private HFGridView mGrid;
 	private View mEmptyView;
@@ -118,6 +119,8 @@ public class CardListActivity extends Activity implements OnCompletionListener {
 	private Button btn_reserve;
 	
 	private RadarAnimalLayout laout_radar;
+	
+	private ContactManager mContactManager;
 
 
 	Handler mHandler = new Handler() {
@@ -212,10 +215,10 @@ public class CardListActivity extends Activity implements OnCompletionListener {
 		mGrid.setHorizontalSpacing(gridSpace);
 		// mGrid.setEmptyView(mEmptyView);/**set empty view will cause always
 		// show empty view*/
-		//mGrid.addHeaderView(mHeadView);
+		mGrid.addHeaderView(mHeadView);
 		boolean flag = mPrefs.getBoolean(FIRSTSHOWFLAG, true);
 		if(flag){
-			//layout_teach.setVisibility(View.VISIBLE);
+			layout_teach.setVisibility(View.VISIBLE);
 		}
 	}
     
@@ -746,7 +749,8 @@ public class CardListActivity extends Activity implements OnCompletionListener {
 				PopMenuItem item = (PopMenuItem)parent.getItemAtPosition(position);
 				switch(item.getItemId()) {
 				case MENU_ITEM_IMPORT_CONTACTS:
-					importContact();
+					addContactFriend();
+//					importContact();
 					break;
 					
 				case MENU_ITEM_MULTI_SELECT:
@@ -849,6 +853,35 @@ public class CardListActivity extends Activity implements OnCompletionListener {
 				AudioDataPacker.TYPE_WIFI_CARDS_SHARE);
 		intent.putExtra(SendFilesActivity.SEND_SOURCE, 0);
 		startActivity(intent);
+	}
+	
+	
+	private void addContactFriend(){
+		if(ContactDBHelper.getInstance().getContacts().size() == 0){
+			AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+			builder.setTitle(R.string.hint);
+			builder.setMessage(R.string.uploadContact);
+			builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {			
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();				
+				}
+			});
+			builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {			
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+					if(mContactManager == null){
+						mContactManager = new ContactManager(CardListActivity.this);
+					}
+					List<MemberContact> contacts = ContactDBHelper.getInstance().getContacts();
+					showProgressDialog();
+					mContactManager.queryContactMembers(contacts);
+				}
+			});
+			builder.create().show();
+		}
+		
 	}
 	
 	private void importContact() {
@@ -976,6 +1009,15 @@ public class CardListActivity extends Activity implements OnCompletionListener {
 
     private static final int EVENT_REPEAT_PLAY = 1001;
 	private static final int EVENT_RECORD_RESUME_DELAY = 1002;
+
+
+	@Override
+	public void onQueryContactMembersCallBack(boolean success, String msg) {
+		dismissProgressDialog();
+		Intent intent = new Intent(this,CardListActivity.class);
+		startActivity(intent);
+	}
+	
 
 	
 }

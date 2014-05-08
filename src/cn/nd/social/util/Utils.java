@@ -3,6 +3,8 @@ package cn.nd.social.util;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -219,5 +221,30 @@ public class Utils {
 			e.printStackTrace();
 		}
 	}
+	
+	public static String getMD5(String val){  
+		if(val == null){
+			return null;
+		}
+        MessageDigest md5;
+		try {
+			md5 = MessageDigest.getInstance("MD5");
+			md5.update(val.getBytes());  
+	        byte[] m = md5.digest();//加密   
+	        return getString(m); 
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		return null;
+         
+	}
+	private static String getString(byte[] b){  
+	        StringBuffer sb = new StringBuffer();  
+	         for(int i = 0; i < b.length; i ++){  
+	          sb.append(b[i]);  
+	         }  
+	         return sb.toString();  
+	}  
 
 }

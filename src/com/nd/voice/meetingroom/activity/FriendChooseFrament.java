@@ -347,5 +347,18 @@ public class FriendChooseFrament extends Fragment implements UserManagerCallBack
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void onAddFriendCallBack(long memberId, boolean success, String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onQueryContactFriendCallBack(List<String> friendMobiles,
+			List<String> noFriendMobiles, boolean success, String msg) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

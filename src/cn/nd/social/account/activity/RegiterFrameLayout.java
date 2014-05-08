@@ -292,6 +292,19 @@ public class RegiterFrameLayout extends FrameLayout implements UserManagerCallBa
 	public void setListener(RegiterFrameLayoutListener listener) {
 		this.listener = listener;
 	}
+
+	@Override
+	public void onAddFriendCallBack(long memberId, boolean success, String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onQueryContactFriendCallBack(List<String> friendMobiles,
+			List<String> noFriendMobiles, boolean success, String msg) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

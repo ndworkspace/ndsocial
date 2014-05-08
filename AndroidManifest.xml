@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.nd.social"
-    android:versionCode="31"
-    android:versionName="1.10.1" >
+    android:versionCode="28"
+    android:versionName="1.9.9" >
 
     <uses-sdk android:minSdkVersion="8" />
 
@@ -33,7 +33,13 @@
 	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <!-- <uses-permission android:name="android.permission.CALL_PHONE"/> -->
+    
+    <!-- 读取联系人权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+     <!-- 写联系人权限 -->
+	<uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <!-- 拨打电话权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name="cn.nd.social.SocialApplication"
@@ -152,6 +158,13 @@
         
         <activity
             android:name="cn.nd.social.account.activity.RegiterActivity"
+            android:launchMode="singleTop"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/Anim_style2" />
+        
+        <activity
+            android:name="cn.nd.social.contacts.activity.ContactListActivity"
             android:launchMode="singleTop"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
@@ -282,11 +295,11 @@
         
         <activity
             android:name="cn.nd.social.syncbrowsing.meeting.activity.HostPageActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/QuickExNoTitle" />
         <activity
             android:name="cn.nd.social.syncbrowsing.meeting.activity.ClientPageActivity"
-            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/QuickExNoTitle" />
 

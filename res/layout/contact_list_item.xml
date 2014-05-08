@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/transparent"
+     >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal"
+    android:background="@color/transparent"
+     >
+	<TextView
+	    android:id="@+id/tv_name"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="1"
+	    android:layout_marginLeft="10dp"
+	    android:textSize="18dp"
+	    android:textColor="@color/white"
+	    android:layout_gravity="center_vertical"
+	     />
+
+	<Button 
+	    android:layout_width="70dp"
+	    android:layout_height="match_parent"
+	    android:background="@color/transparent"
+	    android:textColor="@color/Blue"
+	    android:textSize="18dp"
+	    android:layout_gravity="right|center_vertical"
+	    android:layout_margin="10dp"
+	    android:id="@+id/btn_action"
+	    />
+	
+	</LinearLayout>
+	
+<ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="6dip"
+        android:layout_marginRight="6dip"
+        android:background="@drawable/invite_list_item_bg" />
+	
+</LinearLayout>

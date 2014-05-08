@@ -104,6 +104,7 @@
     <string name="save_success">保存成功</string>
     <string name="exit_application">退出</string>
     <string name="quick_exchange">私密传送</string>
+    <string name="privateshare">私密分享</string>
     <string name="new_card_received_hint">收到新名片</string>
     <string name="ultrasonic_listen_on">超声波监听开启</string>
     <string name="ultrasonic_listen_off">超声波监听关闭</string>
@@ -206,7 +207,7 @@
     <string name="new_version_ready_install">新版本已下载完成</string>
     <string name="check_update">版本更新</string>
     <string name="import_wait">正在导入联系人，请稍候...</string>
-    <string name="add_contacts">导入通讯录</string>
+    <string name="add_contacts">添加通讯录好友</string>
     <string name="sync_title">同步浏览</string>
     <string name="choosesync_title">选择同步文件</string>
     <string name="new_share">新的分享</string>
@@ -296,7 +297,7 @@
     <string name="retry">重试</string>
     <string name="exit_share">退出</string>
     <string name="qe_share_user_title">分享用户</string>
-     <string name="private_share_line">私密连接</string>
+    <string name="private_share_line">私密连接</string>
     <string name="unroot_device_manual_install_apk">您的安卓手机没有root权限，需要手动进行应用安装</string>
     <string name="confirm_install">确认安装</string>
     <string name="pri_image_label">宝盒-图片</string>
@@ -358,4 +359,6 @@
 	<string name="savecard">保存名片</string>
 	<string name="press_again_to_exit">再按一下退出</string>	
 	<string name="net_error">网络错误</string>	
+	<string name="addContactFriend">添加通讯录好友</string>	
+	<string name="uploadContact">看看谁在使用私享，上传通讯录找到他们，是否马上上传？</string>
 </resources>
