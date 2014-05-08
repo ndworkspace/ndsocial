@@ -20,8 +20,6 @@ import cn.nd.social.privategallery.imageviewer.ImageViewTouchBase;
 import cn.nd.social.syncbrowsing.codec.LoadPageCallback;
 import cn.nd.social.syncbrowsing.codec.pdf.PdfContext;
 import cn.nd.social.syncbrowsing.ui.ClientSyncReadView;
-import cn.nd.social.syncbrowsing.ui.ClientSyncReadView.NetworkPageLoader;
-import cn.nd.social.syncbrowsing.ui.HostDocView;
 import cn.nd.social.util.Utils;
 
 public class Document {

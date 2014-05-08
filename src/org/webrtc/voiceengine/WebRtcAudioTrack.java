@@ -16,9 +16,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import android.content.Context;
 import android.media.AudioFormat;
 import android.media.AudioManager;
-import android.media.AudioRecord;
 import android.media.AudioTrack;
-import android.util.Log;
 
 class WebRtcAudioTrack {
     private AudioTrack _audioTrack = null;

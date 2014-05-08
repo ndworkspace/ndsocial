@@ -3,8 +3,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import android.util.Log;
-
 
 public class MsgFactory {
 	private static final short PROTOCOL_VERSION = 1;	

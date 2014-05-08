@@ -2,8 +2,6 @@ package com.nd.voice.meetingroom.manager;
 
 import java.io.Serializable;
 
-import cn.nd.social.account.usermanager.UserManager;
-
 public class MeetingEntity implements Serializable{
 	
 	/**

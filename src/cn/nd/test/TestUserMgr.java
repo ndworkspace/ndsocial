@@ -1,16 +1,14 @@
 package cn.nd.test;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.nd.voice.meetingroom.manager.User;
-import com.nd.voice.meetingroom.manager.UserManagerCallBack;
-
 import android.util.Log;
-
 import cn.nd.social.account.usermanager.UserManager;
 import cn.nd.social.util.MD5Encrypt;
+
+import com.nd.voice.meetingroom.manager.User;
+import com.nd.voice.meetingroom.manager.UserManagerCallBack;
 
 public class TestUserMgr {
 	public static void testQueryContact() {

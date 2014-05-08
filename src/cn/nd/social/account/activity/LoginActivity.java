@@ -7,14 +7,12 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.nd.social.BuildConfig;
 import cn.nd.social.R;
 import cn.nd.social.TabLauncherUI;
 import cn.nd.social.account.BootActivity;
@@ -24,7 +22,6 @@ import cn.nd.social.account.usermanager.UserManager;
 import com.nd.voice.meetingroom.manager.User;
 import com.nd.voice.meetingroom.manager.UserManagerApi;
 import com.nd.voice.meetingroom.manager.UserManagerCallBack;
-import com.nd.voice.meetingroom.manager.UserTestManager;
 
 public class LoginActivity extends Activity implements UserManagerCallBack{
 	

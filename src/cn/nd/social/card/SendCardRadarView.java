@@ -1,12 +1,10 @@
 package cn.nd.social.card;
 
-import java.io.File;
 import java.io.IOException;
 
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;

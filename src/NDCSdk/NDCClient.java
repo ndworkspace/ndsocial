@@ -1,16 +1,14 @@
 package NDCSdk;
 
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.io.*;
-
-import cn.nd.social.account.CAConstant;
-import cn.nd.social.account.CloundServer;
 
 import android.util.Log;
+import cn.nd.social.account.CloundServer;
 
 public class NDCClient implements INDCClient {	
 	public static final short MSG_CA_LOGIN_REQ 			= 101;

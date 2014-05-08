@@ -7,13 +7,9 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
 public class Utils {
 	public final static String PRIVATE_GALLERY_PASSWD = "private_passwd";

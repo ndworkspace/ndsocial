@@ -1,33 +1,17 @@
 package cn.nd.social.syncbrowsing.ui;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
-import cn.nd.social.R;
-import cn.nd.social.data.CardProvider;
-import cn.nd.social.data.SyncHistoryOpenHelper;
-import cn.nd.social.data.SyncHistoryProvider;
-import cn.nd.social.hotspot.MsgDefine;
-import cn.nd.social.net.PrivateSwitcher;
-import cn.nd.social.util.FilePathHelper;
-import cn.nd.social.util.Utils;
-import cn.nd.social.util.file.FileOperationHelper;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -36,6 +20,14 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.nd.social.R;
+import cn.nd.social.data.SyncHistoryOpenHelper;
+import cn.nd.social.data.SyncHistoryProvider;
+import cn.nd.social.hotspot.MsgDefine;
+import cn.nd.social.net.PrivateSwitcher;
+import cn.nd.social.util.FilePathHelper;
+import cn.nd.social.util.Utils;
+import cn.nd.social.util.file.FileOperationHelper;
 
 public class SyncBrowserDialogActivity extends Activity{
 

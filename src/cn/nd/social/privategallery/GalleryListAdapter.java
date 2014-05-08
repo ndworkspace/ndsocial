@@ -1,6 +1,7 @@
 package cn.nd.social.privategallery;
 
 import java.lang.ref.WeakReference;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
@@ -10,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import cn.nd.social.R;
 import cn.nd.social.prishare.items.CellItemBase;
 

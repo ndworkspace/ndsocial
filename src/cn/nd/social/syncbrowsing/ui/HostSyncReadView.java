@@ -1,15 +1,6 @@
 package cn.nd.social.syncbrowsing.ui;
 
 
-import cn.nd.social.R;
-import cn.nd.social.syncbrowsing.Document;
-import cn.nd.social.syncbrowsing.manager.IHostSyncEventListener;
-import cn.nd.social.syncbrowsing.ui.HostDocView.OpMode;
-import cn.nd.social.syncbrowsing.ui.SyncAction.DrawState;
-import cn.nd.social.util.DataFactory;
-import cn.nd.social.util.FilePathHelper;
-import cn.nd.social.util.NDConfig;
-import cn.nd.social.util.Utils;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.util.Log;
@@ -18,6 +9,14 @@ import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import cn.nd.social.R;
+import cn.nd.social.syncbrowsing.Document;
+import cn.nd.social.syncbrowsing.manager.IHostSyncEventListener;
+import cn.nd.social.syncbrowsing.ui.HostDocView.OpMode;
+import cn.nd.social.syncbrowsing.ui.SyncAction.DrawState;
+import cn.nd.social.util.DataFactory;
+import cn.nd.social.util.FilePathHelper;
+import cn.nd.social.util.Utils;
 
 public class HostSyncReadView  {	
 	HostDocView mDocView;

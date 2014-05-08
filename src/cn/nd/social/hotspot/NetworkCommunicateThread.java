@@ -12,14 +12,12 @@ import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.Set;
 
-import cn.nd.social.util.FilePathHelper;
-import cn.nd.social.util.LogToFile;
-
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import cn.nd.social.util.FilePathHelper;
+import cn.nd.social.util.LogToFile;
 
 //todo : NetworkCommunicateThread need split off 
 public class NetworkCommunicateThread extends Thread {

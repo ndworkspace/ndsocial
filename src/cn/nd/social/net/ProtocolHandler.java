@@ -1,8 +1,8 @@
 package cn.nd.social.net;
 
-import cn.nd.social.hotspot.MsgDefine;
 import android.os.Handler;
 import android.os.Message;
+import cn.nd.social.hotspot.MsgDefine;
 
 public class ProtocolHandler extends Handler {
 

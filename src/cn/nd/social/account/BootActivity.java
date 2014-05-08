@@ -1,7 +1,5 @@
 package cn.nd.social.account;
 
-import com.nd.voice.meetingroom.manager.UserManagerApi;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -21,6 +19,8 @@ import cn.nd.social.net.ClientLogin;
 import cn.nd.social.tobedelete.LoginActivityBack;
 import cn.nd.social.tobedelete.NewAccountActivity;
 import cn.nd.social.util.Utils;
+
+import com.nd.voice.meetingroom.manager.UserManagerApi;
 
 public class BootActivity extends Activity {
 	private View mSignIn; // login

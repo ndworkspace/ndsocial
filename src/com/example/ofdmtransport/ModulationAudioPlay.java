@@ -5,7 +5,6 @@ import java.lang.ref.WeakReference;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import cn.nd.social.util.FilePathHelper;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioRecord;
@@ -14,6 +13,7 @@ import android.media.MediaRecorder;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import cn.nd.social.util.FilePathHelper;
 
 
 /**

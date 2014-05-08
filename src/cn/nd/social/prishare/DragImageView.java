@@ -1,11 +1,11 @@
 package cn.nd.social.prishare;
 
-import cn.nd.dragdrop.DragController;
-import cn.nd.dragdrop.DragSource;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
+import cn.nd.dragdrop.DragController;
+import cn.nd.dragdrop.DragSource;
 
 public class DragImageView extends ImageView implements DragSource {
 	public DragImageView(Context context) {

@@ -2,7 +2,6 @@ package cn.nd.social.account.activity;
 
 import java.util.List;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.nd.social.R;
-import cn.nd.social.account.BootActivity;
 import cn.nd.social.account.usermanager.UserManager;
 
 import com.nd.voice.meetingroom.manager.User;

@@ -1,13 +1,10 @@
 ﻿package cn.nd.social.syncbrowsing.manager;
 
-import java.io.ObjectOutputStream.PutField;
-
-import cn.nd.social.syncbrowsing.meeting.activity.ClientPageActivity;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import cn.nd.social.syncbrowsing.meeting.activity.ClientPageActivity;
 
 /**
  * BroadcastReceiver for Meeting event Notify

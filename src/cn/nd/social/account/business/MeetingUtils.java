@@ -7,17 +7,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+import cn.nd.social.account.CloundServer;
+import cn.nd.social.account.usermanager.UserManager;
+
 import com.nd.voice.meetingroom.manager.MeetingDetailEntity;
 import com.nd.voice.meetingroom.manager.MeetingEntity;
 import com.nd.voice.meetingroom.manager.MeetingUser;
 import com.nd.voice.meetingroom.manager.User;
-
-import NDCSdk.INDCClient;
-import android.content.SharedPreferences;
-import android.util.Log;
-import cn.nd.social.account.CloundServer;
-import cn.nd.social.account.usermanager.UserManager;
-import cn.nd.social.util.Utils;
 
 public class MeetingUtils {
 	

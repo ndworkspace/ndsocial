@@ -10,9 +10,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import cn.nd.social.R;
-
 import android.content.Context;
+import cn.nd.social.R;
 
 public class CardViewCfgReader {
 	private final static String FIELD_NAME = "name";

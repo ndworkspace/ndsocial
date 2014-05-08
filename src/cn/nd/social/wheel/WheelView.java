@@ -22,8 +22,6 @@ package cn.nd.social.wheel;
 import java.util.LinkedList;
 import java.util.List;
 
-
-import cn.nd.social.R;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Canvas;
@@ -36,6 +34,7 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
+import cn.nd.social.R;
 
 /**
  * Numeric wheel view.

@@ -2,10 +2,6 @@ package cn.nd.social.net;
 
 import java.util.List;
 
-import cn.nd.social.hotspot.WifiApAdmin;
-import cn.nd.social.net.WifiController.WifiConnectState;
-import cn.nd.social.util.LogToFile;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +13,8 @@ import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import cn.nd.social.hotspot.WifiApAdmin;
+import cn.nd.social.util.LogToFile;
 
 public class WifiShareManager {
 	

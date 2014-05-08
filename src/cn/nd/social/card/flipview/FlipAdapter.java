@@ -16,7 +16,6 @@ import cn.nd.social.card.CardEntity;
 import cn.nd.social.card.CardUtil;
 import cn.nd.social.card.CardViewCfgReader;
 import cn.nd.social.card.CardViewCfgReader.CardLayoutCfg;
-
 import cn.nd.social.ui.controls.CustomizeableLayout;
 
 public class FlipAdapter extends BaseAdapter implements OnClickListener {

@@ -1,8 +1,5 @@
 ﻿package cn.nd.social.account.business;
 
-import com.nd.voice.meetingroom.activity.RoomListFrame;
-import com.nd.voice.meetingroom.manager.MeetingEntity;
-
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,6 +8,9 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.widget.Toast;
+
+import com.nd.voice.meetingroom.activity.RoomListFrame;
+import com.nd.voice.meetingroom.manager.MeetingEntity;
 
 /**
  * BroadcastReceiver for Meeting event Notify

@@ -1,11 +1,10 @@
 package cn.nd.social.prishare.component;
 
+import android.os.Handler;
+import android.os.Message;
 import cn.nd.social.hotspot.MsgDefine;
 
 import com.example.ofdmtransport.Modulation;
-
-import android.os.Handler;
-import android.os.Message;
 
 public class MainHandler extends Handler{
 

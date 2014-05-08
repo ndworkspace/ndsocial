@@ -2,6 +2,7 @@ package cn.nd.social.tresure;
 
 import java.io.File;
 import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -26,7 +27,6 @@ import cn.nd.social.R;
 import cn.nd.social.common.PopMenu;
 import cn.nd.social.common.PopMenuItem;
 import cn.nd.social.hotspot.MsgDefine;
-
 import cn.nd.social.util.CommonUtils;
 import cn.nd.social.util.FilePathHelper;
 import cn.nd.social.util.file.FileIconHelper;

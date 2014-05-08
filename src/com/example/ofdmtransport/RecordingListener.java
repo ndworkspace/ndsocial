@@ -1,14 +1,8 @@
 package com.example.ofdmtransport;
 
-import java.io.IOException;
-
-import cn.nd.social.util.AudioDataPacker;
-
-import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
+import cn.nd.social.util.AudioDataPacker;
 
 public interface RecordingListener {
 	public boolean interceptRecording();

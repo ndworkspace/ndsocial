@@ -58,6 +58,7 @@ import cn.nd.social.common.FlyAnimation;
 import cn.nd.social.common.PopMenu;
 import cn.nd.social.common.PopMenuItem;
 import cn.nd.social.common.RecordAudioThread;
+import cn.nd.social.contacts.activity.ContactListActivity;
 import cn.nd.social.contacts.manager.ContactDBHelper;
 import cn.nd.social.contacts.manager.ContactManager;
 import cn.nd.social.contacts.manager.ContactManagerCallBack;
@@ -933,8 +934,13 @@ public class CardListActivity extends Activity implements OnCompletionListener, 
 	@Override
 	public void onQueryContactMembersCallBack(boolean success, String msg) {
 		dismissProgressDialog();
-		Intent intent = new Intent(this,CardListActivity.class);
-		startActivity(intent);
+		if(success){
+			Intent intent = new Intent(this,ContactListActivity.class);
+			startActivity(intent);
+		}else{
+			Toast.makeText(this, msg, 1000);
+		}
+		
 	}
 	
 	

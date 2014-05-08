@@ -1,14 +1,12 @@
 package com.nd.voice.chatroom;
 
-import cn.nd.social.R;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
+import cn.nd.social.R;
 
 public class MultiTalkSettingView extends LinearLayout{
 

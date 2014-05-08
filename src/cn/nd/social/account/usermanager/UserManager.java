@@ -1,7 +1,6 @@
 package cn.nd.social.account.usermanager;
 
 import java.lang.ref.WeakReference;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,12 +8,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
 import cn.nd.social.account.CAUtils;
 import cn.nd.social.account.CloundServer;
 import cn.nd.social.card.CardUtil;
 import cn.nd.social.card.CardUtil.CardData;
-import cn.nd.social.util.MD5Encrypt;
 
 import com.nd.voice.meetingroom.manager.User;
 import com.nd.voice.meetingroom.manager.UserManagerApi;

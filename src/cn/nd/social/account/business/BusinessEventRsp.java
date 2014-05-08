@@ -1,7 +1,6 @@
 package cn.nd.social.account.business;
 
 import android.util.Log;
-
 import cn.nd.social.account.CAConstant;
 import cn.nd.social.account.CAUtils.BusinessCallback;
 import cn.nd.social.account.business.MeetingUtils.MeetingRsp;

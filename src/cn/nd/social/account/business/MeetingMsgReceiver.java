@@ -3,12 +3,7 @@ package cn.nd.social.account.business;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.nd.voice.meetingroom.manager.MeetingDetailEntity;
-import com.nd.voice.meetingroom.manager.MeetingEntity;
-import com.nd.voice.meetingroom.manager.MeetingManagerCallBack;
-
 import android.util.Log;
-
 import cn.nd.social.account.CloundServer;
 import cn.nd.social.account.business.MeetingUtils.AddMeetingMemberRsp;
 import cn.nd.social.account.business.MeetingUtils.AddMeetingRsp;
@@ -16,7 +11,10 @@ import cn.nd.social.account.business.MeetingUtils.CancelMeetingRsp;
 import cn.nd.social.account.business.MeetingUtils.MeetingRsp;
 import cn.nd.social.account.business.MeetingUtils.QueryListRsp;
 import cn.nd.social.account.business.MeetingUtils.QueryRoomRsp;
-import cn.nd.social.account.business.MeetingUtils.TransferMsg;
+
+import com.nd.voice.meetingroom.manager.MeetingDetailEntity;
+import com.nd.voice.meetingroom.manager.MeetingEntity;
+import com.nd.voice.meetingroom.manager.MeetingManagerCallBack;
 
 
 public class MeetingMsgReceiver{

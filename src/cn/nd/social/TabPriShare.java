@@ -3,15 +3,6 @@ package cn.nd.social;
 
 
 
-import cn.nd.dragdrop.DragController;
-import cn.nd.dragdrop.DragController.DragListener;
-import cn.nd.dragdrop.DragSource;
-import cn.nd.dragdrop.DragSource.OnDragCompletedListener;
-import cn.nd.social.TabLauncherUI.InvokeOptionsMenu;
-import cn.nd.social.prishare.DragDropLayout;
-import cn.nd.social.prishare.DropView;
-import cn.nd.social.prishare.PriShareRecvActivity;
-import cn.nd.social.prishare.PriShareSendActivity;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -25,6 +16,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import cn.nd.dragdrop.DragController;
+import cn.nd.dragdrop.DragController.DragListener;
+import cn.nd.dragdrop.DragSource;
+import cn.nd.dragdrop.DragSource.OnDragCompletedListener;
+import cn.nd.social.TabLauncherUI.InvokeOptionsMenu;
+import cn.nd.social.prishare.DragDropLayout;
+import cn.nd.social.prishare.DropView;
+import cn.nd.social.prishare.PriShareRecvActivity;
+import cn.nd.social.prishare.PriShareSendActivity;
 
 public class TabPriShare extends Fragment implements 
 		InvokeOptionsMenu{

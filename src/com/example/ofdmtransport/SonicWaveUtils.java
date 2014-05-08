@@ -3,9 +3,6 @@ package com.example.ofdmtransport;
 import java.io.File;
 
 import cn.nd.social.util.FilePathHelper;
-import cn.nd.social.util.Utils;
-
-import android.os.Environment;
 
 public class SonicWaveUtils {
 	private static String sCardFile;

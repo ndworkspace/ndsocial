@@ -2,9 +2,7 @@ package cn.nd.social.ui.controls;
 
 import java.io.InputStream;
 
-import cn.nd.social.R;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;

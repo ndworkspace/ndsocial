@@ -1,15 +1,14 @@
 ﻿package cn.nd.social.updater;
 
-import cn.nd.social.R;
-
 import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager.NameNotFoundException;
+import cn.nd.social.R;
 
 /**
  * BroadcastReceiver for Meeting event Notify

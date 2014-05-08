@@ -1,6 +1,7 @@
 package cn.nd.social;
 
 import java.lang.reflect.Method;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -11,20 +12,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.AnimationSet;
 import android.view.ViewGroup;
+import android.view.animation.AnimationSet;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.nd.social.TabLauncherUI.InvokeOptionsMenu;
 import cn.nd.social.TabLauncherUI.TitleEventCallBack;
-import cn.nd.social.card.TabMyCard;
-import cn.nd.social.common.ShareThisApp;
-import cn.nd.social.syncbrowsing.ui.SyncBrowserActivity;
-import cn.nd.social.util.Utils;
 
 import com.nd.voice.chatroom.EnterRoomActivity;
 import com.nd.voice.meetingroom.activity.RoomListActivity;
-import com.nd.voice.meetingroom.manager.MeetingEntity;
 
 public class TabBusiness extends Fragment implements TitleEventCallBack,InvokeOptionsMenu {
 	LayoutInflater mInflater;

@@ -2,13 +2,9 @@ package cn.nd.social.sendfile;
 
 import java.util.ArrayList;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.widget.Toast;
-import cn.nd.social.R;
 import cn.nd.social.hotspot.MsgDefine;
 import cn.nd.social.net.NetworkProtocolImpl;
-import cn.nd.social.prishare.PriShareSendActivity;
 import cn.nd.social.prishare.items.CellItemBase;
 import cn.nd.social.util.Utils;
 

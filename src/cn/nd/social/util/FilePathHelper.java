@@ -4,7 +4,6 @@ import java.io.File;
 
 import android.content.res.Resources;
 import android.os.Environment;
-
 import cn.nd.social.R;
 import cn.nd.social.hotspot.MsgDefine;
 

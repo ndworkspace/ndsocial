@@ -5,13 +5,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +22,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import cn.nd.social.R;
+import cn.nd.social.account.business.BusinessMeetingManager;
+import cn.nd.social.account.usermanager.UserManager;
+import cn.nd.social.common.PopMenu;
+import cn.nd.social.common.PopMenuItem;
 
 import com.nd.voice.chatroom.EnterRoomActivity;
 import com.nd.voice.meetingroom.lib.SwipeListView;
@@ -32,15 +35,7 @@ import com.nd.voice.meetingroom.manager.MeetingDetailEntity;
 import com.nd.voice.meetingroom.manager.MeetingEntity;
 import com.nd.voice.meetingroom.manager.MeetingManagerApi;
 import com.nd.voice.meetingroom.manager.MeetingManagerCallBack;
-import com.nd.voice.meetingroom.manager.MeetingTestManager;
 import com.nd.voice.meetingroom.manager.UserManagerApi;
-import com.nd.voice.meetingroom.manager.UserTestManager;
-
-import  cn.nd.social.R;
-import cn.nd.social.account.business.BusinessMeetingManager;
-import cn.nd.social.account.usermanager.UserManager;
-import cn.nd.social.common.PopMenu;
-import cn.nd.social.common.PopMenuItem;
 
 public class RoomListActivity extends FragmentActivity implements MeetingManagerCallBack{
 	

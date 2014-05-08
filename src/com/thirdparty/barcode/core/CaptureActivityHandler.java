@@ -17,11 +17,7 @@
 package com.thirdparty.barcode.core;
 
 
-import cn.nd.social.R;
-
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.Result;
-import com.thirdparty.barcode.camera.CameraManager;
+import java.util.Collection;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -30,8 +26,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import cn.nd.social.R;
 
-import java.util.Collection;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.Result;
+import com.thirdparty.barcode.camera.CameraManager;
 
 /**
  * This class handles all the messaging which comprises the state machine for

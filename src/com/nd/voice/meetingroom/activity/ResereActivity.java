@@ -2,13 +2,12 @@ package com.nd.voice.meetingroom.activity;
 
 import java.util.Calendar;
 
-import cn.nd.social.R;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import cn.nd.social.R;
 
 public class ResereActivity extends FragmentActivity implements ReserveRoomFramentListener,FriendChooseListener{
 	

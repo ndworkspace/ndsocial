@@ -17,10 +17,8 @@
 package com.thirdparty.barcode.core;
 
 
-import cn.nd.social.R;
-
-import com.google.zxing.ResultPoint;
-import com.thirdparty.barcode.camera.CameraManager;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -31,13 +29,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
+import cn.nd.social.R;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.zxing.ResultPoint;
+import com.thirdparty.barcode.camera.CameraManager;
 
 /**
  * This view is overlaid on top of the camera preview. It adds the viewfinder

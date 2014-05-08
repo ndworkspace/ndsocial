@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import cn.nd.social.account.usermanager.UserManager;
+import cn.nd.test.TestUserMgr;
 
 import com.nd.voice.meetingroom.manager.User;
 import com.nd.voice.meetingroom.manager.UserManagerApi;
@@ -28,6 +29,7 @@ public class ContactManager implements UserManagerCallBack{
 		mApi.setCallBack(this);
 		List<String> contactMobiles = getContactMobiles(contacts);
 		mApi.queryContactFriend(contactMobiles);
+//		TestUserMgr.testQueryContact();
 	}
 	
 	private List<String> getContactMobiles(List<MemberContact> contacts){

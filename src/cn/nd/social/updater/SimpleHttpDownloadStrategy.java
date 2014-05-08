@@ -22,9 +22,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import cn.nd.social.R;
-import cn.nd.social.util.Utils;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -32,6 +29,8 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.RemoteViews;
+import cn.nd.social.R;
+import cn.nd.social.util.Utils;
 
 public class SimpleHttpDownloadStrategy implements DownloadStrategy {
 

@@ -3,7 +3,6 @@ package cn.nd.social.prishare.items;
 import java.io.File;
 import java.text.DecimalFormat;
 
-
 import android.graphics.drawable.Drawable;
 
 public class AppCellItem extends CellItemBase {

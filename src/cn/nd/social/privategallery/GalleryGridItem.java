@@ -1,12 +1,12 @@
 package cn.nd.social.privategallery;
 
-import cn.nd.social.hotspot.Utils;
-import cn.nd.social.prishare.items.CellItemBase;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import cn.nd.social.hotspot.Utils;
+import cn.nd.social.prishare.items.CellItemBase;
 
 public class GalleryGridItem extends CellItemBase{
 

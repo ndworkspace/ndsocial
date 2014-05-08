@@ -30,8 +30,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import cn.nd.social.R;
 import cn.nd.social.prishare.PriShareSendActivity;
-import cn.nd.social.sendfile.SendFilesActivity;
-import cn.nd.social.util.AudioDataPacker;
 import cn.nd.social.util.Utils;
 
 public class SetTimeActivity extends Activity implements

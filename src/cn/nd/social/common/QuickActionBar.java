@@ -2,15 +2,6 @@ package cn.nd.social.common;
 
 import java.util.ArrayList;
 
-import cn.nd.social.R;
-import cn.nd.social.TabLauncherUI;
-import cn.nd.social.R.drawable;
-import cn.nd.social.R.id;
-import cn.nd.social.R.layout;
-import cn.nd.social.R.string;
-import cn.nd.social.ui.controls.HorizontalListView;
-import cn.nd.social.updater.UpdateInitiator;
-import cn.nd.social.util.DimensionUtils;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -21,6 +12,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import cn.nd.social.R;
+import cn.nd.social.ui.controls.HorizontalListView;
+import cn.nd.social.util.DimensionUtils;
 
 public class QuickActionBar extends LinearLayout{
 

@@ -1,11 +1,8 @@
 package cn.nd.social;
 
 
-import com.nd.voice.meetingroom.activity.AuthorizationFrame;
-
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +16,8 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import cn.nd.social.TabLauncherUI.InvokeOptionsMenu;
 import cn.nd.social.TabLauncherUI.TitleEventCallBack;
-import cn.nd.social.ui.controls.GradientView;
+
+import com.nd.voice.meetingroom.activity.AuthorizationFrame;
 
 public class TabIM extends AuthorizationFrame implements TitleEventCallBack,InvokeOptionsMenu,TabFramentChangeListener {
 

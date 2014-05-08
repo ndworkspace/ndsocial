@@ -1,18 +1,14 @@
 package com.example.ofdmtransport;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-import cn.nd.social.util.AudioDataPacker;
-import cn.nd.social.util.FilePathHelper;
 import android.media.AudioFormat;
-import android.media.AudioManager;
 import android.media.AudioRecord;
-import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import cn.nd.social.util.AudioDataPacker;
 
 public class ModulationAudioRecord extends Thread {
 

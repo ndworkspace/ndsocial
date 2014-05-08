@@ -23,7 +23,6 @@ import android.view.animation.Animation.AnimationListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.nd.social.MessageActivity;
 import cn.nd.social.R;
 import cn.nd.social.data.MsgProviderSingleton;
 import cn.nd.social.hotspot.MsgDefine;
@@ -31,7 +30,6 @@ import cn.nd.social.privategallery.PrivateGalleryProvider;
 import cn.nd.social.privategallery.Utils;
 import cn.nd.social.privategallery.imageviewer.ImageViewTouch;
 import cn.nd.social.privategallery.imageviewer.ImageViewTouchBase.DisplayType;
-import cn.nd.social.services.FileControlProvider;
 import cn.nd.social.ui.controls.TVOffAnimation;
 
 public class ImageViewer extends Activity implements OnCompletionListener {

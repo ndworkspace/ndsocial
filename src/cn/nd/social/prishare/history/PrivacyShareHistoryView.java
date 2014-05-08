@@ -2,14 +2,12 @@ package cn.nd.social.prishare.history;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 import cn.nd.social.R;
-import cn.nd.social.common.ImageViewer;
 import cn.nd.social.prishare.component.InterfaceHandlerForMain;
 
 public class PrivacyShareHistoryView {

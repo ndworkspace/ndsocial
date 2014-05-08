@@ -3,19 +3,16 @@ package cn.nd.social.net;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import cn.nd.social.R;
-import cn.nd.social.R.string;
-import cn.nd.social.util.Utils;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
+import cn.nd.social.R;
+import cn.nd.social.util.Utils;
 
 public class PrivateSwitcher {
 	private boolean mIsMobileDataPreOn;

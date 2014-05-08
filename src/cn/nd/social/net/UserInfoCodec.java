@@ -4,8 +4,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
-
-import cn.nd.social.card.CardUtil;
 import cn.nd.social.card.CardUtil.CardData;
 
 public class UserInfoCodec {

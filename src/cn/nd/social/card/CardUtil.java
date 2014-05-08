@@ -2,8 +2,6 @@ package cn.nd.social.card;
 
 import java.util.ArrayList;
 
-import com.nd.voice.meetingroom.manager.User;
-
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -16,13 +14,14 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.widget.Toast;
 import cn.nd.social.R;
-import cn.nd.social.SocialApplication;
 import cn.nd.social.account.CAUtils;
 import cn.nd.social.account.CloundServer;
 import cn.nd.social.data.CardOpenHelper;
 import cn.nd.social.data.CardProvider;
 import cn.nd.social.util.AudioDataPacker;
 import cn.nd.social.util.Utils;
+
+import com.nd.voice.meetingroom.manager.User;
 
 public class CardUtil {
 	public final static String ACTION_SELF_CARD_REFRESH = "cn.nd.social.refresh_card";
