@@ -11,6 +11,7 @@ import com.nd.voice.meetingroom.manager.UserManagerCallBack;
 import NDCSdk.INDCClient;
 import NDCSdk.NDCClient;
 import android.os.Handler;
+import android.os.UserManager;
 import android.util.Log;
 import android.widget.Toast;
 import cn.nd.social.BuildConfig;
@@ -361,11 +362,11 @@ public class CloundServer {
 			case CAConstant.APP_EVENT_ADD_FRIEND_RSP:			
 				if(msg.arg1 == CACallBack.RET_SUCCESS) {					
 					if(hasUserMgrCbk()) {
-						//mWeakRefCbk.get().onAddFriendCallBack((Long)msg.obj, true,"添加成功");
+						mWeakRefCbk.get().onAddFriendCallBack((Long)msg.obj, true,"添加成功");
 					}
 				} else {
 					if(hasUserMgrCbk()) {
-						//mWeakRefCbk.get().onAddFriendCallBack(0, false, "服务器返回错误");				
+						mWeakRefCbk.get().onAddFriendCallBack(0, false, "服务器返回错误");				
 					}
 				}
 				break;
@@ -374,13 +375,14 @@ public class CloundServer {
 				if(msg.arg1 == CACallBack.RET_SUCCESS) {
 					ArrayList<String>friendMobile = new ArrayList<String>();
 					ArrayList<String>notFriendMobiles = new ArrayList<String>();
-					AccountInfoParser.parseContactFriendInfo((String)msg.obj, friendMobile, notFriendMobiles);
+					ArrayList<Long>notFriendIds = new ArrayList<Long>();
+					AccountInfoParser.parseContactFriendInfo((String)msg.obj, friendMobile, notFriendMobiles,notFriendIds);
 					if(hasUserMgrCbk()) {
-						//mWeakRefCbk.get().onQueryContactFriendCallBack((Long)msg.obj, true,"添加成功");
+						mWeakRefCbk.get().onQueryContactFriendCallBack(friendMobile,notFriendMobiles,notFriendIds,true,"添加成功");
 					}
 				} else {
 					if(hasUserMgrCbk()) {
-						//mWeakRefCbk.get().onQueryContactFriendCallBack(null,null, false, "服务器返回错误");				
+						mWeakRefCbk.get().onQueryContactFriendCallBack(null,null, null,false, "服务器返回错误");				
 					}
 				}
 				break;
@@ -523,7 +525,7 @@ public class CloundServer {
 					parseFriendList((String)msg.obj);
 				} else {
 					Log.e("CloundServer","query friend error");
-				}
+				}				
 				debugShowInfoInUI("query friend response:" + msg.arg1);
 				break;
 				

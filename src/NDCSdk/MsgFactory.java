@@ -496,8 +496,7 @@ public class MsgFactory {
 			try{
 				short nTotalLen = (short) (4 + data.length);
 				out.writeShort(nTotalLen);
-				//TODO: change the msg type
-				out.writeShort(NDCClient.MSG_CA_DEL_ALIAS_REQ);		//type	
+				out.writeShort(NDCClient.MSG_CA_PHONE_CHECK_REQ);		//type	
 				out.write(data);
 			}
 			catch (IOException e)

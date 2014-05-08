@@ -222,7 +222,7 @@ public class ContactListActivity extends Activity implements UserManagerCallBack
 
 	@Override
 	public void onQueryContactFriendCallBack(List<String> friendMobiles,
-			List<String> noFriendMobiles, List<String> noFriendUids,
+			List<String> noFriendMobiles, List<Long> noFriendUids,
 			boolean success, String msg) {
 		// TODO Auto-generated method stub
 		

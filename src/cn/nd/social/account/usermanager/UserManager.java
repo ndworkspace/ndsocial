@@ -159,19 +159,11 @@ public class UserManager implements UserManagerApi {
 		CloundServer.getInstance().setUserMgrCbk(mWeakRefUserMgrCbk!=null? mWeakRefUserMgrCbk.get():null);
 		List<String>encryptedList = contactMobiles;
 		
-/*		try {
-			for(String mobile:contactMobiles) {
-				String encrypt = MD5Encrypt.getMD5(mobile);
-				encryptedList.add(encrypt);
-			}
-		} catch (NoSuchAlgorithmException e) {
-			Log.e("UserManager","queryContactFriend: MD5 encrypt error");
-			e.printStackTrace();
-		}*/
+
 		
 		JSONArray jArray = new JSONArray();
 		for(String encryptMobile:encryptedList) {
-			jArray.put(JSONObject.quote(encryptMobile));
+			jArray.put(encryptMobile);
 		}
 		
 		JSONObject jobj = new JSONObject();

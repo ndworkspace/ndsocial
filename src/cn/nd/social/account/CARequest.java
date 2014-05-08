@@ -137,9 +137,6 @@ public class CARequest {
 			return false;
 		}
 		int reqCode = CAConstant.CHECK_PHONE_FRIEND;
-		if (isReqPending(reqCode)) {
-			return false;
-		}
 		
 		NetMessageEntity netMsg = new NetMessageEntity();
 		netMsg.requestCode = reqCode;

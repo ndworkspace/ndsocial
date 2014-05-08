@@ -73,7 +73,7 @@ public class ContactManager implements UserManagerCallBack{
 
 	@Override
 	public void onQueryContactFriendCallBack(List<String> friendMobiles,
-			List<String> noFriendMobiles,List<String> noFriendUids,boolean success,String msg) {
+			List<String> noFriendMobiles,List<Long> noFriendUids,boolean success,String msg) {
 		if(success){
 			for(MemberContact item : mContacts){
 				if(friendMobiles.contains(item.getMobileMD5())){
