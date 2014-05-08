@@ -1,8 +1,8 @@
 package cn.nd.social.util;
 
-import cn.nd.social.R;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
+import cn.nd.social.R;
 
 /**
  * DimensionUtils intends for providing dimension utility

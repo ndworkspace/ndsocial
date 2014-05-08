@@ -1,16 +1,16 @@
 package cn.nd.social.contacts.manager;
 
-import cn.nd.social.card.CardUtil;
-import cn.nd.social.card.CardUtil.CardData;
-import cn.nd.social.util.Utils;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.provider.ContactsContract;
-import android.provider.ContactsContract.Data;
-import android.provider.ContactsContract.CommonDataKinds.Organization;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds;
 import android.provider.ContactsContract.CommonDataKinds.Email;
+import android.provider.ContactsContract.CommonDataKinds.Organization;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.Data;
+import cn.nd.social.card.CardUtil;
+import cn.nd.social.card.CardUtil.CardData;
+import cn.nd.social.util.Utils;
 
 public class ImportContact {
 	private ContentResolver getContentResolver() {

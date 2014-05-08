@@ -3,15 +3,13 @@ package com.nd.voice;
 import java.lang.ref.WeakReference;
 import java.util.Random;
 
-import cn.nd.social.prishare.component.MainHandler.MainMsgHandlerInterface;
-
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.PorterDuff.Mode;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
+import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;

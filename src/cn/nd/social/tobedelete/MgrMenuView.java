@@ -1,9 +1,5 @@
 package cn.nd.social.tobedelete;
 
-import cn.nd.social.R;
-import cn.nd.social.TabLauncherUI;
-import cn.nd.social.common.ShareThisApp;
-import cn.nd.social.updater.UpdateInitiator;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -17,6 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import cn.nd.social.R;
+import cn.nd.social.TabLauncherUI;
+import cn.nd.social.common.ShareThisApp;
+import cn.nd.social.updater.UpdateInitiator;
 
 public class MgrMenuView extends LinearLayout {
 

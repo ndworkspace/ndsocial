@@ -16,8 +16,8 @@ package cn.nd.social.updater;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.OutputStream;
+
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;

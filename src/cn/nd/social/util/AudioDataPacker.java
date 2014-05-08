@@ -1,15 +1,13 @@
 package cn.nd.social.util;
 
-import java.io.File;
 import java.io.IOException;
-
-import com.example.ofdmtransport.Modulation;
 
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.os.Environment;
 import android.util.Log;
+
+import com.example.ofdmtransport.Modulation;
 
 
 public abstract class AudioDataPacker {

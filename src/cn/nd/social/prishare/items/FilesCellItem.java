@@ -2,9 +2,9 @@ package cn.nd.social.prishare.items;
 
 import java.io.File;
 
+import android.graphics.drawable.Drawable;
 import cn.nd.social.R;
 import cn.nd.social.util.Utils;
-import android.graphics.drawable.Drawable;
 
 public class FilesCellItem extends CellItemBase {
 

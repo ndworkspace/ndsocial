@@ -1,13 +1,10 @@
 package cn.nd.social.prishare.component;
 
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Handler;
-import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -19,8 +16,6 @@ import cn.nd.dragdrop.DragView;
 import cn.nd.dragdrop.DropTarget;
 import cn.nd.social.R;
 import cn.nd.social.common.VibratorController;
-import cn.nd.social.hotspot.MsgDefine;
-import cn.nd.social.hotspot.Utils;
 
 public class UserHead extends LinearLayout implements DropTarget,
 		View.OnClickListener, View.OnLongClickListener {

@@ -2,8 +2,6 @@ package cn.nd.social.syncbrowsing.ui;
 
 import java.util.List;
 
-import cn.nd.social.R;
-import cn.nd.social.util.Utils;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import cn.nd.social.R;
+import cn.nd.social.util.Utils;
 
 
 public class ConnUserListAdapter extends BaseAdapter {

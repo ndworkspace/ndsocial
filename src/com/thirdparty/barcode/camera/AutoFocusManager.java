@@ -16,12 +16,13 @@
 
 package com.thirdparty.barcode.camera;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import android.content.Context;
 import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.util.Log;
-import java.util.ArrayList;
-import java.util.Collection;
 
 import com.thirdparty.barcode.executor.AsyncTaskExecInterface;
 import com.thirdparty.barcode.executor.AsyncTaskExecManager;

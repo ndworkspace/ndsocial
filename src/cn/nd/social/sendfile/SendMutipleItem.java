@@ -5,14 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-
+import android.view.View;
 import cn.nd.social.prishare.component.UserHead;
 import cn.nd.social.prishare.items.CellItemBase;
 import cn.nd.social.prishare.items.FilesCellItem;
-import cn.nd.social.util.Utils;
-import android.util.SparseArray;
-import android.view.View;
-import android.widget.Toast;
 
 public class SendMutipleItem {
 

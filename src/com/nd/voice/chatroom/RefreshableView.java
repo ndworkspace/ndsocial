@@ -3,8 +3,6 @@ package com.nd.voice.chatroom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import cn.nd.social.R;
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -18,6 +16,7 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Scroller;
 import android.widget.TextView;
+import cn.nd.social.R;
 
 /**
  * 刷新控制view

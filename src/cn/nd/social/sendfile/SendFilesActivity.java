@@ -1,23 +1,5 @@
 package cn.nd.social.sendfile;
 
-import com.example.ofdmtransport.Modulation;
-import com.example.ofdmtransport.ModulationAudioPlay;
-
-import cn.nd.social.R;
-import cn.nd.social.common.ResourceConstant;
-import cn.nd.social.hotspot.MsgDefine;
-import cn.nd.social.hotspot.NetworkServerThread;
-import cn.nd.social.hotspot.UserManagerSingleton;
-import cn.nd.social.net.ProtocolHandler;
-import cn.nd.social.net.WifiController;
-import cn.nd.social.net.WifiNetProtocol;
-import cn.nd.social.net.ProtocolHandler.DefaultDisposal;
-import cn.nd.social.net.WifiController.WifiConnectState;
-import cn.nd.social.prishare.component.SetTimeActivity;
-import cn.nd.social.prishare.items.CellItemBase;
-import cn.nd.social.privategallery.ImageThumbnailViewer;
-import cn.nd.social.util.AudioDataPacker;
-import cn.nd.social.util.WifiInfoDataPacket;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -30,6 +12,24 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
+import cn.nd.social.R;
+import cn.nd.social.common.ResourceConstant;
+import cn.nd.social.hotspot.MsgDefine;
+import cn.nd.social.hotspot.NetworkServerThread;
+import cn.nd.social.hotspot.UserManagerSingleton;
+import cn.nd.social.net.ProtocolHandler;
+import cn.nd.social.net.ProtocolHandler.DefaultDisposal;
+import cn.nd.social.net.WifiController;
+import cn.nd.social.net.WifiController.WifiConnectState;
+import cn.nd.social.net.WifiNetProtocol;
+import cn.nd.social.prishare.component.SetTimeActivity;
+import cn.nd.social.prishare.items.CellItemBase;
+import cn.nd.social.privategallery.ImageThumbnailViewer;
+import cn.nd.social.util.AudioDataPacker;
+import cn.nd.social.util.WifiInfoDataPacket;
+
+import com.example.ofdmtransport.Modulation;
+import com.example.ofdmtransport.ModulationAudioPlay;
 
 public class SendFilesActivity extends Activity {
 	private ModulationAudioPlay mAudioPlay;

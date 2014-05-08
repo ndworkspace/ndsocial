@@ -3,18 +3,15 @@ package cn.nd.social.util;
 import java.io.FileOutputStream;
 
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
+import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
-import android.graphics.BitmapFactory.Options;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Bitmap.Config;
-import android.graphics.PorterDuff.Mode;
 import android.media.ThumbnailUtils;
-import android.util.DisplayMetrics;
 import android.widget.Toast;
 
 public class BitmapUtils {

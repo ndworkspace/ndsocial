@@ -1,6 +1,5 @@
 package cn.nd.social.ui.controls;
 
-import cn.nd.social.R;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -9,6 +8,7 @@ import android.graphics.Shader;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.widget.TextView;
+import cn.nd.social.R;
 
 public class TextGradientView extends TextView {
     private String TAG = "TextGradientView";

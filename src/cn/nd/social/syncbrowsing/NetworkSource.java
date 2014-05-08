@@ -2,7 +2,6 @@ package cn.nd.social.syncbrowsing;
 
 import cn.nd.social.syncbrowsing.codec.LoadPageCallback;
 import cn.nd.social.syncbrowsing.ui.ClientSyncReadView;
-import cn.nd.social.syncbrowsing.ui.ClientSyncReadView.NetworkPageLoader;
 
 public class NetworkSource implements Source {
 

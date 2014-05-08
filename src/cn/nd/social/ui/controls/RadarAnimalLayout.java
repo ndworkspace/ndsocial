@@ -1,17 +1,17 @@
 package cn.nd.social.ui.controls;
 
-import cn.nd.social.R;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
-import android.view.animation.Animation.AnimationListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import cn.nd.social.R;
 
 public class RadarAnimalLayout extends RelativeLayout {
 	

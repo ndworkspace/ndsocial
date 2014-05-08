@@ -1,16 +1,14 @@
 package cn.nd.social.card;
 
-import com.nineoldandroids.view.ViewHelper;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
-import android.widget.Toast;
 import cn.nd.social.R;
-import cn.nd.social.util.NDConfig;
+
+import com.nineoldandroids.view.ViewHelper;
 
 /**
  * fancy Card list adapter

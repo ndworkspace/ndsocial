@@ -1,12 +1,6 @@
 package cn.nd.social.prishare.component;
 
 
-import cn.nd.social.R;
-import cn.nd.social.wheel.NumericWheelAdapter;
-import cn.nd.social.wheel.OnWheelChangedListener;
-import cn.nd.social.wheel.OnWheelClickedListener;
-import cn.nd.social.wheel.OnWheelScrollListener;
-import cn.nd.social.wheel.WheelView;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -14,12 +8,15 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager.LayoutParams;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import cn.nd.social.R;
+import cn.nd.social.wheel.NumericWheelAdapter;
+import cn.nd.social.wheel.OnWheelChangedListener;
+import cn.nd.social.wheel.OnWheelClickedListener;
+import cn.nd.social.wheel.OnWheelScrollListener;
+import cn.nd.social.wheel.WheelView;
 
 
 @SuppressLint("ResourceAsColor")

@@ -3,6 +3,19 @@ package cn.nd.social.syncbrowsing.ui;
 import java.io.File;
 import java.util.ArrayList;
 
+import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 import cn.nd.social.R;
 import cn.nd.social.hotspot.MsgDefine;
 import cn.nd.social.hotspot.NetworkCommunicateThread;
@@ -16,24 +29,6 @@ import cn.nd.social.syncbrowsing.manager.IClientSyncEventListener;
 import cn.nd.social.syncbrowsing.utils.DialogUtil;
 import cn.nd.social.util.DataFactory;
 import cn.nd.social.util.FilePathHelper;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 public class ClientSyncActivity extends Activity {
 	

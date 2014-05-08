@@ -9,11 +9,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import cn.nd.social.prishare.PriShareSendActivity;
-
 import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
+import cn.nd.social.prishare.PriShareSendActivity;
 
 public class NetworkServerThread extends Thread {
 

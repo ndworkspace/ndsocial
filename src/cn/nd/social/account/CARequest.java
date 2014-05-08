@@ -1,13 +1,13 @@
 ﻿package cn.nd.social.account;
 
-import cn.nd.social.SocialApplication;
-import cn.nd.social.account.business.MeetingUtils.BSMeetingNetworkError;
 import NDCSdk.INDCClient;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import cn.nd.social.SocialApplication;
+import cn.nd.social.account.business.MeetingUtils.BSMeetingNetworkError;
 
 public class CARequest {
 	private INDCClient caclient;

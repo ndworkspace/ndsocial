@@ -22,7 +22,6 @@ package cn.nd.social.util.file;
 import java.io.File;
 import java.util.ArrayList;
 
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;

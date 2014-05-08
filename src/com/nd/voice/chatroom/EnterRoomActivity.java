@@ -3,13 +3,6 @@ package com.nd.voice.chatroom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.nd.voice.MultiTalk;
-import com.nd.voice.VoiceEndpoint;
-import com.nd.voice.VoiceEndpoint.ConferenceCallback;
-
-import cn.nd.social.R;
-import cn.nd.social.TabLauncherUI;
-import cn.nd.social.util.LogToFile;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +12,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.nd.social.R;
+import cn.nd.social.TabLauncherUI;
+import cn.nd.social.util.LogToFile;
+
+import com.nd.voice.MultiTalk;
+import com.nd.voice.VoiceEndpoint;
+import com.nd.voice.VoiceEndpoint.ConferenceCallback;
 
 public class EnterRoomActivity extends Activity implements ConferenceCallback{
 

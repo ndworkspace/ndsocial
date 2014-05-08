@@ -1,9 +1,5 @@
 package cn.nd.social.card;
 
-import cn.nd.social.R;
-import cn.nd.social.card.CardViewCfgReader.CardLayoutCfg;
-import cn.nd.social.ui.controls.CustomizeableLayout;
-import cn.nd.social.util.Utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
@@ -11,6 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import cn.nd.social.R;
+import cn.nd.social.card.CardViewCfgReader.CardLayoutCfg;
+import cn.nd.social.ui.controls.CustomizeableLayout;
+import cn.nd.social.util.Utils;
 
 
 public class CardViewLayout extends CustomizeableLayout {

@@ -2,23 +2,17 @@ package cn.nd.social.card.flipview;
 
 import java.util.ArrayList;
 
-import com.nineoldandroids.view.ViewHelper;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.ContactsContract;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 import cn.nd.social.R;
@@ -27,6 +21,8 @@ import cn.nd.social.card.CardUtil;
 import cn.nd.social.card.flipview.FlipAdapter.Callback;
 import cn.nd.social.card.flipview.FlipView.OnFlipListener;
 import cn.nd.social.card.flipview.FlipView.OnOverFlipListener;
+
+import com.nineoldandroids.view.ViewHelper;
 
 public class CardFlipActivity extends Activity implements Callback, OnFlipListener, OnOverFlipListener {
 	

@@ -1,6 +1,5 @@
 package com.nd.voice.chatroom;
 
-import java.util.ArrayList;
 
 
 public class ChatRoomInfo {

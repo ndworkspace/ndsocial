@@ -14,8 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import cn.nd.social.R;
-import cn.nd.social.prishare.PriShareSendActivity;
-import cn.nd.social.prishare.component.GridViewAdapter;
 import cn.nd.social.prishare.items.ImageCellItem;
 
 /**

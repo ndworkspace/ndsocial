@@ -6,9 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import cn.nd.social.R;
-import cn.nd.social.prishare.items.CellItemBase;
-import cn.nd.social.prishare.items.FilesCellItem;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +13,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import cn.nd.social.R;
+import cn.nd.social.prishare.items.CellItemBase;
+import cn.nd.social.prishare.items.FilesCellItem;
 
 public class MainListViewAdapter extends BaseAdapter {
 

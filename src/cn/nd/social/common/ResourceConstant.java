@@ -1,7 +1,6 @@
 package cn.nd.social.common;
 
 import cn.nd.social.R;
-import cn.nd.social.R.drawable;
 
 public class ResourceConstant {
 

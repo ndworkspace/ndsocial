@@ -5,7 +5,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
-
 import cn.nd.dragdrop.DragController;
 import cn.nd.dragdrop.DragSource;
 

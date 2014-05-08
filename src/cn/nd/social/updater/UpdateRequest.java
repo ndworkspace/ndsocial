@@ -15,12 +15,12 @@ limitations under the License.
 package cn.nd.social.updater;
 
 import java.security.InvalidParameterException;
+
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.storage.StorageManager;
 import cn.nd.social.wakeful.WakefulIntentService;
 
 public class UpdateRequest {

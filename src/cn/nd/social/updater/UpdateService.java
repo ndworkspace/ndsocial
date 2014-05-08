@@ -17,11 +17,7 @@ package cn.nd.social.updater;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.util.Log;
-import android.widget.Toast;
-import cn.nd.social.R;
-import cn.nd.social.util.Utils;
 import cn.nd.social.wakeful.WakefulIntentService;
 
 public class UpdateService extends WakefulIntentService {

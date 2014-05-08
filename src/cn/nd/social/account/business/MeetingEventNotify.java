@@ -2,10 +2,6 @@
 
 import java.util.List;
 
-import com.nd.voice.meetingroom.activity.MeetingDetailActivity;
-import com.nd.voice.meetingroom.manager.MeetingEntity;
-import com.nd.voice.meetingroom.utils.NotificationUtils;
-
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Context;
@@ -19,6 +15,9 @@ import cn.nd.social.account.business.MeetingUtils.InviteResultNotify;
 import cn.nd.social.account.business.MeetingUtils.MeetingRsp;
 import cn.nd.social.account.business.MeetingUtils.StartMeetingNotify;
 import cn.nd.social.util.Utils;
+
+import com.nd.voice.meetingroom.manager.MeetingEntity;
+import com.nd.voice.meetingroom.utils.NotificationUtils;
 
 public class MeetingEventNotify {
 

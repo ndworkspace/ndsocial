@@ -61,9 +61,7 @@ import cn.nd.social.updater.UpdateEventReceiver;
 import cn.nd.social.updater.UpdateInitiator;
 import cn.nd.social.util.Utils;
 
-import com.nd.voice.VoiceEndpoint;
 import com.nd.voice.meetingroom.activity.RoomListFrame;
-import com.nd.voice.meetingroom.manager.User;
 
 public class TabLauncherUI extends FragmentActivity implements OnClickListener{
 

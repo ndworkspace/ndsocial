@@ -13,15 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 import cn.nd.social.R;
-import cn.nd.social.R.id;
-import cn.nd.social.R.layout;
-import cn.nd.social.R.string;
 import cn.nd.social.updater.UpdateInitiator;
 
 public class ShareThisApp {

@@ -1,16 +1,5 @@
 package cn.nd.social.account.business;
 
-import cn.nd.social.SocialApplication;
-import cn.nd.social.account.CACallBack;
-import cn.nd.social.account.CAConstant;
-import cn.nd.social.account.CloundServer;
-import cn.nd.social.account.business.MeetingUtils.BSMeetingNetworkError;
-import NDCSdk.INDCClient;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
-import android.os.Message;
-import android.util.Log;
 
 public class NDCData {
 	public static class LoginData {

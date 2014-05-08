@@ -1,5 +1,6 @@
 package cn.nd.social.contacts.manager;
 
+import cn.nd.social.util.MD5Encrypt;
 import cn.nd.social.util.Utils;
 
 import com.activeandroid.Model;
@@ -70,7 +71,7 @@ public class MemberContact extends Model{
 	}
 	
 	public String getMobileMD5(){
-		return Utils.getMD5(this.getPhoneNumber());
+		return MD5Encrypt.getMD5(this.getPhoneNumber());
 	}
 	
 	@Override

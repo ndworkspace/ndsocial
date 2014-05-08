@@ -2,9 +2,6 @@ package cn.nd.social.syncbrowsing.ui;
 
 import java.util.ArrayList;
 
-import cn.nd.social.privategallery.imageviewer.ImageViewTouchBase;
-import cn.nd.social.syncbrowsing.Document;
-import cn.nd.social.syncbrowsing.ui.SyncAction.DrawState;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -23,6 +20,9 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.ScaleGestureDetector.OnScaleGestureListener;
 import android.view.ViewConfiguration;
+import cn.nd.social.privategallery.imageviewer.ImageViewTouchBase;
+import cn.nd.social.syncbrowsing.Document;
+import cn.nd.social.syncbrowsing.ui.SyncAction.DrawState;
 
 public class HostDocView extends ImageViewTouchBase {
 

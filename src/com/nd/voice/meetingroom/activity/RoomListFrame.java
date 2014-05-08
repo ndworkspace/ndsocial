@@ -7,9 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.http.util.LangUtils;
-
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -18,17 +15,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -37,25 +29,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import cn.nd.social.R;
-import cn.nd.social.TabFramentChangeListener;
 import cn.nd.social.TabLauncherUI;
-import cn.nd.social.account.activity.LoginFrameLayout;
-import cn.nd.social.account.activity.LoginFrameLayoutListener;
-import cn.nd.social.account.activity.RegiterFrameLayout;
-import cn.nd.social.account.activity.RegiterFrameLayoutListener;
 import cn.nd.social.account.business.BusinessMeetingManager;
-import cn.nd.social.account.usermanager.UserManager;
 import cn.nd.social.common.PopMenu;
-import cn.nd.social.common.PopMenuItem;
 import cn.nd.social.util.DateStringUtils;
 
-import com.nd.voice.chatroom.EnterRoomActivity;
 import com.nd.voice.meetingroom.manager.MeetingDetailEntity;
 import com.nd.voice.meetingroom.manager.MeetingEntity;
 import com.nd.voice.meetingroom.manager.MeetingManagerApi;
 import com.nd.voice.meetingroom.manager.MeetingManagerCallBack;
 import com.nd.voice.meetingroom.manager.User;
-import com.nd.voice.meetingroom.manager.UserManagerApi;
 
 public class RoomListFrame extends AuthorizationFrame implements MeetingManagerCallBack{
 	

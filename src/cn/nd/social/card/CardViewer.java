@@ -2,14 +2,9 @@ package cn.nd.social.card;
 
 import java.util.Date;
 
-import com.nineoldandroids.view.ViewHelper;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -27,10 +22,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.nd.social.R;
-import cn.nd.social.card.CardViewCfgReader;
 import cn.nd.social.card.CardViewCfgReader.CardLayoutCfg;
 import cn.nd.social.ui.controls.CustomizeableLayout;
 import cn.nd.social.ui.controls.FrameLayoutEx;
+
+import com.nineoldandroids.view.ViewHelper;
 
 public class CardViewer extends Activity {
 	LayoutInflater mInflater;

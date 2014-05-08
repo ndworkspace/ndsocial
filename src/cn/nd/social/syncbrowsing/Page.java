@@ -1,7 +1,5 @@
 package cn.nd.social.syncbrowsing;
 
-import java.lang.ref.SoftReference;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;

@@ -3,9 +3,17 @@ package cn.nd.social.prishare.component;
 import java.io.File;
 import java.util.ArrayList;
 
-import com.example.ofdmtransport.ModulationAudioPlay;
-import com.example.ofdmtransport.ModulationAudioRecord;
-
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Message;
+import android.util.Log;
+import android.widget.Toast;
 import cn.nd.social.R;
 import cn.nd.social.SocialApplication;
 import cn.nd.social.data.MsgDBHelper;
@@ -16,10 +24,9 @@ import cn.nd.social.hotspot.NetworkServerThread;
 import cn.nd.social.hotspot.UserManagerSingleton;
 import cn.nd.social.net.NetworkProtocolImpl;
 import cn.nd.social.net.ProtocolHandler;
+import cn.nd.social.net.ProtocolHandler.HandlerInterface;
 import cn.nd.social.net.WifiController;
 import cn.nd.social.net.WifiShareManager;
-import cn.nd.social.net.ProtocolHandler.HandlerInterface;
-import cn.nd.social.net.WifiController.WifiConnectState;
 import cn.nd.social.prishare.PriShareSendActivity;
 import cn.nd.social.prishare.PriShareSendActivity.UIHandler;
 import cn.nd.social.prishare.component.MainHandler.MainMsgHandlerInterface;
@@ -32,20 +39,12 @@ import cn.nd.social.services.ISocialService;
 import cn.nd.social.services.SocialService.ServiceBinder;
 import cn.nd.social.util.AudioDataPacker;
 import cn.nd.social.util.CommonUtils;
-import cn.nd.social.util.LogToFile;
 import cn.nd.social.util.FilePathHelper;
+import cn.nd.social.util.LogToFile;
 import cn.nd.social.util.WifiInfoDataPacket;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.DialogInterface.OnClickListener;
-import android.os.Message;
-import android.util.Log;
-import android.widget.Toast;
+
+import com.example.ofdmtransport.ModulationAudioPlay;
+import com.example.ofdmtransport.ModulationAudioRecord;
 
 /**
  * mainly handle the messages received by Main.java

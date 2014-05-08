@@ -31,7 +31,6 @@ import cn.nd.social.account.business.BusinessMeetingManager;
 import cn.nd.social.account.usermanager.UserManager;
 import cn.nd.social.common.PopMenu;
 import cn.nd.social.common.PopMenuItem;
-import cn.nd.social.syncbrowsing.ui.SyncBrowserDialogActivity;
 import cn.nd.social.util.LogToFile;
 
 import com.nd.voice.MultiTalk;

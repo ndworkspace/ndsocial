@@ -15,6 +15,10 @@
 package cn.nd.social.wakeful;
 
 import java.io.IOException;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -25,9 +29,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.XmlResourceParser;
 import cn.nd.social.wakeful.WakefulIntentService.AlarmListener;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 public class AlarmReceiver extends BroadcastReceiver {
   private static final String WAKEFUL_META_DATA="com.commonsware.cwac.wakeful";

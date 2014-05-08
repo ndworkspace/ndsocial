@@ -2,37 +2,23 @@ package cn.nd.social.syncbrowsing.meeting.activity;
 
 import java.io.File;
 
-import com.nd.voice.meetingroom.manager.MeetingDetailEntity;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 import cn.nd.social.R;
-import cn.nd.social.account.business.BusinessEventRsp;
-import cn.nd.social.syncbrowsing.Document;
-import cn.nd.social.syncbrowsing.SyncProtocol;
-import cn.nd.social.syncbrowsing.manager.IClientNetMsgReceiver;
 import cn.nd.social.syncbrowsing.manager.IHostSyncEventListener;
 import cn.nd.social.syncbrowsing.manager.TestSyncHostNetImpl;
 import cn.nd.social.syncbrowsing.ui.HostSyncReadView;
-import cn.nd.social.syncbrowsing.ui.SyncAction;
 import cn.nd.social.syncbrowsing.ui.SyncConstant;
-import cn.nd.social.syncbrowsing.ui.SyncAction.DrawState;
-import cn.nd.social.syncbrowsing.ui.SyncAction.PageDrawAction;
-import cn.nd.social.syncbrowsing.ui.SyncAction.PageTransAction;
-import cn.nd.social.syncbrowsing.ui.SyncAction.SyncActionBase;
-import cn.nd.social.syncbrowsing.ui.SyncAction.SyncActionType;
-import cn.nd.social.syncbrowsing.ui.SyncAction.UpdateDocAction;
 import cn.nd.social.syncbrowsing.utils.DialogUtil;
 import cn.nd.social.util.DataFactory;
 import cn.nd.social.util.FilePathHelper;
-import cn.nd.social.util.Utils;
+
+import com.nd.voice.meetingroom.manager.MeetingDetailEntity;
 
 public class HostPageActivity extends Activity {
 	private final static String TAG = "HostPageActivity";

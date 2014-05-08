@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import cn.nd.social.account.BootActivity;
 import cn.nd.social.account.CAUtils;
-import cn.nd.social.card.CardListActivity;
 import cn.nd.social.card.TabMyCard;
 import cn.nd.social.common.QuickActionBar;
 import cn.nd.social.common.QuickActionItem;

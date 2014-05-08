@@ -3,10 +3,6 @@ package cn.nd.social.contacts.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.nd.voice.meetingroom.manager.User;
-import com.nd.voice.meetingroom.manager.UserManagerApi;
-import com.nd.voice.meetingroom.manager.UserManagerCallBack;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -18,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.nd.social.R;
 import cn.nd.social.account.usermanager.UserManager;
 import cn.nd.social.common.ShareThisApp;
@@ -26,6 +23,10 @@ import cn.nd.social.contacts.manager.ContactManager;
 import cn.nd.social.contacts.manager.ContactManagerCallBack;
 import cn.nd.social.contacts.manager.GetContacts;
 import cn.nd.social.contacts.manager.MemberContact;
+
+import com.nd.voice.meetingroom.manager.User;
+import com.nd.voice.meetingroom.manager.UserManagerApi;
+import com.nd.voice.meetingroom.manager.UserManagerCallBack;
 
 public class ContactListActivity extends Activity implements UserManagerCallBack, ContactManagerCallBack{
 	
@@ -114,10 +115,11 @@ public class ContactListActivity extends Activity implements UserManagerCallBack
 			btn_action.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(final View view) {
-					if(contact.getUid() == null){
+					if(!contact.isMember()){
 						sendSms(contact);
 					}else{
 						mWaitContact = contact;
+						showProgressDialog("正在提交申请");
 						sendAddFriendRequest(contact);
 					}
 				}
@@ -144,7 +146,7 @@ public class ContactListActivity extends Activity implements UserManagerCallBack
 	
 	
 	private void loadContactList(){
-		showProgressDialog();
+		showProgressDialog("正在获取朋友信息");
 		loadFromDB();
 		List<MemberContact> list =  GetContacts.getPhoneContacts(this);
 		mContactManager.queryContactMembers(list);
@@ -160,9 +162,9 @@ public class ContactListActivity extends Activity implements UserManagerCallBack
 	
 	ProgressDialog mProgress;
 	
-	private void showProgressDialog() {
+	private void showProgressDialog(String title) {
 		mProgress = new ProgressDialog(this);
-		mProgress.setMessage("正在获取朋友信息");
+		mProgress.setMessage(title);
 		mProgress.setIndeterminate(true);
 		mProgress.setCancelable(true);
 		mProgress.show();
@@ -205,9 +207,16 @@ public class ContactListActivity extends Activity implements UserManagerCallBack
 	@Override
 	public void onAddFriendCallBack(long memberId, boolean success, String msg) {
 		// TODO Auto-generated method stub
-		mWaitContact.setFriend(true);
-		ContactDBHelper.getInstance().save(mWaitContact);
-		loadFromDB();
+		dismissProgressDialog();
+		if(success){
+			Toast.makeText(this, "添加成功", 1000);
+			mWaitContact.setFriend(true);
+			ContactDBHelper.getInstance().save(mWaitContact);
+			loadFromDB();
+		}else{
+			Toast.makeText(this, msg, 1000);
+		}
+		
 	}
 
 

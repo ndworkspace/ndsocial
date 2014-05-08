@@ -1,23 +1,15 @@
 package cn.nd.social.prishare;
 
-import cn.nd.dragdrop.DragController;
-import cn.nd.dragdrop.DragSource;
-import cn.nd.social.util.UnitConverter;
-
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.ArcShape;
-import android.graphics.drawable.shapes.Shape;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+import cn.nd.dragdrop.DragController;
+import cn.nd.dragdrop.DragSource;
 
 /**
  * A ViewGroup that supports dragging within it. Dragging starts in an object
