@@ -30,7 +30,15 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:gravity="center_vertical"
-            android:orientation="horizontal" >            
+            android:orientation="horizontal" > 
+            
+           <Button
+                android:id="@+id/btn_up_down"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:layout_marginLeft="15dip"
+                android:background="@drawable/button_down"
+                android:textColor="#fff" />
 
            <ImageView
                 android:id="@+id/iv_back"

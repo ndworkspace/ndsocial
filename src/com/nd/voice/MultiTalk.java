@@ -3,8 +3,10 @@
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -47,7 +49,11 @@ import cn.nd.social.R;
 import cn.nd.social.account.usermanager.UserManager;
 import cn.nd.social.common.PopMenu;
 import cn.nd.social.common.PopMenuItem;
-import cn.nd.social.syncbrowsing.manager.MeetingSyncEnterReceiver;
+//import cn.nd.social.syncbrowsing.manager.MeetingSyncEnterReceiver;
+import cn.nd.social.syncbrowsing.manager.SyncMsgFactory;
+import cn.nd.social.syncbrowsing.meeting.activity.ClientLayoutDelegate;
+import cn.nd.social.syncbrowsing.meeting.activity.ClientPageActivity;
+import cn.nd.social.syncbrowsing.meeting.activity.ClientPageFrameLayout;
 import cn.nd.social.syncbrowsing.meeting.activity.HostLayoutDelegate;
 import cn.nd.social.syncbrowsing.meeting.activity.HostPageFrameLayout;
 import cn.nd.social.syncbrowsing.ui.HostSyncActivity;
@@ -79,6 +85,7 @@ public class MultiTalk extends Activity implements
 	private FrameLayout mScreenShot;
 	private TextView mTitleTV;
 	private HostPageFrameLayout mHostPageFrament;
+	private ClientPageFrameLayout mClientPageFrament;
 	private ViewGroup rootView;
 	
 	private View toolBar;
@@ -179,7 +186,7 @@ public class MultiTalk extends Activity implements
 		VoiceEndpoint.api().setPlayoutMute(mRoom, false);
 	}
 
-	private MeetingSyncEnterReceiver mSyncEnterReceiver;
+	private SyncEnterReceiver mSyncEnterReceiver;
 
 	private void initMeeting(Intent intent) {
 		mFaceId = intent.getIntExtra("faceres", 0);
@@ -187,10 +194,10 @@ public class MultiTalk extends Activity implements
 
 		// userIdArray = intent.getLongArrayExtra("idarray");
 		mUserManager = new UserManager();
-		mSyncEnterReceiver = new MeetingSyncEnterReceiver(this,
+		mSyncEnterReceiver = new SyncEnterReceiver(this,
 				MeetingDetailEntity.getMeetingIdByUid(mRoom));
 		registerReceiver(mSyncEnterReceiver,
-				MeetingSyncEnterReceiver.getIntentFilter());
+				mSyncEnterReceiver.getIntentFilter());
 	}
 
 	public void addLocalInfoView() {
@@ -721,8 +728,11 @@ public class MultiTalk extends Activity implements
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				showHostPageFrameLayout(null);
+				if(mClientPageFrament != null) {
+					showClientPageFrameLayout(false, null);
+				} else {
+					showHostPageFrameLayout(null);
+				}
 			}
 		});
 	}
@@ -752,7 +762,7 @@ public class MultiTalk extends Activity implements
 
 	@Override
 	public void onConferenceMemberEnter(long uid) {
-		if (mLocalUsr != uid && !mUsrInRoom.containsKey(uid)) {
+		if (mLocalUsr != uid) {
 			/*
 			 * Toast.makeText(MultiTalk.this, "you come", Toast.LENGTH_SHORT)
 			 * .show();
@@ -1015,8 +1025,8 @@ public class MultiTalk extends Activity implements
 		// TODO Auto-generated method stub
 		showHostPageFrameLayout(null);
 	}
-
 	@Override
+	
 	public void onDownAction() {
 		// TODO Auto-generated method stub
 		hideHostPageFrameLayout();
@@ -1026,6 +1036,161 @@ public class MultiTalk extends Activity implements
 	public void onCloseAction() {
 		// TODO Auto-generated method stub
 		closeHostPageFrameLayout();
+	}
+	
+	
+	public class SyncEnterReceiver extends BroadcastReceiver {		
+		
+		Context mContext;
+		String mMeetingId;
+		boolean mHasEnterSync = false;	
+		
+
+		public SyncEnterReceiver(Context context,String meetingId) {
+			mContext = context;
+			mMeetingId = meetingId;
+		}
+
+		public IntentFilter getIntentFilter() {
+			IntentFilter filter = new IntentFilter(SyncMsgFactory.ACTION_RECV_SYNC_ENTER);
+			return filter;
+		}
+		
+		public void onExitSync() {
+			mHasEnterSync = false;
+		}
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if (action.equals(SyncMsgFactory.ACTION_RECV_SYNC_ENTER)) {
+				String meetingId = intent.getStringExtra("meetingid");
+				if(mMeetingId != null && mMeetingId.equals(meetingId)) {
+	/*				if(!mHasEnterSync) {
+						mHasEnterSync = true;*/
+						boolean hasExtra = intent.getBooleanExtra("hasextra",false);						
+						Bundle extras = null;
+						if(hasExtra) {
+							extras = intent.getExtras();							
+						}
+						showClientPageFrameLayout(hasExtra, extras)	;	
+	/*				}*/
+				}
+			}
+		}
+
+	}
+	
+	private ClientLayoutDelegate mClientSyncDelegate = new ClientLayoutDelegate() {
+		
+		@Override
+		public void onUpAction() {
+			showClientPageFrameLayout(false,null);			
+		}
+		
+		@Override
+		public void onDownAction() {
+			hideClientPageFrameLayout();			
+		}
+		
+		@Override
+		public void onCloseAction() {
+			closeClientPageFrameLayout();			
+		}
+	};
+	
+	
+	private void showClientPageFrameLayout(boolean hasExtra,Bundle extras) {
+		// TODO Auto-generated method stub
+		if(mClientPageFrament == null){
+			mClientPageFrament = new ClientPageFrameLayout(this);
+			rootView.addView(mClientPageFrament);
+			mClientPageFrament.setDelegate(mClientSyncDelegate);
+			mClientPageFrament.laterInit(hasExtra, extras);
+		}else{
+			Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_in);
+			animation.setAnimationListener(new AnimationListener() {
+				
+				@Override
+				public void onAnimationStart(Animation arg0) {
+					// TODO Auto-generated method stub
+					mClientPageFrament.setVisibility(View.VISIBLE);
+				}
+				
+				@Override
+				public void onAnimationRepeat(Animation arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void onAnimationEnd(Animation arg0) {
+					// TODO Auto-generated method stub
+					toolBar.setVisibility(View.GONE);
+				}
+			});
+			mClientPageFrament.startAnimation(animation);
+		}
+		
+	}
+	
+	private void hideClientPageFrameLayout(){
+		if(mClientPageFrament != null){
+			Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_out);
+			animation.setAnimationListener(new AnimationListener() {
+				
+				@Override
+				public void onAnimationStart(Animation arg0) {
+					// TODO Auto-generated method stub
+					toolBar.setVisibility(View.VISIBLE);
+				}
+				
+				@Override
+				public void onAnimationRepeat(Animation arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void onAnimationEnd(Animation arg0) {
+					// TODO Auto-generated method stub
+					mClientPageFrament.setVisibility(View.GONE);
+				}
+			});
+			mClientPageFrament.startAnimation(animation);
+		}
+	}
+	
+	private void closeClientPageFrameLayout(){
+		if(mClientPageFrament == null) {
+			return;
+		}
+		mClientPageFrament.release();
+		
+		Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_out);
+		animation.setAnimationListener(new AnimationListener() {
+			
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+				toolBar.setVisibility(View.GONE);
+			}
+			
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				// TODO Auto-generated method stub
+				rootView.removeView(mClientPageFrament);
+				mClientPageFrament = null;
+			}
+		});
+		
+		mClientPageFrament.startAnimation(animation);
 	}
 
 }

@@ -158,7 +158,7 @@ public class CloundServer {
 	public void queryContactFriend(byte[] data) {
 		if(!mCARequest.queryContactFriend(data,mCbkDispatcher)) {
 			if(hasUserMgrCbk()) {
-				//TODO:
+				mWeakRefCbk.get().onQueryContactFriendCallBack(null,null, null,false, "网络不给力");
 							
 			}
 		}
