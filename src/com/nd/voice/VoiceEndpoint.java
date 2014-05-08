@@ -25,9 +25,9 @@ public class VoiceEndpoint implements VoiceSDKCallback {
 	}
 	
 	//Inner network
-	private static final String VOICE_SERVER = "192.168.19.57";
+	//private static final String VOICE_SERVER = "192.168.19.57";
 	//public network
-	//private static final String VOICE_SERVER ="voice.91.com";//"192.168.213.35"
+	private static final String VOICE_SERVER ="voice.91.com";//"192.168.213.35"
 //	private static final short VOICE_PORT = 9601;
 	private static final short VOICE_PORT = 29601;
 	private static final int VE_SETUID = 1000;
