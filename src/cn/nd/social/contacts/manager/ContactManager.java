@@ -82,7 +82,7 @@ public class ContactManager implements UserManagerCallBack{
 					item.setFriend(true);
 				}else if(noFriendMobiles.contains(item.getMobileMD5())){
 					item.setFriend(false);
-					int index = friendMobiles.indexOf(item.getMobileMD5());
+					int index = noFriendMobiles.indexOf(item.getMobileMD5());
 					item.setUid(new Long(noFriendUids.get(index)));
 				}
 			}

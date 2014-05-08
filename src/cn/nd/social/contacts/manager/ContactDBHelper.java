@@ -29,11 +29,13 @@ public class ContactDBHelper  {
 	public void save(MemberContact contact){
 		ActiveAndroid.beginTransaction();
 		try{
+			new Delete().from(MemberContact.class).where("contactid=" + contact.getContactid()).execute();
 			contact.save();
 			ActiveAndroid.setTransactionSuccessful();
 		}finally {
 			ActiveAndroid.endTransaction();
 		}
+		mAllContacts = getContacts();
 		reBuildMap();
 	}
 	
@@ -43,13 +45,6 @@ public class ContactDBHelper  {
 		try {
 			new Delete().from(MemberContact.class).execute();
 	        for (MemberContact contact : contacts) {
-//		        	From from = new Select()
-//	                .from(MemberContact.class)
-//	                .where("phoneNumber = ?", contact.getPhoneNumber());
-//		        	MemberContact temp = (MemberContact)from.executeSingle();
-//		        	if(temp != null){
-//		        		temp.delete();
-//		        	}
 	        	contact.save();
 			}
 	        ActiveAndroid.setTransactionSuccessful();

@@ -901,6 +901,9 @@ public class CardListActivity extends Activity implements OnCompletionListener, 
 				}
 			});
 			builder.create().show();
+		}else{
+			Intent intent = new Intent(this,ContactListActivity.class);
+			startActivity(intent);
 		}
 		
 	}

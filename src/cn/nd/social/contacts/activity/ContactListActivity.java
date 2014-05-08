@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,6 +37,7 @@ public class ContactListActivity extends Activity implements UserManagerCallBack
 	private UserManagerApi mUserManagerApi;
 	private MemberContact mWaitContact;
 	private ContactManager mContactManager;
+	private Handler mHandler;
 	
 	 @Override
 	    public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class ContactListActivity extends Activity implements UserManagerCallBack
 		mUserManagerApi = new UserManager();
 		mUserManagerApi.setCallBack(this);
 		mContactManager = new ContactManager(this);
+		mHandler = new Handler();
 	}
 
 	private void setupViews() {
@@ -148,9 +151,19 @@ public class ContactListActivity extends Activity implements UserManagerCallBack
 	private void loadContactList(){
 		showProgressDialog("正在获取朋友信息");
 		loadFromDB();
-		List<MemberContact> list =  GetContacts.getPhoneContacts(this);
-		mContactManager.queryContactMembers(list);
-		dismissProgressDialog();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				final List<MemberContact> list =  GetContacts.getPhoneContacts(ContactListActivity.this);
+				
+				mHandler.post(new Runnable() {
+					@Override
+					public void run() {
+						mContactManager.queryContactMembers(list);
+					}
+				});
+			}
+		}).run();
 	}
 	
 	private void loadFromDB() {
@@ -213,6 +226,7 @@ public class ContactListActivity extends Activity implements UserManagerCallBack
 			mWaitContact.setFriend(true);
 			ContactDBHelper.getInstance().save(mWaitContact);
 			loadFromDB();
+			mUserManagerApi.getFriendList(mUserManagerApi.getMyInfo().getUserid());
 		}else{
 			Toast.makeText(this, msg, 1000);
 		}
