@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dm_history_child_memory_height"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dm_history_traffic_hspliter_left"
+        android:layout_marginRight="@dimen/dm_history_traffic_hspliter_left"
+        android:background="@drawable/zapya_history_h" />
+
+    <TextView
+        android:id="@+id/dm_histoy_child_memory_text"
+        style="@style/history_traffic_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/imageView1"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dm_history_child_memory_text_left" />
+
+</RelativeLayout>

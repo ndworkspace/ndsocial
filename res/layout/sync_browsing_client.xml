@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    android:orientation="vertical" >
+
+
+    <include
+        android:id="@+id/client_read_page"
+        layout="@layout/sync_read_client"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:id="@+id/rl_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="visible" >
+
+        <RelativeLayout
+            android:id="@+id/wait_title"
+            android:layout_width="match_parent"
+            android:layout_height="60dip" >
+
+            <Button
+                android:id="@+id/conn_wait_back"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dip"
+                android:background="@drawable/back_btn"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/wait_conn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/connecting"
+                android:textColor="#6c6c6c"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+        
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="1.5dip"
+            android:background="#6c6c6c"
+            android:layout_alignBottom="@+id/wait_title"/>
+      
+        
+        <ImageView
+            android:id="@+id/start_img"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:layout_centerInParent="true"
+            />
+
+        <TextView
+            android:id="@+id/sync_hint"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:clickable="false"
+            android:focusableInTouchMode="false"
+            android:gravity="center"
+            android:text="@string/sync_waiting_host"
+            android:textColor="#80000000"
+            android:textSize="18sp" />
+
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="1.5dip"
+            android:background="#6c6c6c"
+            android:layout_alignTop="@+id/wait_bottom"/>
+        
+        <LinearLayout
+            android:id="@+id/wait_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="60dip"
+            android:layout_alignParentBottom="true" 
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/conn_reback_btn"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:src="@drawable/reselect_file_btn"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/file_name"
+                android:layout_gravity="center"
+                android:singleLine="false"                
+                android:textColor="#6c6c6c"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>

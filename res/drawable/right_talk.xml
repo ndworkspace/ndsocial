@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot = "false">
+    <item android:drawable="@drawable/talk_r_empty" android:duration="75"></item> 
+    <item android:drawable="@drawable/talk_r_one" android:duration="75"></item>  
+    <item android:drawable="@drawable/talk_r_two" android:duration="75"></item>  
+    <item android:drawable="@drawable/talk_r_three" android:duration="75"></item> 
+    <item android:drawable="@drawable/talk_r_four" android:duration="75"></item>  
+    <item android:drawable="@drawable/talk_r_five" android:duration="75"></item>  
+     <item android:drawable="@drawable/talk_r_six" android:duration="75"></item>  
+   </animation-list>

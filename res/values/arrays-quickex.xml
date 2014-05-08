@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="options">
+        <item>@string/transfer</item>
+        <item>@string/multiSelection</item>
+        <item>@string/open</item>
+        <item>@string/more</item>
+    </string-array>
+
+</resources>

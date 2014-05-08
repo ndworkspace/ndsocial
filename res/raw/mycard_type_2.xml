@@ -1,0 +1,68 @@
+<!--location unit is px, color only support RGB  -->
+<MyCardLayout>
+	
+	<default_size>
+		<width>720</width>
+		<height>480</height>
+	</default_size>
+	
+	<global_cfg>
+		<background_pic>card4</background_pic>
+		<background_color>fcfcfc</background_color>
+		<font_color>ffffff</font_color>
+		<font_size>24</font_size>
+	</global_cfg>
+	
+
+
+		
+	<name>
+		<loc_x>480</loc_x>
+		<loc_y>140</loc_y>
+		<font_size>60</font_size>
+		<font_color>ffffff</font_color>
+	</name>
+
+	<company>
+		<loc_x>480</loc_x>
+		<loc_y>240</loc_y>
+		<font_size>24</font_size>
+		<font_color>cccccc</font_color>
+	</company>
+	
+	<title>
+		<loc_x>480</loc_x>
+		<loc_y>280</loc_y>
+		<font_size>40</font_size>
+		<font_color>f19588</font_color>
+	</title>
+
+	<mobile>
+		<loc_x>200</loc_x>
+		<loc_y>90</loc_y>
+		<font_size>24</font_size>
+		<font_color>4f4f4f</font_color>
+	</mobile>
+
+	<phone>
+		<loc_x>135</loc_x>
+		<loc_y>165</loc_y>
+		<font_size>24</font_size>
+		<font_color>4f4f4f</font_color>
+	</phone>
+
+	<email>
+		<loc_x>80</loc_x>
+		<loc_y>230</loc_y>
+		<font_size>24</font_size>
+		<font_color>4f4f4f</font_color>
+	</email>
+
+	<address>
+		<loc_x>100</loc_x>
+		<loc_y>300</loc_y>
+		<font_size>24</font_size>
+		<font_color>4f4f4f</font_color>
+	</address>
+
+</MyCardLayout>

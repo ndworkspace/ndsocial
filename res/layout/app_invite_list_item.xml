@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="65dip"
+    android:background="@drawable/zapya_common_list_selector"
+    android:orientation="horizontal" >
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="65dip"
+        android:visibility="invisible" />
+
+    <RelativeLayout
+        android:id="@+id/rl_invite"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="14.0dip" >
+   
+
+        <ImageView
+            android:id="@+id/iv_invite_item_icon"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_invite_item_ways"
+        android:layout_width="wrap_content"
+        android:layout_height="66.69998dip"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="6.0dip"
+        android:layout_marginRight="6.0dip"
+        android:layout_toRightOf="@id/rl_invite"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:text="Unknown"
+        android:textColor="#ff464646"
+        android:textSize="15dip" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="6.0dip"
+        android:layout_marginRight="6.0dip"
+        android:background="@drawable/invite_list_item_bg" />
+
+</RelativeLayout>

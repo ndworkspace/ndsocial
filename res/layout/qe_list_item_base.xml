@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <FrameLayout
+        android:id="@+id/thumb"
+        android:layout_width="@dimen/dm_data_list_item_thumb_width"
+        android:layout_height="@dimen/dm_data_list_item_thumb_height"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="5.0dip"
+        android:layout_marginTop="5.0dip" >
+
+        <ImageView
+            android:id="@+id/background"
+            android:layout_width="@dimen/dm_data_list_item_thumb_width"
+            android:layout_height="@dimen/dm_data_list_item_thumb_width"
+            android:scaleType="fitXY"
+            android:src="@drawable/zapya_data_audio_cover"
+             />
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/dm_data_list_item_thumb_width"
+            android:layout_height="@dimen/dm_data_list_item_thumb_width"
+            android:padding="4dip"
+            android:scaleType="fitXY" />
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dip"
+        android:layout_toRightOf="@id/thumb"
+        android:ellipsize="marquee"
+        android:gravity="top|left|center"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:paddingLeft="4dip"
+        android:singleLine="true"
+        android:textColor="@color/dm_data_list_item_title_color"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/title2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginTop="6dip"
+        android:layout_toLeftOf="@id/title2"
+        android:layout_toRightOf="@id/thumb"
+        android:ellipsize="marquee"
+        android:gravity="left|center"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:paddingLeft="4dip"
+        android:textColor="@color/dm_data_list_item_subtitle_color"
+        android:textSize="11sp" />
+
+</merge>

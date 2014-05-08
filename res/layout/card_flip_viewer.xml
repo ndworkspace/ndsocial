@@ -1,0 +1,24 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:flipview="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/flip_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <cn.nd.social.card.flipview.FlipView
+        android:id="@+id/flip_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        flipview:orientation="horizontal" >
+    </cn.nd.social.card.flipview.FlipView>
+
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Empty!"
+        android:textSize="32sp"
+        android:visibility="gone" />
+
+</FrameLayout>

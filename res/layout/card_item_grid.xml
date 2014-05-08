@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.nd.social.card.CardListItem xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contact_card_item"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/card_item_bg"
+    android:gravity="center_vertical" >
+    
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#b0cccccc"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
+        android:paddingLeft="8dip"
+        android:paddingRight="8dip"
+        android:textColor="#303030"
+        android:textSize="20sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dip"
+        android:paddingLeft="15dip" >
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:scaleType="matrix"
+            android:visibility="gone" />
+
+        <RelativeLayout            
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dip" >
+
+<!--             <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="4dp"
+                android:paddingTop="4dp"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:paddingLeft="8dip"
+                android:paddingRight="8dip"
+                android:background="#a0cccccc" /> -->
+
+             <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="4dp"
+                android:textColor="#ff0090ff"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dip"
+                android:textSize="16sp"
+                android:visibility="gone" />
+         
+        </RelativeLayout>
+ 		
+    </RelativeLayout>
+ 	<CheckBox
+            android:id="@+id/ckbx"
+            android:layout_width="29dip"
+            android:layout_height="29dip"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:button="@drawable/multi_checkbox"
+            android:clickable="false"
+            android:focusable="false"
+            android:visibility="visible"
+            android:layout_gravity="bottom|right"/>
+</cn.nd.social.card.CardListItem>

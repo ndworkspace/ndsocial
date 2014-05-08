@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/title_bar" >
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/title_btn_back"
+            android:text="@string/back"
+            android:textColor="#fff"
+            android:textSize="14sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/msg_details"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+             />
+
+        <ImageButton
+            android:id="@+id/right_btn"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/title_btn_right"
+            android:src="@drawable/title_btn_function" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:layout_marginTop="45dip"
+        android:id="@+id/has_card_view"
+        android:orientation="vertical" >
+        <FrameLayout
+            android:id="@+id/card_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="60dip"
+            android:layout_marginTop="10dip"
+            android:background="#000000"
+            android:orientation="vertical" >
+
+            <cn.nd.social.ui.controls.FrameLayoutEx
+                android:id="@+id/tab_card"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <cn.nd.social.ui.controls.CustomizeableLayout
+                    android:id="@+id/customize_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/cust_name_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    
+                    <TextView
+                        android:id="@+id/cust_company_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/cust_title_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:id="@+id/mobile_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/cust_mobile_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/mobile_str" />
+
+                        <TextView
+                            android:id="@+id/cust_mobile_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:layout_marginRight="40dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/phone_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/cust_phone_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/phone_str" />
+
+                        <TextView
+                            android:id="@+id/cust_phone_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:layout_marginRight="40dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/email_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/cust_email_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/email_str" />
+
+                        <TextView
+                            android:id="@+id/cust_email_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:layout_marginRight="40dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/addr_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:id="@+id/cust_addr_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/addr_str" />
+
+                        <TextView
+                            android:id="@+id/cust_addr_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:layout_marginRight="40dip" />
+                    </LinearLayout>
+                </cn.nd.social.ui.controls.CustomizeableLayout>
+            </cn.nd.social.ui.controls.FrameLayoutEx>
+        </FrameLayout>
+        <!-- card_viewer_navi_bar mmfooter_bg  android:background="@drawable/title_btn_right" -->
+
+        <LinearLayout
+            android:id="@+id/add_to_contact"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/card_viewer_navi_bar_heigth"
+            android:layout_gravity="bottom"
+            android:background="@drawable/navi_bar_bg"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="2.0dip" >
+
+            <TextView
+                android:id="@+id/add_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/add_to_contact"
+                android:textColor="@color/white"
+                android:textSize="16dip" />
+        </LinearLayout>
+    </FrameLayout>
+
+   <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#eee"
+        android:layout_marginTop="45dip"
+        android:id="@+id/empty_card_view"
+        android:orientation="vertical"
+        android:visibility="gone" >
+         <TextView
+                android:id="@+id/empty_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="#cc000000"
+                android:textSize="16dip" />
+        </FrameLayout>
+</FrameLayout>

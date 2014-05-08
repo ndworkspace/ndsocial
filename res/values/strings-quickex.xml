@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="tabbar_multi_send">(%1$d)</string>
+	<string name="tabbar_multi_send_no_value">Send</string>
+    <string name="title_browser">Files</string>
+    <string name="title_audio">Media</string>
+    <string name="title_gallery">Gallery</string>
+    <string name="title_apps">Apps</string>
+    <string name="title_send">Send</string>
+    <string name="title_recv">Receieve</string>
+    <string name="title_history">History</string>
+    <string name="connect_str">create connenction</string>
+    <string name="set_userid">set user Id</string>
+    <string name="OK">OK</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Hide">hide</string>
+    <string name="exitHint">Are you sure to leave?</string>
+    <string name="menu_set_userid">set user id</string>
+    <string name="transfer">transfer</string>
+    <string name="multiSelection">select mutiple</string>
+    <string name="open">open</string>
+    <string name="more">more</string>
+    <string name="hotspot_name">hotspot name</string>
+    <string name="password">password</string>
+    <string name="wifi_type">wifi type</string>
+    <string name="create">create</string>
+    <string name="or">or</string>
+    <string name="connect">connect</string>
+    <string name="progress_loading">loading</string>
+    <string name="menu_create">create</string>
+    <string name="network_creating">Creating group...</string>
+    <string name="network_waiting">Waiting for friends...</string>
+    <string name="network_retry">create fail,please try again</string>
+    <string name="network_quit_hint">Quit current connection?</string>
+    <string name="quit_group_hint">quit current group?</string>
+    <string name="network_connecting">connecting group...</string>
+    <string name="network_connected">connection established</string>
+    <string name="kickout_user_hint">Are you sure kickout?</string>
+    <string name="hint_send_apk_authority">help install?</string>
+    <string name="dm_progress_loading">Loading</string>
+    <string name="dm_history_no_history">No History</string>
+    <string name="transfer_mgr_me">Me</string>
+    <string name="wait_conn">等待小伙伴加入...</string>
+    <string name="hours">小时</string>
+    <string name="mins">分钟</string>
+ 
+
+</resources>

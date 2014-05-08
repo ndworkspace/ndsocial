@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="transfer">传输</string>
+    <string name="multiSelection">多选</string>
+    <string name="open">打开</string>
+    <string name="more">更多</string>
+    <string name="OK">确定</string>
+    <string name="Cancel">取消</string>
+    <string name="Hide">隐藏</string>
+    <string name="hint">提示</string>
+    <string name="exitHint">确定离开应用?</string>
+    <string name="menu_set_userid">设置用户标识</string>
+    <string name="set_userid">设置用户ID</string>
+    <string name="title_browser">文件</string>
+    <string name="title_audio">影音</string>
+    <string name="title_gallery">相册</string>
+    <string name="title_apps">应用</string>
+    <string name="title_send">发送</string>
+    <string name="title_recv">接收</string>
+    <string name="title_history">历史</string>
+    <string name="connect_str">连朋友    传文件</string>
+    <string name="hotspot_name">热点名称</string>
+    <string name="password">密码</string>
+    <string name="wifi_type">wifi 类型</string>
+    <string name="create">创建</string>
+    <string name="or">或者</string>
+    <string name="connect">连接热点</string>
+    <string name="menu_create">创建热点</string>
+    <string name="network_creating">正在创建连接...</string>
+    <string name="network_connecting">正在连接...</string>
+    <string name="network_waiting">创建成功,等待朋友加入…</string>
+    <string name="network_retry">创建失败,请重试…</string>
+    <string name="network_quit_hint">是否退出当前连接?</string>
+    <string name="quit_group_hint">是否离开当前组?</string>
+    <string name="network_connected">连接成功</string>
+    <string name="kickout_user_hint">确认要踢出?</string>
+    <string name="hint_send_apk_authority">帮助安装?</string>
+	<string name="update_hint">版本更新信息</string>
+</resources>

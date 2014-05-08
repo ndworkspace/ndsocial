@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="10dip"
+        android:layout_marginTop="10dip" >
+
+        <include
+            android:id="@+id/self_card"
+            layout="@layout/card_layout" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:id="@+id/bg_main" android:drawable="@drawable/main_bg" />
+        <item android:id="@+id/bg_mask" android:drawable="@drawable/bg_mask"
+                android:left="0.0dip" android:top="0.0dip" android:right="0.0dip"
+                android:bottom="0.0dip" />
+</layer-list>

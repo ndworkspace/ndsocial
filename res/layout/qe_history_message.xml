@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/history_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/history_title_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/title_shadow_text"
+            style="@style/title_shadow_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical"
+            android:text="@string/title_history" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/history_list"
+        style="@style/dm_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/history_title_bar"
+        android:cacheColorHint="#00000000"
+        android:divider="@null"
+        android:dividerHeight="0.0dip"
+        android:drawSelectorOnTop="false"
+        android:fadingEdge="vertical"
+        android:fadingEdgeLength="3.0dip"
+        android:fastScrollEnabled="true"
+        android:listSelector="@drawable/history_list_selector" />
+
+    <!--
+		<view class="cn.nd.quickexchange.HistoryListView"
+		      style="?android:attr/listViewWhiteStyle"
+		      android:id="@id/history"
+		      android:layout_width="match_parent"
+		      android:layout_height="0dip"
+		      android:layout_weight="1.0"
+		      android:smoothScrollbar="true"
+		      android:stackFromBottom="true"
+		      android:fadingEdge="none"
+		      android:layout_marginBottom="1dip"
+		      android:cacheColorHint="#00000000"
+		      android:scrollbarAlwaysDrawVerticalTrack="false"
+		      android:scrollbarStyle="insideOverlay"
+		      android:paddingBottom="@dimen/input_text_height_adjusted"
+		      android:transcriptMode="normal"/>
+    -->
+
+
+    <!--
+	    <TextView
+	        android:id="@+id/history_empty_text"
+	        style="@style/title_shadow_text"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerInParent="true"
+	        android:text="@string/dm_history_no_history"
+	        android:visibility="gone" />
+    -->
+
+</RelativeLayout>

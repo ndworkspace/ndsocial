@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/mycard_thumb_vertical_margin"
+        android:layout_marginTop="@dimen/mycard_thumb_vertical_margin"
+        android:layout_marginLeft="@dimen/card_list_grid_space"
+        android:layout_marginRight="@dimen/card_list_grid_space" >
+
+        <include
+            android:id="@+id/self_card"
+            layout="@layout/card_layout" />
+
+        <cn.nd.social.ui.controls.RadarAnimalLayout 
+            android:id="@+id/layout_radar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            >
+        </cn.nd.social.ui.controls.RadarAnimalLayout>
+
+        <CheckBox
+            android:id="@+id/mycard_ckbx"
+            android:layout_width="29dip"
+            android:layout_height="29dip"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="0dp"
+            android:button="@drawable/multi_checkbox"
+            android:clickable="false"
+            android:focusable="false"
+            android:visibility="visible"/>
+    </RelativeLayout>
+
+</RelativeLayout>

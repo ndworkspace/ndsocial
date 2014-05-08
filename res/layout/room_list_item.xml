@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/transparent"
+     >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dip"
+        android:orientation="horizontal"
+        android:padding="8dip" >
+
+        <ImageView
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_marginLeft="5dip"
+            android:id="@+id/iv_face"
+            android:src="@drawable/user_avatar" />
+
+        <FrameLayout 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dip"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dip"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="test"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="80dip"
+                    android:layout_height="30dip"
+                    android:layout_gravity="right|center_vertical"
+                    android:text="tv_date"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="match_parent"
+                android:layout_height="30dip"
+                android:textSize="15dp"
+                android:layout_gravity="center_vertical"
+                android:text="12324343243243" />
+        </LinearLayout>
+        
+        <Button 
+            android:id="@+id/btn_delete"
+            android:layout_width="120dip"
+            android:layout_height="40dip"
+            android:layout_gravity="center_vertical|right"
+            android:text="解散"
+            android:visibility="invisible"
+            />
+        </FrameLayout>
+    </LinearLayout>
+
+</LinearLayout>

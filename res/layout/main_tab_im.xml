@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical" 
+    android:id="@+id/card_list_layout">
+	<include 
+	    layout="@layout/main_tab_title"/>
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical">
+	    <View 
+	       android:layout_width="match_parent"
+	       android:layout_height="0dip"
+	       android:layout_weight="2" />
+		<RelativeLayout 
+		    android:layout_weight="4"
+		    android:layout_width="match_parent"
+		    android:layout_height="0dip">
+		    <ImageView 
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent"
+		        android:layout_marginTop="-40dip"
+		        android:layout_marginBottom="-40dip"
+		        android:src="@drawable/im_logo"/>		    
+		</RelativeLayout>
+		<View 
+	       android:layout_width="match_parent"
+	       android:layout_height="0dip"
+	       android:layout_weight="2" />
+		
+		<RelativeLayout 
+		    android:layout_weight="2"
+		    android:layout_width="match_parent"
+		    android:layout_height="0dip">
+		    <RelativeLayout 
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:background="@drawable/im_waiting_bg">
+		        
+		       <cn.nd.social.ui.controls.TextGradientView 
+		            android:id="@+id/tv_wait_exciting"		            
+		            android:layout_height="wrap_content"
+		            android:layout_width="wrap_content"
+		            android:textColor="@color/dark_red"
+		        	android:text="@string/im_wait_exciting"
+		        	android:textSize="20dip"
+		        	android:paddingTop="15dip"
+		        	android:paddingBottom="15dip"
+		        	android:layout_marginLeft="40dip"
+		        	android:layout_marginRight="40dip"		            
+		            android:layout_centerInParent="true"
+		            />
+<!-- 		        <cn.nd.social.ui.controls.GradientView 
+		            android:id="@+id/tv_wait_exciting"		            
+		            android:layout_height="wrap_content"
+		            android:layout_width="120dip"		            
+		            android:layout_centerInParent="true"
+		            /> -->
+<!-- 		        android:textColor="@color/Red"
+		        android:text="@string/im_wait_exciting"
+		        android:textSize="16dip" -->
+		      <ImageView 
+		            android:id="@+id/left_arrow"
+		            android:layout_centerVertical="true"
+		            android:layout_height="wrap_content"
+		            android:layout_width="wrap_content"		            
+		            android:layout_toLeftOf="@id/tv_wait_exciting"
+		            android:src="@drawable/arrow_left_anim"/>
+		     <ImageView 
+		            android:id="@+id/right_arrow"
+		            android:layout_centerVertical="true"
+		            android:layout_height="wrap_content"
+		            android:layout_width="wrap_content"		            
+		            android:layout_toRightOf="@id/tv_wait_exciting"
+		            android:src="@drawable/arrow_right_anim"/>
+		    </RelativeLayout>	    
+		</RelativeLayout>
+		
+		<View 
+	       android:layout_width="match_parent"
+	       android:layout_height="0dip"
+	       android:layout_weight="2" />
+	</LinearLayout>
+
+<!-- 	<ImageView
+	    android:id="@+id/im_bg"
+	    android:src="@drawable/im_bg"
+	    android:scaleType="fitXY"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"/> -->
+</LinearLayout>

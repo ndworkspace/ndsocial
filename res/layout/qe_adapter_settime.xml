@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/set_sub_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        
+    
+    <FrameLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/shake_frame"
+        android:layout_centerHorizontal="true">
+        
+         <ImageView
+         	  android:id="@+id/set_time_bg"
+         	  android:layout_width="200dp"
+         	  android:layout_height="200dp"
+         	  android:layout_gravity="center_horizontal"
+         	  android:src="@drawable/st_bg"
+         	  android:visibility="gone"/>
+    	   
+    	    <ImageView
+         	  android:id="@+id/set_time_bg_empty"
+         	  android:layout_width="200dp"
+         	  android:layout_height="200dp"
+         	  android:layout_gravity="center_horizontal"
+         	  android:src="@drawable/st_bg_eternity"
+         	  android:visibility="gone"/>
+    	    
+    	    <ImageView 
+    	        android:id="@+id/set_time_delete"
+    	        android:layout_width="wrap_content"
+    	        android:layout_height="wrap_content"
+    	        android:layout_marginLeft="30dp"
+    	        android:layout_marginTop="30dp"
+    	        android:paddingRight="20dp"
+    	        android:paddingBottom="20dp"
+    	        android:src="@drawable/set_time_delete"
+    	       android:visibility="gone"/>
+     </FrameLayout>	    
+    	  
+      	 
+      	  <TextView 
+      	     android:id="@+id/set_time_eternity"
+      	     android:layout_width="wrap_content"
+      	     android:layout_height="wrap_content"
+      	     android:layout_below="@+id/shake_frame"
+      	     android:layout_centerHorizontal="true"
+      	     android:layout_marginTop="15dp"
+      	     android:text="@string/st_text_eternity"
+      	     android:textSize="30.0sp"
+      	     android:textColor="#add8e6"
+      	     android:visibility="gone"/>
+      	  
+      	  <TextView 
+      	     android:id="@+id/set_time_hours"
+      	     android:layout_width="wrap_content"
+      	     android:layout_height="wrap_content"
+      	     android:layout_centerHorizontal="true"
+      	     android:layout_below="@+id/shake_frame"
+      	     android:layout_marginTop="15dp"
+      	     android:text="@string/st_text_hrs"
+      	     android:textSize="30.0sp"
+      	     android:textColor="#add8e6"
+      	     android:visibility="gone"/>
+        
+ </RelativeLayout>

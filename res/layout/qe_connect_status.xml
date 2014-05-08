@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <RelativeLayout
+        android:id="@id/conn_status"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/connect_actionbar_height"
+        android:layout_marginLeft="3.5dp"
+        android:layout_toLeftOf="@id/connect_btn"
+        android:layout_toRightOf="@id/quit_connect"
+        android:visibility="gone" >
+
+        <ImageView
+            android:id="@id/conn_status_progress"
+            android:layout_width="@dimen/grpslt_status_waiting_width"
+            android:layout_height="@dimen/grpslt_status_waiting_height"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/grpslt_status_waiting_left_offset"
+            android:background="@drawable/zapya_common_refresh_wait" />
+
+        <TextView
+            android:id="@id/conn_status_text"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/grpslt_status_waiting_txt_left_offset"
+            android:layout_toRightOf="@id/conn_status_progress"
+            android:textColor="@color/grpslt_title_text_color"
+            android:textSize="@dimen/grpslt_status_waiting_txt_size" />
+    </RelativeLayout>
+
+</merge>

@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/wait_for_connect"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/radar_rotate_bg"
+        android:layout_width="@dimen/radar_bg_size"
+        android:layout_height="@dimen/radar_bg_size"
+        android:layout_centerInParent="true"
+        android:src="@drawable/radar_bg" />
+
+    <RelativeLayout
+        android:id="@+id/wait_touch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+
+        <ProgressBar
+            android:id="@+id/radar_rotate"
+            android:layout_width="@dimen/radar_circle_size"
+            android:layout_height="@dimen/radar_circle_size"
+            android:layout_centerInParent="true"
+            android:indeterminateDrawable="@drawable/radar_bg_circle" />
+
+        <ImageView
+            android:id="@+id/iv_qr_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/wait_connect_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/radar_rotate"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/wait_conn"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

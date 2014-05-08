@@ -1,0 +1,33 @@
+同步浏览网络协议
+1、握手：client -> server
+client:
+    int16   protocol id
+    int16   client version
+    
+server:
+    int16   protocol id
+    int32   status code
+    int16   view width
+    int16   view height
+    int32   page count
+    ...
+    
+2、页面同步:server notify
+server:
+    int16   protocol id
+    int32   page number
+    int32   page version
+
+3、页面更新请求：client -> server
+client:
+    int16   protocol id
+    int16   page number
+    int32   current page version
+
+server:
+    int16   protocol id
+    int32   status code
+    int32   page number
+    int32   page version
+    string  page info
+   

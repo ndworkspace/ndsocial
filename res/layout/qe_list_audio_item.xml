@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.nd.social.prishare.component.CellItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/dm_data_list_item_height"
+    android:orientation="vertical"
+    android:padding="2.0dip" >
+
+    <include layout="@layout/qe_list_item_base" />
+
+    <TextView
+        android:id="@+id/title3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/title"
+        android:layout_marginTop="6dip"
+        android:ellipsize="marquee"
+        android:gravity="right|center"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:paddingRight="10.0dip"
+        android:textColor="@color/dm_data_list_item_subtitle_color"
+        android:textSize="11sp" />
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="@dimen/private_chkbox_size"
+        android:layout_height="@dimen/private_chkbox_size"
+        android:button="@drawable/qe_multi_checkbox"
+        android:clickable="false"
+        android:focusable="false"
+        android:visibility="visible" />
+
+</cn.nd.social.prishare.component.CellItemView>

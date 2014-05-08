@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lauche_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/lauch_title_bg"
+        android:gravity="center_vertical"
+        android:visibility="visible" >
+
+        <ImageButton
+            android:id="@+id/back_btn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/back_btn"
+            android:textColor="#fff"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/main_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/card_title"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/tl_right_btn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/more_selector" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/tab_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="60dp" >
+
+        <include layout="@layout/main_tab_card_list" />
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/fly_card_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dip"
+        android:layout_marginTop="0dip"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:id="@+id/layout_teach"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#70000000"
+        android:visibility="gone" 
+        android:clickable="true"
+        >
+        <ImageView 
+            android:layout_marginTop="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+            android:src="@drawable/longtouchteach"/>
+       <!--  <Button 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            ></Button> -->
+    </FrameLayout>
+
+</FrameLayout>

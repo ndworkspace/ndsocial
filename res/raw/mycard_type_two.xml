@@ -1,0 +1,68 @@
+<!--440*660 templete, location unit is px, color only support RGB  -->
+<MyCardLayout>
+	
+	<default_size>
+		<width>720</width>
+		<height>480</height>
+	</default_size>
+	
+	<global_cfg>
+		<background_pic>card4</background_pic>
+		<background_color>fcfcfc</background_color>
+		<font_color>ffffff</font_color>
+		<font_size>16</font_size>
+	</global_cfg>
+	
+
+
+		
+	<name>
+		<loc_x>280</loc_x>
+		<loc_y>300</loc_y>
+		<font_size>36</font_size>
+		<font_color>ffffff</font_color>
+	</name>
+
+	<company>
+		<loc_x>50</loc_x>
+		<loc_y>50</loc_y>
+		<font_size>18</font_size>
+		<font_color>ffffff</font_color>
+	</company>
+	
+	<title>
+		<loc_x>240</loc_x>
+		<loc_y>50</loc_y>
+		<font_size>18</font_size>
+		<font_color>ffffff</font_color>
+	</title>
+
+	<mobile>
+		<loc_x>50</loc_x>
+		<loc_y>90</loc_y>
+		<font_size>18</font_size>
+		<font_color>ffffff</font_color>
+	</mobile>
+
+	<phone>
+		<loc_x>50</loc_x>
+		<loc_y>130</loc_y>
+		<font_size>18</font_size>
+		<font_color>ffffff</font_color>
+	</phone>
+
+	<email>
+		<loc_x>50</loc_x>
+		<loc_y>170</loc_y>
+		<font_size>18</font_size>
+		<font_color>ffffff</font_color>
+	</email>
+
+	<address>
+		<loc_x>50</loc_x>
+		<loc_y>210</loc_y>
+		<font_size>18</font_size>
+		<font_color>ffffff</font_color>
+	</address>
+
+</MyCardLayout>

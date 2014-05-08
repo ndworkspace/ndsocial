@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_list_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical" >
+
+    <include layout="@layout/main_tab_title" />
+
+ 	<RelativeLayout 
+ 	    android:layout_width="match_parent"
+ 	    android:layout_height="match_parent">
+    <cn.nd.social.prishare.DragDropLayout
+        android:id="@+id/drag_container"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pri_share_page_container_height"                
+        >
+        
+        <RelativeLayout 
+            android:layout_width="@dimen/pri_share_outterring_diameter"
+            android:layout_height="@dimen/pri_share_outterring_height"
+            android:layout_centerInParent="true">
+            <ImageView 
+	            android:layout_width="@dimen/pri_share_outterring_diameter"
+	            android:layout_height="@dimen/pri_share_outterring_diameter"
+	            android:scaleType="matrix"
+	            android:src="@drawable/pri_share_outerring"
+	            android:layout_marginTop="@dimen/pri_share_outterring_vertical_margin"
+	            android:layout_marginBottom="@dimen/pri_share_outterring_vertical_margin"/>
+        </RelativeLayout>
+        
+        
+        <cn.nd.social.prishare.DragImageView
+            android:id="@+id/drag_view"
+            android:layout_width="70dip"
+            android:layout_height="70dip"
+            android:layout_centerInParent="true"
+            android:src="@drawable/finger_print_big"
+             />
+        
+        <View
+            android:id="@+id/stub_view"
+            android:layout_width="1dip"
+            android:layout_height="1dip"
+            android:layout_centerInParent="true"
+             />
+        
+         <ImageView 
+            android:id="@+id/arrow_up"
+            android:layout_above="@id/stub_view"
+            android:layout_marginBottom="50dip"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/arrow_up_anim"/>
+         
+         <ImageView 
+            android:id="@+id/arrow_down"
+            android:layout_below="@id/stub_view"
+            android:layout_marginTop="50dip"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:src="@drawable/arrow_down_anim"/>
+                
+         <cn.nd.social.prishare.DropView
+            android:id="@+id/send"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/send"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="#80ffffff"
+             />
+<!--             android:background="@drawable/ic_item_send" -->
+         
+         <cn.nd.social.prishare.DropView
+            android:id="@+id/recv"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:textColor="#80ffffff"
+            android:text="@string/receive"
+            android:textSize="20sp"
+            android:gravity="center"
+                      
+             />
+<!--          android:background="@drawable/ic_item_recv"   -->
+    </cn.nd.social.prishare.DragDropLayout>
+</RelativeLayout>
+    
+
+</LinearLayout>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/connect_user_page"
+        layout="@layout/sync_conn_user_list"
+        android:visibility="visible" />
+
+    <include
+        android:id="@+id/host_read_page"
+        layout="@layout/sync_read"
+        android:visibility="visible" />
+
+    <RelativeLayout
+        android:id="@+id/rl_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#bbb"
+        android:gravity="center"
+        android:visibility="visible" >
+
+        <RelativeLayout
+            android:id="@+id/wait_title"
+            android:layout_width="match_parent"
+            android:background="#fff"
+            android:layout_height="60dip" >
+
+            <Button
+                android:id="@+id/conn_wait_back"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dip"
+                android:background="@drawable/back_btn"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/wait_conn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/connecting"
+                android:textColor="#6c6c6c"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dip"
+            android:layout_alignBottom="@+id/wait_title"
+            android:background="#6c6c6c" />
+
+        
+        <RelativeLayout
+            android:id="@+id/container_wait"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_centerInParent="true"
+             >
+
+            <include layout="@layout/sync_wait_connect" />
+        </RelativeLayout>
+        
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1.5dip"
+            android:layout_alignTop="@+id/wait_bottom"
+            android:background="#6c6c6c" />
+
+        <LinearLayout
+            android:id="@+id/wait_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="60dip"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="@drawable/import_new_bg" >
+
+            <ImageView
+                android:id="@+id/start_img"
+                android:layout_width="80dip"
+                android:layout_height="80dip"
+                android:src="@drawable/start_sync_btn" />
+
+            <TextView
+                android:id="@+id/sync_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusableInTouchMode="false"
+                android:text="@string/sync_start_view"
+                android:textColor="#6c6c6c"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>

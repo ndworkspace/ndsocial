@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/main_bg"
+    >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/main_title_height"
+        android:background="@drawable/lauch_title_bg"
+        android:gravity="center_vertical"
+        android:visibility="visible" >
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/back_btn"
+            android:textColor="#fff"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/main_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/reservemeeting"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/btn_add"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_add" 
+            android:visibility="gone"
+            />
+    </RelativeLayout>
+
+    <cn.nd.social.ui.controls.ClearableEditTextWithIcon
+        android:id="@+id/et_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:hint="@string/meetingtitle"
+        android:ems="10" />
+    
+    <LinearLayout 
+        android:layout_width="280dip"
+        android:layout_height="280dip"
+        android:layout_marginTop="0dp"
+        android:layout_gravity="center"
+        android:orientation="vertical" 
+        android:background="@drawable/bg_time"
+        >
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dip"
+            android:textSize="35dp"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:text="07:50"
+            android:id="@+id/tv_time"
+            />
+        
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dip"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:text="03/04  周五"
+            android:id="@+id/tv_date"
+            />
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        >
+        <Button 
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/btn_next"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:text="下一步"
+        android:background="@drawable/button_bottom"
+        />
+    </LinearLayout>
+    
+    
+
+</LinearLayout>

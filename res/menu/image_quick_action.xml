@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/trans"
+        android:title="传输"/>
+    <item
+        android:id="@+id/multiSelect"
+        android:title="多选"/>
+    <item
+        android:id="@+id/open"
+        android:title="打开"/>
+    <item
+        android:id="@+id/more"
+        android:title="更多"/>
+
+</menu>

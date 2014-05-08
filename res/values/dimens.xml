@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="my_card_editor_single_row_height">50.0dip</dimen>
+    <dimen name="my_card_editor_single_row_content_height">46.0dip</dimen>
+    <dimen name="my_card_editor_address_row_height">189.0dip</dimen>
+    <dimen name="my_card_editor_address_row_content_height">185.0dip</dimen>
+    <dimen name="my_card_shadow_height">8.0dip</dimen>
+    <dimen name="my_card_default_font_size">20.0sp</dimen>
+    <dimen name="my_card_editor_tutorial_done_arrow_offset">-30.0dip</dimen>
+    <dimen name="card_viewer_navi_bar_heigth">50.0dip</dimen>
+    <dimen name="msg_child_user_width">46.0dip</dimen>
+    <dimen name="msg_child_item_height">60.0dip</dimen>
+    <dimen name="msg_child_user_left">12.6999817dip</dimen>
+    <dimen name="msg_child_user_top">6.6999817dip</dimen>
+	
+	<dimen name="tab_tools_item_margin">4dip</dimen>
+	<dimen name="tab_tools_item_stroke">2dip</dimen>
+	
+	<dimen name="private_gallery_item_width">240dip</dimen>
+	<dimen name="private_gallery_item_height">160dip</dimen>
+	
+	<dimen name="mycard_thumb_vertical_margin">4dip</dimen>
+	<dimen name="mycard_thumb_side_margin">4dip</dimen>
+	<dimen name="card_list_grid_space">4dip</dimen>
+	
+	<dimen name="fancy_mycard_thumb_side_margin">8dip</dimen>
+	<dimen name="listview_width">130dip</dimen>
+	<dimen name="listview_height">80dip</dimen>
+	<dimen name="listview_height_short">40dip</dimen>
+	<dimen name="popwindow_height">85dp</dimen>
+	<dimen name="tab_tools_item_height">120dip</dimen>
+	<dimen name="tab_tools_item_icon_size">100dip</dimen>
+	
+	<dimen name="private_chkbox_size">30dip</dimen>
+	<dimen name="qe_menu_item_height">60dip</dimen>
+	<dimen name="popmenu_right_padding">5dip</dimen>
+	<dimen name="popmenu_width">200dip</dimen>
+	<dimen name="circle_radius_1">120dip</dimen>
+	<dimen name="circle_radius_2">170dip</dimen>
+	<dimen name="circle_radius_3">240dip</dimen>
+	<dimen name="circle_radius_4">320dip</dimen>
+	<dimen name="little_circle_r">30dip</dimen>
+	<dimen name="left_margin">10dip</dimen>
+	<dimen name="localusr_r">70dip</dimen>
+	<dimen name="large_padding">16.0dip</dimen>
+	<dimen name="hint_text_size">14.0dip</dimen>
+	<dimen name="mgr_icon_size">60dip</dimen>
+	<dimen name="main_title_height">60dip</dimen>
+	<dimen name="sync_external_circle">120dip</dimen>
+	<dimen name="qrcode_size">130dip</dimen>
+	<dimen name="trans_icon_size">120dip</dimen>
+	<dimen name="trans_connect_btn_size">200dp</dimen>
+	<dimen name="trans_progress_size">240dp</dimen>
+	<dimen name="radar_circle_margin_top">80dp</dimen>
+	<dimen name="radar_bg_size">280dp</dimen>
+	<dimen name="radar_circle_size">290dp</dimen>
+	
+	
+	
+	    <!-- Size of private share outer ring. -->
+    <dimen name="pri_share_outterring_diameter">280dip</dimen>
+    <dimen name="pri_share_outterring_height">270dip</dimen>
+    <dimen name="pri_share_outterring_vertical_margin">-5dip</dimen>
+	<dimen name="pri_share_page_container_width">300dip</dimen>
+	<dimen name="pri_share_page_container_height">340dip</dimen>
+
+	<dimen name="quick_actionbar_height">100dip</dimen>
+	<dimen name="quick_actionbar_item_width">80dip</dimen>
+	<dimen name="quick_actionbar_item_margin">10dip</dimen>
+	
+	<dimen name="connector_name_textview_height">16dip</dimen>
+	<dimen name="connector_name_textview_width">50dip</dimen>
+	
+	<dimen name="connector_energy_bar_height">18dip</dimen>
+	<dimen name="connector_energy_bar_width">10dip</dimen>
+	
+	<dimen name="pri_share_face_size">50dip</dimen>
+	
+	<dimen name="pri_share_user_circle_margin">20dip</dimen>
+	
+</resources>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#eee"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/first_row"
+                android:layout_width="match_parent"
+                android:layout_height="100dip"
+                android:layout_marginTop="@dimen/tab_tools_item_margin"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tool_share_card"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/tab_tools_item_margin"
+                    android:layout_marginRight="@dimen/tab_tools_item_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/tool_item_selector"
+                    android:gravity="center"
+                    android:text="@string/share_card"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dip" />
+
+                <TextView
+                    android:id="@+id/tool_private_gallery"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/tab_tools_item_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/tool_private_gallery"
+                    android:gravity="center"
+                    android:text="@string/private_gallery_lable"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dip" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/second_row"
+                android:layout_width="fill_parent"
+                android:layout_height="100dip"
+                android:layout_marginTop="@dimen/tab_tools_item_margin"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tool_private_share"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/tab_tools_item_margin"
+                    android:layout_marginRight="@dimen/tab_tools_item_margin"
+                    android:layout_weight="1.5"
+                    android:background="@drawable/tool_private_share"
+                    android:gravity="center"
+                    android:text="@string/quick_exchange"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dip" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/third_row"
+                android:layout_width="fill_parent"
+                android:layout_height="100dip"
+                android:layout_marginTop="@dimen/tab_tools_item_margin"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tool_multi_talk"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/tab_tools_item_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/tool_multi_talk"
+                    android:gravity="center"
+                    android:text="@string/app_voice"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dip" />
+
+                <TextView
+                    android:id="@+id/tool_share_this"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/tab_tools_item_margin"
+                    android:layout_weight="1.2"
+                    android:background="@drawable/tool_share_this"
+                    android:gravity="center"
+                    android:text="@string/share_the_app"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dip" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/forth_row"
+                android:layout_width="fill_parent"
+                android:layout_height="100dip"
+                android:layout_marginTop="@dimen/tab_tools_item_margin"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tool_sync_browse"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/tab_tools_item_margin"
+                    android:layout_marginRight="@dimen/tab_tools_item_margin"
+                    android:layout_weight="1"
+                    android:background="@drawable/tool_sync_browse"
+                    android:gravity="center"
+                    android:text="@string/sync_read"
+                    android:textColor="@android:color/black"
+                    android:textSize="20dip" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

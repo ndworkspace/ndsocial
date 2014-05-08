@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    android:orientation="vertical" >
+        
+        <RelativeLayout
+            android:id="@+id/rl_top_tool"
+            android:layout_width="fill_parent"
+            android:layout_height="44dip"
+            android:gravity="center_vertical" >
+
+           <Button
+                android:id="@+id/iv_back"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:layout_marginLeft="15dip"
+                android:background="@drawable/back_btn"
+                android:textColor="#fff" />
+            
+            <ImageView
+                android:id="@+id/btn_view_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dip"
+                android:background="@drawable/tab_find_frd_normal"
+                android:textSize="16dip"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"  />
+            
+            <TextView
+                android:id="@+id/tv_pagenum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="15dip"
+                android:background="@color/transparent"
+                android:textSize="16dip"
+                android:textColor="@android:color/black"
+                android:layout_centerInParent="true"
+                android:gravity="center" />
+        </RelativeLayout>
+       
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dip"
+        android:layout_alignBottom="@+id/rl_top_tool"
+        android:background="#6c6c6c" />
+
+    <cn.nd.social.syncbrowsing.ui.HostDocView
+        android:id="@+id/doc_area"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="44dip"
+        android:layout_marginBottom="50dip"
+        android:background="#fff"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+    </cn.nd.social.syncbrowsing.ui.HostDocView>
+
+    <LinearLayout
+        android:id="@+id/ll_toolbar"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+        
+        <RelativeLayout
+            android:id="@+id/ll_tool"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >            
+
+           <ImageView
+                android:id="@+id/btn_view_back"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dip"
+                android:layout_marginRight="10dip"
+                android:src="@drawable/reselect_file_btn"
+                />
+                  
+           <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dip"
+                android:id="@+id/tv_file_name"
+                android:gravity="center"
+                android:singleLine="false"                
+                android:textColor="#6c6c6c"
+                android:textSize="16sp"
+                android:layout_toRightOf="@id/btn_view_back"
+                android:layout_toLeftOf="@+id/btn_switch"
+                android:layout_centerInParent="true" />
+           
+           <ImageView
+                android:id="@+id/btn_switch"
+                android:layout_width="32dip"
+                android:layout_height="32dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="15dip"
+                android:src="@drawable/comment_switch_disable"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+    </LinearLayout>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dip"
+        android:layout_alignTop="@+id/ll_toolbar"
+        android:background="#6c6c6c" />
+
+</RelativeLayout>

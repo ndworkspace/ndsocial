@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+   
+    <RelativeLayout       
+        android:id="@+id/set_time_top_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/lauch_title_bg"
+        android:visibility="visible"
+        android:gravity="center_vertical"       
+        android:layout_alignParentTop="true" >
+
+          <ImageButton
+            android:id="@+id/set_time_reback_btn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/back_btn"
+            android:onClick="setTime_back"/>
+       
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/available_time"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/set_main_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp">
+
+        <ImageView 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/st_bg_bg"/>
+        
+        <android.support.v4.view.ViewPager
+            android:id="@+id/settime_pager"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center" />
+  
+         <TextView 
+                android:id="@+id/custom_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="280dp"
+                android:text="@string/st_text_custom"
+                android:textColor="@color/white"
+                android:textSize="24.0sp"/>
+         
+        <FrameLayout
+            android:id="@+id/set_time_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="350dp">
+
+            <ImageButton
+                android:id="@+id/st_sure_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="0dp"
+                android:background="@color/transparent"
+                android:src="@drawable/set_time_sure_state" />
+
+            <TextView
+                android:id="@+id/button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/set_time_button_text"
+            	android:textColor="@color/white"
+                android:textSize="20sp" />
+        </FrameLayout>
+
+       
+    </FrameLayout>
+
+</RelativeLayout>

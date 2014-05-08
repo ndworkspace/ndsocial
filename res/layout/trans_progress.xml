@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_trans"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/trans_progress_size"
+    >
+	
+    <View
+        android:id="@+id/stub_view"
+        android:layout_centerInParent="true"
+        android:layout_width="0dip"
+        android:layout_height="0dip"         
+        />
+    
+    <ImageView
+        android:id="@+id/trans_percentage"
+        android:layout_centerInParent="true"
+        android:layout_height="@dimen/trans_connect_btn_size"
+        android:layout_width="@dimen/trans_connect_btn_size"
+        android:src="@drawable/percent_0"
+        />
+    
+    
+    <ImageView
+        android:id="@+id/iv_send_sign_left"
+        android:layout_toLeftOf="@id/stub_view"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="20dip"
+        android:layout_marginTop="30dip"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/new_send_signal"
+        />
+    
+    <ImageView
+        android:id="@+id/iv_send_sign_right"
+        android:layout_toRightOf="@id/stub_view"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dip"
+        android:layout_marginBottom="30dip"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/new_send_signal"
+        />
+    
+    
+</RelativeLayout>

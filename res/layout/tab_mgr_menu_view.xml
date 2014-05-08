@@ -1,0 +1,205 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/mgr_set_bg"
+    android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:layout_marginBottom="20dip"
+            android:orientation="horizontal" >
+ 
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/mgr_connect"
+                    android:layout_width="@dimen/mgr_icon_size"
+                    android:layout_height="@dimen/mgr_icon_size"
+                    android:layout_gravity="center"
+                    android:src="@drawable/mgr_connect_btn" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/connecting"
+                    android:textColor="@color/White"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/mgr_card"
+                    android:layout_width="@dimen/mgr_icon_size"
+                    android:layout_height="@dimen/mgr_icon_size"
+                    android:layout_gravity="center"
+                    android:src="@drawable/mgr_card_btn" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/card"
+                    android:textColor="@color/White"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/mgr_treasure"
+                    android:layout_width="@dimen/mgr_icon_size"
+                    android:layout_height="@dimen/mgr_icon_size"
+                    android:layout_gravity="center"
+                    android:src="@drawable/mgr_treasure_btn" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/treasure"
+                    android:textColor="@color/White"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/mgr_history"
+                    android:layout_width="@dimen/mgr_icon_size"
+                    android:layout_height="@dimen/mgr_icon_size"
+                    android:layout_gravity="center"
+                    android:src="@drawable/mgr_history_btn" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/history"
+                    android:textColor="@color/White"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dip"
+            android:background="@color/White" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:layout_marginBottom="20dip"
+            android:orientation="horizontal" >
+ 
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/mgr_share_img"
+                    android:layout_width="@dimen/mgr_icon_size"
+                    android:layout_height="@dimen/mgr_icon_size"
+                    android:layout_gravity="center"
+                    android:src="@drawable/mgr_share_btn" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/share"
+                    android:textColor="@color/White"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/mgr_update_img"
+                    android:layout_width="@dimen/mgr_icon_size"
+                    android:layout_height="@dimen/mgr_icon_size"
+                    android:layout_gravity="center"
+                    android:src="@drawable/mgr_update_btn" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/update"
+                    android:textColor="@color/White"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/mgr_advise_img"
+                    android:layout_width="@dimen/mgr_icon_size"
+                    android:layout_height="@dimen/mgr_icon_size"
+                    android:layout_gravity="center"
+                    android:src="@drawable/mgr_advise_btn" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/advise"
+                    android:textColor="@color/White"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/mgr_exit_img"
+                    android:layout_width="@dimen/mgr_icon_size"
+                    android:layout_height="@dimen/mgr_icon_size"
+                    android:layout_gravity="center"
+                    android:src="@drawable/mgr_exit_btn" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/exit"
+                    android:textColor="@color/White"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+</LinearLayout>

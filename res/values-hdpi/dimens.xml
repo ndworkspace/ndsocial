@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="qrcode_size">120dip</dimen>
+	<dimen name="trans_icon_size">120dp</dimen>
+	<dimen name="trans_connect_btn_size">180dp</dimen>
+	<dimen name="trans_progress_size">240dp</dimen>
+	<dimen name="radar_circle_margin_top">70dp</dimen>
+	<dimen name="radar_bg_size">240dp</dimen>
+	<dimen name="radar_circle_size">250dp</dimen>
+	<dimen name="pri_share_user_circle_margin">10dp</dimen>
+</resources>

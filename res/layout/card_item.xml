@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.nd.social.card.CardListItem xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contact_card_item"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/color_card_item"
+    android:gravity="center_vertical"
+    android:paddingLeft="15dip" >
+
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:scaleType="matrix"
+        android:visibility="gone" />
+    
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/iv"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:textColor="#000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
+            android:textColor="#cc000000"
+            android:textSize="12sp" />
+         
+    </LinearLayout>
+
+   
+     
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/friends_ind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="matrix"
+            android:src="@drawable/friends_ind"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</cn.nd.social.card.CardListItem>

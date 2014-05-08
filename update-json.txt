@@ -1,0 +1,57 @@
+{
+"versionCode": 5,
+"updateURL": "http://121.207.254.44/777Server/NDSocial.apk",
+"releaseNote": "更新信息:\n1.新用户注册，只要2个信息栏;\n2.修复名片的展示中，职位与姓名重合问题;\n3.从通讯录导入名片的过程，显示当前进度;\n4.合并分享自己名片入口"
+}
+
+{
+"versionCode": 6,
+"updateURL": "http://121.207.254.44/777Server/NDSocial.apk",
+"releaseNote": "更新信息:\n1.版本自动更新使用dialog交互;\n2.版本更新后台下载添加进度显示;\n3.私密分享添加勾选提示"
+}
+
+{
+"versionCode": 7,
+"updateURL": "http://121.207.254.44/777Server/NDSocial.apk",
+"releaseNote": "更新信息:\n1.优化私密分享代码结构;\n2.修复不同分辨率下名片显示不一致问题;\n3.修复私密图库下，导入导出图片后，文件仍然显示在原位置的问题;\n4.调整名片夹和消息列表位置;\n5.修改主界面标题，第二屏先用图片填充"
+}
+
+{
+"versionCode": 8,
+"updateURL": "http://121.207.254.44/777Server/NDSocial.apk",
+"releaseNote": "更新信息:\n1.加入3D IM demo;\n2.进入私密分享时提示修改;\n3.私密分享中，修改checkbox显示风格;\n4.同步浏览过程中，中途加入成员;\n5.修复同步浏览过程中，client登陆后退出，再登陆时socket异常的问题;\n6.分享此应用移动到菜单栏\n7.私密分享的时间默认为5秒"
+}
+
+{
+"versionCode": 9,
+"updateURL": "http://121.207.254.44/777Server/NDSocial.apk",
+"releaseNote": "更新信息:\n1.临时版本，去掉3DIM \n2.合并菜单入口\n3.使用新的菜单显示风格"
+}
+
+
+{
+"versionCode": 10,
+"updateURL": "http://121.207.254.44/777Server/NDSocial.apk",
+"releaseNote": "更新信息:\n1.限制android 4.0及以上的版本才能安装使用 \n2.集成新的超声波库，提高传输速率 \n3.同步浏览中增加示例文件，历史列表为空时，可浏览示例文件\n4.私密分享将应用分享移后\n5.热点连接在传输时才开始进行\n6.接受到的名片提示用户保存到通讯录"
+}
+
+{
+"versionCode": 11,
+"updateURL": "http://121.207.254.44/777Server/NDSocial.apk",
+"releaseNote": "更新信息:\n1.集成最新的3DIM库 \n2.同步浏览中切换文件时，不断开连接 \n3.同步浏览中UI风格改为与主界面类似\n4.检查新版本与关于合并为版本更新"
+}
+
+
+{
+"versionCode": 17,
+"updateURL": "http://121.207.254.44/777Server/NDSocial.apk",
+"releaseNote": "更新信息:\n1.调整分享屏的4个排列顺序；\n2.Toy mail,改为Baby邮箱\n3.将3个主屏右上角的含三点的圆圈的操作显示，修改为一致\n4.在私密分享，按住雷达要能再次发出声波，放手就停止\n5.同步浏览分享屏幕修改\n6.提高二维码识别率\n7.提高超声波握手成功率\n8.优化超声波音质\n9.设定私密图片的默认存盘时间"
+}"
+}
+
+
+{
+"versionCode": 21,
+"updateURL": "http://121.207.254.44/777Server/NDSocial.apk",
+"releaseNote": "更新信息:\n1.私密分享屏幕UI更新"
+}

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg" >
+
+    <LinearLayout
+        android:id="@+id/card_list_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <include layout="@layout/main_tab_title" />
+        <LinearLayout 
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <View
+                android:layout_width="0dip"
+                android:layout_height="1dip"
+                android:layout_weight="3" />
+            <ImageView 
+                android:layout_width="260dip"
+            	android:layout_height="260dip"
+            	android:layout_gravity="center_horizontal"
+            	android:src="@drawable/affection"/>
+            <View
+                android:layout_width="0dip"
+                android:layout_height="1dip"
+                android:layout_weight="4" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="To Be Continued"
+                android:gravity="center"
+                android:textSize="16dip"/>
+             <View
+                android:layout_width="0dip"
+                android:layout_height="1dip"
+                android:layout_weight="2" />
+  		</LinearLayout>
+  		
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/im_logo" />
+
+            <View
+                android:id="@+id/stub_view"
+                android:layout_width="1dip"
+                android:layout_height="1dip"
+                android:layout_centerInParent="true" />
+
+            <ImageView
+                android:id="@+id/left_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30dip"
+                android:src="@drawable/arrow_left_anim" />
+
+            <ImageView
+                android:id="@+id/right_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="30dip"
+                android:src="@drawable/arrow_right_anim" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>

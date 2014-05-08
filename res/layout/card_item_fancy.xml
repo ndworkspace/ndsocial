@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.nd.social.card.CardListItem xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+ >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_item"
+        android:background="@drawable/card_item_bg"
+        android:paddingLeft="15dip" >
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:scaleType="matrix"
+            android:visibility="gone" />
+
+        <RelativeLayout            
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/iv"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dip" >
+
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dip"
+        android:textColor="#000"
+        android:textSize="24sp" />
+    
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="#ff0090ff"
+        android:textSize="16sp" />
+
+</cn.nd.social.card.CardListItem>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="private_gallery_lable">私密图片</string>
+    <string name="private_set_pwd">设置密码</string>
+    <string name="private_hint_password">请输入保护密码</string>
+    <string name="private_confirm_password">请再次输入保护密码</string>
+    <string name="private_pass_too_short">密码至少为4位</string>
+    <string name="private_password_not_match">两次密码输入不匹配</string>
+    <string name="private_password_confirmed">密码已确认</string>
+    <string name="private_ok">确认</string>
+    <string name="private_forgot_pass">忘记密码</string>
+    <string name="private_passwd_hint">请输入保护密码</string>
+    <string name="private_passwd_error">保护密码错误</string>
+    <string name="empty_view_no_file">没有文件</string>
+    <string name="private_gallery_title">我的图片</string>
+    <string name="private_add_file_error">无法添加文件</string>
+
+</resources>

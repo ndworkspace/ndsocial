@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ImageView
+        android:id="@id/tab_background"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="bottom|center"
+        android:scaleType="matrix" />
+
+    <LinearLayout
+        android:id="@id/tabbarleftsub"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@id/appTab"
+            style="@style/tabbar_title"
+            android:drawableTop="@drawable/zapya_common_apps"
+            android:text="@string/title_apps"
+            android:textColor="@color/tab_apps_text_color" />
+
+        <TextView
+            android:id="@id/galleryTab"
+            style="@style/tabbar_title"
+            android:drawableTop="@drawable/zapya_common_photo"
+            android:text="@string/title_gallery"
+            android:textColor="@color/tab_gallery_text_color" />
+
+        <TextView
+            android:id="@id/mediaTab"
+            style="@style/tabbar_title"
+            android:drawableTop="@drawable/zapya_common_audio"
+            android:text="@string/title_audio"
+            android:textColor="@color/tab_audio_text_color" />
+
+        <TextView
+            android:id="@id/folderTab"
+            style="@style/tabbar_title"
+            android:drawableTop="@drawable/zapya_common_browse"
+            android:text="@string/title_browser"
+            android:textColor="@color/tab_browser_text_color" />
+
+        <TextView
+            android:id="@id/historyTab"
+            style="@style/tabbar_title"
+            android:drawableTop="@drawable/zapya_common_history"
+            android:text="@string/title_history"
+            android:textColor="@color/tab_hist_text_color" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" >
+
+        <LinearLayout
+            android:id="@id/bar_low_layer"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/tab_hist_indicator_height"
+            android:clickable="false"
+            android:focusableInTouchMode="false"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:id="@id/app_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6.6999817dip"
+                android:layout_marginTop="1.0dip"
+                android:background="@drawable/zapya_data_history_badge"
+                android:clickable="false"
+                android:focusableInTouchMode="false"
+                android:orientation="horizontal"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:id="@id/bar_badge_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <ImageView
+                    android:id="@id/bar_badge_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <ImageView
+                    android:id="@id/bar_badge_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/zapya_data_history_badge_number_plus" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0" />
+
+            <View
+                android:id="@id/view3"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/tab_hist_indicator_height"
+                android:scaleType="fitXY"
+                android:src="@drawable/zapya_common_v" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@id/bar_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/bar_low_layer"
+            android:layout_marginRight="6.6999817dip"
+            android:layout_marginTop="1.0dip"
+            android:background="@drawable/zapya_data_history_badge"
+            android:clickable="false"
+            android:focusableInTouchMode="false"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+
+            <ImageView
+                android:id="@id/bar_badge_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:id="@id/bar_badge_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:id="@id/bar_badge_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/zapya_data_history_badge_number_plus" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@id/media_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="40.0dip"
+        android:layout_marginLeft="10.0dip"
+        android:layout_marginTop="1.0dip"
+        android:background="@drawable/zapya_data_audio_badge"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+        android:visibility="gone" />
+
+</merge>

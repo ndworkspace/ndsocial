@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.nd.social.prishare.component.CellItemView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/grid_item_width"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="6dip" >
+
+    <FrameLayout
+        android:id="@id/thumb"
+        android:layout_width="@dimen/grid_item_thumb_width"
+        android:layout_height="@dimen/grid_item_thumb_width"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="2dip" >
+
+        <ImageView
+            android:id="@id/icon_background"
+            android:layout_width="@dimen/grid_item_thumb_width"
+            android:layout_height="@dimen/grid_item_thumb_width"
+            android:scaleType="fitXY"
+            android:src="@drawable/backgroud_cover"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@id/icon"
+            android:layout_width="@dimen/grid_item_thumb_width"
+            android:layout_height="@dimen/grid_item_thumb_width"
+            android:paddingBottom="4dip"
+            android:paddingLeft="@dimen/grid_item_thumb_padding"
+            android:paddingRight="@dimen/grid_item_thumb_padding"
+            android:paddingTop="4dip"
+            android:scaleType="centerCrop" />
+        <!-- android:scaleType="fitXY" -->
+
+        <CheckBox
+            android:id="@id/checkbox"
+            android:layout_width="@dimen/private_chkbox_size"
+            android:layout_height="@dimen/private_chkbox_size"
+            android:button="@drawable/qe_multi_checkbox"
+            android:clickable="false"
+            android:focusable="false"
+            android:visibility="visible" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/thumb"
+        android:layout_centerHorizontal="true"
+        android:ellipsize="marquee"
+        android:gravity="center_horizontal"
+        android:paddingLeft="@dimen/grid_item_padding"
+        android:paddingRight="@dimen/grid_item_padding"
+        android:singleLine="true"
+        android:textColor="#ffffffff"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@id/subtitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_centerHorizontal="true"
+        android:ellipsize="marquee"
+        android:gravity="center_horizontal"
+        android:singleLine="true"
+        android:textColor="#ffffffff"
+        android:textSize="12sp" />
+
+</cn.nd.social.prishare.component.CellItemView>

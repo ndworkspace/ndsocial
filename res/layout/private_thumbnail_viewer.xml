@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/private_root_container"
+    android:background="#ff3a3a3a" >
+    
+    <include
+        android:id="@+id/privacy_title"
+        layout="@layout/private_file_title" />
+    
+    <RelativeLayout
+        android:id="@+id/rl_tab"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/privacy_title"
+        android:background="#F2F2F2" >
+
+        
+        <RelativeLayout
+            android:id="@+id/rl_nav"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_gravity="top"
+            android:background="#5AB0EB" >
+
+            <RadioGroup
+                android:id="@+id/rg_nav_content"
+                android:layout_width="fill_parent"
+                android:layout_height="38dip"
+                android:layout_alignParentTop="true"
+                android:background="#F2F2F2"
+                android:orientation="horizontal" >
+            </RadioGroup>
+
+            <ImageView
+                android:id="@+id/iv_nav_indicator"
+                android:layout_width="1dip"
+                android:layout_height="5dip"
+                android:layout_alignParentBottom="true"
+                android:background="#5AB0EB"
+                android:scaleType="matrix" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    
+    <RelativeLayout
+        android:id="@+id/privacy_containerBody"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/rl_tab" >
+
+        <cn.nd.social.privategallery.CustomViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+    </RelativeLayout>
+
+    
+<!--         android:flipInterval="30"
+        android:persistentDrawingCache="animation"  -->
+</RelativeLayout>

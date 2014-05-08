@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dm_history_child_item_height"
+        android:visibility="invisible" />
+
+    <RelativeLayout
+        android:id="@+id/history_user_info"
+        android:layout_width="@dimen/dm_history_child_user_width"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dm_history_child_user_left"
+        android:layout_marginTop="@dimen/dm_history_child_user_top"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/history_avatar_frame"
+            android:layout_width="@dimen/dm_history_child_avatar_frame_size"
+            android:layout_height="@dimen/dm_history_child_avatar_frame_size"
+            android:layout_centerHorizontal="true" >
+
+            <ImageView
+                android:id="@+id/history_opposide_avatar"
+                android:layout_width="@dimen/dm_history_child_avatar_size"
+                android:layout_height="@dimen/dm_history_child_avatar_size"
+                android:layout_centerInParent="true"
+                android:src="@drawable/dm_icon_default_user" />
+
+            <ImageView
+                android:id="@+id/history_opposide_avatar"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/zapya_history_avatar_frame" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/history_opposide_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/history_avatar_frame"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dm_history_child_space_between_avatar_nick"
+            android:singleLine="true"
+            android:text="Feilongzaitian"
+            android:textColor="@color/dm_history_nick_name_color"
+            android:textSize="@dimen/dm_history_child_user_nick_text_size" />
+
+        <RelativeLayout
+            android:layout_width="@dimen/dm_history_child_file_type_max_size"
+            android:layout_height="@dimen/dm_history_child_file_type_max_size"
+            android:layout_below="@id/history_opposide_nick"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dm_history_child_space_between_nick_type" >
+
+            <ImageView
+                android:id="@+id/history_file_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:adjustViewBounds="true"
+                android:src="@drawable/zapya_history_app" />
+            <!--
+	            <com.dewmobile.kuaiya.ui.DmCheckBox
+	                android:id="@+id/history_checkbox_recv"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_centerInParent="true"
+	                android:button="@drawable/checkbox_bg"
+	                android:focusable="false" />
+            -->
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dm_history_child_buble_height"
+        android:layout_alignTop="@id/history_user_info"
+        android:layout_marginRight="@dimen/dm_history_child_buble_right_space"
+        android:layout_toRightOf="@id/history_user_info" >
+
+        <ProgressBar
+            android:id="@+id/history_progressbar_normal"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/history_buble"
+            android:layout_alignTop="@id/history_buble"
+            android:progressDrawable="@null" />
+
+        <ProgressBar
+            android:id="@+id/history_progressbar_fail"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/history_buble"
+            android:layout_alignTop="@id/history_buble"
+            android:progressDrawable="@null" />
+
+        <FrameLayout
+            android:id="@+id/history_buble"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/history_recv_bg_none" >
+
+            <RelativeLayout
+                android:id="@+id/history_buble_content_1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <RelativeLayout
+                    android:id="@+id/thumb"
+                    android:layout_width="@dimen/dm_history_child_thumb_frame_width"
+                    android:layout_height="@dimen/dm_history_child_thumb_frame_height"
+                    android:layout_marginLeft="@dimen/dm_history_child_recv_thumb_frame_left"
+                    android:layout_marginTop="@dimen/dm_history_child_thumb_frame_top" >
+
+                    <ImageView
+                        android:id="@+id/history_thumbnail_mask"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/zapya_data_audio_cover" />
+
+                    <ImageView
+                        android:id="@+id/history_thumbnail"
+                        android:layout_width="@dimen/dm_history_child_thumb_width"
+                        android:layout_height="@dimen/dm_history_child_thumb_height"
+                        android:layout_centerInParent="true"
+                        android:scaleType="fitXY" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/history_file_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/thumb"
+                    android:layout_marginLeft="@dimen/dm_history_child_text_left"
+                    android:layout_marginTop="@dimen/dm_history_child_first_text_top"
+                    android:layout_toRightOf="@id/thumb"
+                    android:ellipsize="middle"
+                    android:singleLine="true"
+                    android:text="title"
+                    android:textColor="@color/dm_history_child_first_text_color"
+                    android:textSize="@dimen/dm_history_child_first_text_size" />
+
+                <TextView
+                    android:id="@+id/history_file_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/history_file_title"
+                    android:layout_below="@id/history_file_title"
+                    android:layout_marginTop="@dimen/dm_history_child_second_text_top"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:singleLine="true"
+                    android:text="102.8MB"
+                    android:textColor="@color/dm_history_child_second_text_color"
+                    android:textSize="@dimen/dm_history_child_second_text_size" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/history_buble_content_2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <RelativeLayout
+                    android:id="@+id/thumb"
+                    android:layout_width="@dimen/dm_history_child_thumb_frame_width_2"
+                    android:layout_height="@dimen/dm_history_child_thumb_frame_height"
+                    android:layout_marginLeft="@dimen/dm_history_child_thumb_frame_left_2"
+                    android:layout_marginTop="@dimen/dm_history_child_thumb_frame_top" >
+
+                    <ImageView
+                        android:id="@+id/history_thumbnail_mask"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@drawable/zapya_data_photo_s_cover_normal" />
+
+                    <ImageView
+                        android:id="@+id/history_thumbnail"
+                        android:layout_width="@dimen/dm_history_child_thumb_width_2"
+                        android:layout_height="@dimen/dm_history_child_thumb_height"
+                        android:layout_centerInParent="true"
+                        android:scaleType="fitXY" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/history_file_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/thumb"
+                    android:layout_marginLeft="@dimen/dm_history_child_text_left_2"
+                    android:layout_marginTop="@dimen/dm_history_child_first_text_top"
+                    android:layout_toRightOf="@id/thumb"
+                    android:ellipsize="middle"
+                    android:singleLine="true"
+                    android:text="title"
+                    android:textColor="@color/dm_history_child_first_text_color"
+                    android:textSize="@dimen/dm_history_child_first_text_size" />
+
+                <TextView
+                    android:id="@+id/history_file_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/history_file_title"
+                    android:layout_below="@id/history_file_title"
+                    android:layout_marginTop="@dimen/dm_history_child_second_text_top"
+                    android:ellipsize="end"
+                    android:includeFontPadding="false"
+                    android:singleLine="true"
+                    android:text="102.8MB"
+                    android:textColor="@color/dm_history_child_second_text_color"
+                    android:textSize="@dimen/dm_history_child_second_text_size" />
+            </RelativeLayout>
+        </FrameLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/history_count_down"
+        android:layout_width="@dimen/dm_history_child_install_width"
+        android:layout_height="@dimen/dm_history_child_install_height"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dm_history_child_install_right"
+        android:background="@drawable/zapya_history_installation_normal"
+        android:focusable="false"
+        android:gravity="center"
+        android:text="5 sec"
+        android:textColor="#00000000"
+        android:textSize="@dimen/dm_history_child_install_size"
+        android:visibility="invisible" />
+
+    <!--
+         <Button
+        android:id="@+id/history_apk_install"
+        style="@style/dm_shadow_btn"
+        android:layout_width="@dimen/dm_history_child_install_width"
+        android:layout_height="@dimen/dm_history_child_install_height"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dm_history_child_install_right"
+        android:background="@drawable/transfer_install_btn"
+        android:focusable="false"
+        android:text="@string/dm_history_app_install"
+        android:textColor="@color/dm_history_install_color"
+        android:textSize="@dimen/dm_history_child_install_size" />
+    -->
+
+</RelativeLayout>

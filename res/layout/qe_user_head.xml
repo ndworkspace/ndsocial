@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.nd.social.prishare.component.UserHead xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:paddingLeft="5dip" >
+
+    <ImageView
+        android:id="@id/image_id"
+        android:layout_width="@dimen/dm_userhead_width"
+        android:layout_height="@dimen/dm_userhead_width"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/dm_userhead_img_padding"
+        android:scaleType="fitXY"
+        android:src="@drawable/avatar1" />
+
+    <TextView
+        android:id="@id/user_id"
+        style="@style/userhead_name"
+        android:layout_width="@dimen/dm_userhead_name_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ellipsize="marquee"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textSize="11.0sp" />
+
+</cn.nd.social.prishare.component.UserHead>

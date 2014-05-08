@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/main_bg"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/main_title_height"
+        android:background="@drawable/lauch_title_bg"
+        android:gravity="center_vertical"
+        android:visibility="visible" >
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/back_btn"
+            android:textColor="#fff"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/main_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/invitemember"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </RelativeLayout>
+    <cn.nd.social.ui.controls.ClearableEditTextWithIcon
+        android:id="@+id/et_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:hint="@string/searchfriend"
+        android:ems="10" />
+    <ListView
+        android:id="@+id/listView_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:layout_weight="1"
+        android:background="@color/transparent"
+        android:cacheColorHint="@color/transparent"
+        android:divider="@color/transparent"
+        android:listSelector="@color/transparent"
+        >
+    </ListView>
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="70dip" 
+        >
+        <Button 
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="30dip"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/btn_sure"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:text="@string/sure"
+        android:background="@drawable/button_bottom"
+        />
+    </LinearLayout>
+    
+
+</LinearLayout>

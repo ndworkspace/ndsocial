@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/main_bg"
+    android:orientation="vertical" >
+
+    <include layout="@layout/main_tab_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="100dip"
+        android:layout_marginBottom="70dip"
+        >
+
+        <LinearLayout
+            android:id="@+id/tool_multi_talk"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/tab_tools_item_margin"
+            android:layout_marginRight="@dimen/tab_tools_item_margin"
+            android:layout_marginBottom="20dip"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <!-- android:background="@drawable/private_share_bg" -->
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/comm_meeting" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tool_sync_browse"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/tab_tools_item_margin"
+            android:layout_marginRight="@dimen/tab_tools_item_margin"
+            android:layout_marginTop="20dip"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/comm_talkbar" />
+        </LinearLayout>
+
+        <!-- android:text="@string/private_gallery_lable" -->
+    </LinearLayout>
+
+</FrameLayout>
