@@ -99,7 +99,7 @@ public class ContactListActivity extends Activity implements UserManagerCallBack
 			final MemberContact contact = mList.get(position);
 			tv_name.setText(contact.getContactName());
 			Button btn_action = (Button) view.findViewById(R.id.btn_action);
-			if(contact.getUid() == null){
+			if(!contact.isMember()){
 				btn_action.setText("邀请");
 				btn_action.setEnabled(true);
 			}else{
@@ -210,12 +210,6 @@ public class ContactListActivity extends Activity implements UserManagerCallBack
 		loadFromDB();
 	}
 
-	@Override
-	public void onQueryContactFriendCallBack(List<String> friendMobiles,
-			List<String> noFriendMobiles, boolean success, String msg) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void onQueryContactMembersCallBack(
@@ -224,6 +218,14 @@ public class ContactListActivity extends Activity implements UserManagerCallBack
 		if(success){
 			loadFromDB();
 		}
+	}
+
+	@Override
+	public void onQueryContactFriendCallBack(List<String> friendMobiles,
+			List<String> noFriendMobiles, List<String> noFriendUids,
+			boolean success, String msg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -301,7 +301,8 @@ public class RegiterFrameLayout extends FrameLayout implements UserManagerCallBa
 
 	@Override
 	public void onQueryContactFriendCallBack(List<String> friendMobiles,
-			List<String> noFriendMobiles, boolean success, String msg) {
+			List<String> noFriendMobiles, List<String> noFriendUids,
+			boolean success, String msg) {
 		// TODO Auto-generated method stub
 		
 	}

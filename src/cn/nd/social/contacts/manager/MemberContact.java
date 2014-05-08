@@ -45,6 +45,10 @@ public class MemberContact extends Model{
 	public Boolean isFriend() {
 		return friendFlag==3;
 	}
+	public boolean isMember(){
+		return friendFlag!=2;
+	}
+	
 	public void setFriend(Boolean isFriend) {
 		if(isFriend){
 			friendFlag = 3;

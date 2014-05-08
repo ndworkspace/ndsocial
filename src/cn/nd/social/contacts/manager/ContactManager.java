@@ -73,13 +73,15 @@ public class ContactManager implements UserManagerCallBack{
 
 	@Override
 	public void onQueryContactFriendCallBack(List<String> friendMobiles,
-			List<String> noFriendMobiles,boolean success,String msg) {
+			List<String> noFriendMobiles,List<String> noFriendUids,boolean success,String msg) {
 		if(success){
 			for(MemberContact item : mContacts){
 				if(friendMobiles.contains(item.getMobileMD5())){
 					item.setFriend(true);
 				}else if(noFriendMobiles.contains(item.getMobileMD5())){
 					item.setFriend(false);
+					int index = friendMobiles.indexOf(item.getMobileMD5());
+					item.setUid(new Long(noFriendUids.get(index)));
 				}
 			}
 			ContactDBHelper.getInstance().save(mContacts);
@@ -87,4 +89,13 @@ public class ContactManager implements UserManagerCallBack{
 		mContacts = null;
 		mWeakCallBack.get().onQueryContactMembersCallBack(success, msg);
 	}
+	
+	public void setCallBack(ContactManagerCallBack callback){
+		if(callback == null){
+			mWeakCallBack = null;
+		}else{
+			mWeakCallBack = new WeakReference<ContactManagerCallBack>(callback);
+		}
+	}
+	
 }

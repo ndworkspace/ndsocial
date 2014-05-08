@@ -152,7 +152,7 @@ public class UserTestManager implements UserManagerApi{
 	@Override
 	public void queryContactFriend(List<String> contactMobiles) {
 		// TODO Auto-generated method stub
-		this.callBack.onQueryContactFriendCallBack(new ArrayList<String>(), new ArrayList<String>(), true, null);
+		this.callBack.onQueryContactFriendCallBack(new ArrayList<String>(), new ArrayList<String>(),new ArrayList<String>(), true, null);
 	}
 
 }

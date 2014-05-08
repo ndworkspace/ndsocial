@@ -30,6 +30,7 @@ import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -60,6 +61,7 @@ import cn.nd.social.common.RecordAudioThread;
 import cn.nd.social.contacts.manager.ContactDBHelper;
 import cn.nd.social.contacts.manager.ContactManager;
 import cn.nd.social.contacts.manager.ContactManagerCallBack;
+import cn.nd.social.contacts.manager.GetContacts;
 import cn.nd.social.contacts.manager.ImportContact;
 import cn.nd.social.contacts.manager.ImportContact.ImportContactCallBack;
 import cn.nd.social.contacts.manager.MemberContact;
@@ -215,10 +217,10 @@ public class CardListActivity extends Activity implements OnCompletionListener, 
 		mGrid.setHorizontalSpacing(gridSpace);
 		// mGrid.setEmptyView(mEmptyView);/**set empty view will cause always
 		// show empty view*/
-		mGrid.addHeaderView(mHeadView);
+		//mGrid.addHeaderView(mHeadView);
 		boolean flag = mPrefs.getBoolean(FIRSTSHOWFLAG, true);
 		if(flag){
-			layout_teach.setVisibility(View.VISIBLE);
+			//layout_teach.setVisibility(View.VISIBLE);
 		}
 	}
     
@@ -720,6 +722,23 @@ public class CardListActivity extends Activity implements OnCompletionListener, 
 		mProgress.setMessage(getText(R.string.wait_hint));
 		mProgress.setIndeterminate(true);
 		mProgress.setCancelable(false);
+		mProgress.setOnKeyListener(new ProgressDialog.OnKeyListener(){
+
+			@Override
+			public boolean onKey(DialogInterface dialog, int keyCode,
+					KeyEvent event) {
+				 if (keyCode == KeyEvent.KEYCODE_BACK )  
+			        {  
+			            // 创建退出对话框  
+			        	if (mProgress != null) {
+			    			mProgress.dismiss();
+			    			mProgress = null;
+			    			mContactManager.setCallBack(null);
+			    			return false;
+			    		}
+			        }  
+				return true;
+			}});
 		mProgress.show();
 	}
 
@@ -874,8 +893,9 @@ public class CardListActivity extends Activity implements OnCompletionListener, 
 					if(mContactManager == null){
 						mContactManager = new ContactManager(CardListActivity.this);
 					}
-					List<MemberContact> contacts = ContactDBHelper.getInstance().getContacts();
+					List<MemberContact> contacts = GetContacts.getPhoneContacts(CardListActivity.this);
 					showProgressDialog();
+					mContactManager.setCallBack(CardListActivity.this);
 					mContactManager.queryContactMembers(contacts);
 				}
 			});
@@ -909,6 +929,14 @@ public class CardListActivity extends Activity implements OnCompletionListener, 
 		});
 		builder.create().show();
 	}
+	
+	@Override
+	public void onQueryContactMembersCallBack(boolean success, String msg) {
+		dismissProgressDialog();
+		Intent intent = new Intent(this,CardListActivity.class);
+		startActivity(intent);
+	}
+	
 	
     class ImportContactTask extends AsyncTask<Void,Integer,Void> {
         // variable length argument, first params match doInBackground 
@@ -1010,13 +1038,6 @@ public class CardListActivity extends Activity implements OnCompletionListener, 
     private static final int EVENT_REPEAT_PLAY = 1001;
 	private static final int EVENT_RECORD_RESUME_DELAY = 1002;
 
-
-	@Override
-	public void onQueryContactMembersCallBack(boolean success, String msg) {
-		dismissProgressDialog();
-		Intent intent = new Intent(this,CardListActivity.class);
-		startActivity(intent);
-	}
 	
 
 	

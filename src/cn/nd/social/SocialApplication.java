@@ -20,6 +20,8 @@ import cn.nd.social.services.SocialService.ServiceBinder;
 import cn.nd.social.services.WifiService.WifiServiceBinder;
 import cn.nd.social.updater.UpdateService;
 
+import com.activeandroid.ActiveAndroid;
+
 
 public class SocialApplication extends Application {
 	public static final String TAG = "SocialApplication";
@@ -131,6 +133,7 @@ public class SocialApplication extends Application {
 		
 		//connect to clound server
 		CloundServer.getInstance().init();
+		ActiveAndroid.initialize(this);
 	}
 	
 	
@@ -138,6 +141,7 @@ public class SocialApplication extends Application {
 	@Override
 	public void onTerminate() {
 		super.onTerminate();
+		ActiveAndroid.dispose();
 	}
 	
 

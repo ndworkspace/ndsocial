@@ -50,11 +50,9 @@ public class GetContacts {
 		Cursor phoneCursor = resolver.query(Phone.CONTENT_URI,
 				PHONES_PROJECTION, null, null, null);
 		
-		MemberContact cData = new MemberContact();
-		
 		if (phoneCursor != null) {
 			while (phoneCursor.moveToNext()) {
-
+				MemberContact cData = new MemberContact();
 				// 得到手机号码
 				String phoneNumber = phoneCursor.getString(PHONES_NUMBER_INDEX);
 				// 当手机号码为空的或者为空字段 跳过当前循环 

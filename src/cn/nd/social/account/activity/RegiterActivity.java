@@ -367,7 +367,8 @@ public class RegiterActivity extends Activity implements UserManagerCallBack{
 
 	@Override
 	public void onQueryContactFriendCallBack(List<String> friendMobiles,
-			List<String> noFriendMobiles, boolean success, String msg) {
+			List<String> noFriendMobiles, List<String> noFriendUids,
+			boolean success, String msg) {
 		// TODO Auto-generated method stub
 		
 	}

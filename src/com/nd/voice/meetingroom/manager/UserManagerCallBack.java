@@ -14,6 +14,6 @@ public interface UserManagerCallBack {
 	
 	void onAddFriendCallBack(long memberId,boolean success,String msg);
 	
-	void onQueryContactFriendCallBack(List<String> friendMobiles,List<String> noFriendMobiles,boolean success,String msg);
+	void onQueryContactFriendCallBack(List<String> friendMobiles,List<String> noFriendMobiles,List<String> noFriendUids,boolean success,String msg);
 	
 }
