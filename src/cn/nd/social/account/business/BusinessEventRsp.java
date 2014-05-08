@@ -1,5 +1,7 @@
 package cn.nd.social.account.business;
 
+import java.lang.ref.WeakReference;
+
 import android.util.Log;
 import cn.nd.social.account.CAConstant;
 import cn.nd.social.account.CAUtils.BusinessCallback;
@@ -45,7 +47,8 @@ public class BusinessEventRsp implements BusinessCallback {
 			
 			if(action.equals(MeetingUtils.MEETING_TRANSFER_RECV_NOTIFY)) {
 				TransferMsg transMsg = (TransferMsg)rsp;
-				SyncMsgFactory.parseSyncPacket(transMsg.rawData, syncReceiver);
+				IClientNetMsgReceiver receiver = syncReceiver != null?syncReceiver.get():null;
+				SyncMsgFactory.parseSyncPacket(transMsg.rawData, receiver);
 			} else {
 				MeetingMsgReceiver.onMeetingBusiness(rsp,action);
 			}
@@ -62,9 +65,9 @@ public class BusinessEventRsp implements BusinessCallback {
 			
 	}	
 	
-	private IClientNetMsgReceiver syncReceiver;
+	private WeakReference<IClientNetMsgReceiver> syncReceiver;
 	public void setSyncReadReceiver(IClientNetMsgReceiver receiver) {
-		syncReceiver = receiver;
+		syncReceiver = new WeakReference<IClientNetMsgReceiver>(receiver);
 	}
 
 }

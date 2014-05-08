@@ -123,6 +123,8 @@ public class MultiTalk extends Activity implements
 	private WakeLock mWakeLock;
 	
 	private boolean isTalking;
+	
+	private boolean mIsSyncShowing = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -301,7 +303,16 @@ public class MultiTalk extends Activity implements
 			mSettingView.setVisibility(View.INVISIBLE);
 			mBlurView.setVisibility(View.INVISIBLE);
 			isSettingShow = false;
+		} else if(mIsSyncShowing) {
+			if(mHostPageFrament != null) {
+				mHostPageFrament.exitHint();
+			} else if(mClientPageFrament != null) {
+				hideClientPageFrameLayout();
+			}
 		} else {
+			if(mClientPageFrament != null) {
+				mClientPageFrament.release();
+			}
 			mMultiAct = null;
 			VoiceEndpoint.leave(mRoom);
 			finish();
@@ -328,7 +339,7 @@ public class MultiTalk extends Activity implements
 	}
 
 	private void showHostPageFrameLayout(String filePath) {
-		// TODO Auto-generated method stub
+		mIsSyncShowing = true;
 		if(mHostPageFrament == null){
 			mHostPageFrament = new HostPageFrameLayout(this);
 			mHostPageFrament.setDelegate(this);
@@ -338,6 +349,13 @@ public class MultiTalk extends Activity implements
 				mHostPageFrament.setmPath(filePath);
 			}
 			mHostPageFrament.showDoc();
+			//这样点击事件就不会透到下一层view
+			mHostPageFrament.setOnClickListener(new View.OnClickListener() {				
+				@Override
+				public void onClick(View v) {
+					
+				}
+			});
 		}else{
 			Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_in);
 			animation.setAnimationListener(new AnimationListener() {
@@ -366,6 +384,7 @@ public class MultiTalk extends Activity implements
 	}
 	
 	private void hideHostPageFrameLayout(){
+		mIsSyncShowing = false;
 		if(mHostPageFrament != null){
 			Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_out);
 			animation.setAnimationListener(new AnimationListener() {
@@ -393,6 +412,8 @@ public class MultiTalk extends Activity implements
 	}
 	
 	private void closeHostPageFrameLayout(){
+		
+		mIsSyncShowing = false;
 		Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_out);
 		animation.setAnimationListener(new AnimationListener() {
 			
@@ -1123,12 +1144,21 @@ public class MultiTalk extends Activity implements
 	
 	
 	private void showClientPageFrameLayout(boolean hasExtra,Bundle extras) {
-		// TODO Auto-generated method stub
+		
+		mIsSyncShowing = true;
+		
 		if(mClientPageFrament == null){
 			mClientPageFrament = new ClientPageFrameLayout(this);
 			rootView.addView(mClientPageFrament);
 			mClientPageFrament.setDelegate(mClientSyncDelegate);
 			mClientPageFrament.laterInit(hasExtra, extras);
+			//这样点击事件就不会透到下一层view
+			mClientPageFrament.setOnClickListener(new View.OnClickListener() {				
+				@Override
+				public void onClick(View v) {
+					
+				}
+			});
 		}else{
 			Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_in);
 			animation.setAnimationListener(new AnimationListener() {
@@ -1157,6 +1187,9 @@ public class MultiTalk extends Activity implements
 	}
 	
 	private void hideClientPageFrameLayout(){
+		
+		mIsSyncShowing = false;
+		
 		if(mClientPageFrament != null){
 			Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_out);
 			animation.setAnimationListener(new AnimationListener() {
@@ -1184,6 +1217,8 @@ public class MultiTalk extends Activity implements
 	}
 	
 	private void closeClientPageFrameLayout(){
+		
+		mIsSyncShowing = false;
 		if(mClientPageFrament == null) {
 			return;
 		}

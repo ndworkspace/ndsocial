@@ -104,6 +104,18 @@ public class HostPageFrameLayout extends FrameLayout {
 	}
 
 	private Handler mHandler = new Handler();
+	
+	
+	public void exitHint() {
+		new AlertDialog.Builder(mContext).setMessage("是否确定要退出?").setNegativeButton("取消", null).setPositiveButton("确定", new AlertDialog.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				release();
+				mdelegate.get().onCloseAction();
+			}
+		}).create().show();
+	}
 
 	private void setupViews() {
 		mHostReadPage = rootView.findViewById(R.id.host_read_page);	
@@ -112,18 +124,8 @@ public class HostPageFrameLayout extends FrameLayout {
 		btn_close.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public void onClick(View v) {
-				
-				new AlertDialog.Builder(mContext).setMessage("是否确定要退出?").setNegativeButton("取消", null).setPositiveButton("确定", new AlertDialog.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-						release();
-						mdelegate.get().onCloseAction();
-					}
-				}).create().show();
-				
-				
+			public void onClick(View v) {				
+				exitHint();
 			}
 		});
 		
