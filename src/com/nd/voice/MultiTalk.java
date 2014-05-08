@@ -26,8 +26,10 @@ import android.os.PowerManager.WakeLock;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.view.animation.Animation;
@@ -114,6 +116,8 @@ public class MultiTalk extends Activity implements
 	private UserManagerApi mUserManager;
 
 	private WakeLock mWakeLock;
+	
+	private boolean isTalking;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -703,19 +707,34 @@ public class MultiTalk extends Activity implements
 			}
 		});
 
-		mSpeakBtn.setOnClickListener(new OnClickListener() {
-
+		mSpeakBtn.setOnTouchListener(new OnTouchListener() {
+			
 			@Override
-			public void onClick(View arg0) {
-
-				boolean m = (Boolean) mSpeakBtn.getTag();
-				if (!m) {
+			public boolean onTouch(View arg0, MotionEvent event) {
+				// TODO Auto-generated method stub
+				if(event.getAction() == MotionEvent.ACTION_DOWN){
 					startSpeak();
-				} else {
+				}else if(event.getAction() == MotionEvent.ACTION_UP 
+						|| event.getAction() == MotionEvent.ACTION_CANCEL){
 					stopSpeak();
 				}
+				return true;
 			}
 		});
+		
+//		mSpeakBtn.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View arg0) {
+//
+//				boolean m = (Boolean) mSpeakBtn.getTag();
+//				if (!m) {
+//					startSpeak();
+//				} else {
+//					stopSpeak();
+//				}
+//			}
+//		});
 		
 		toolBar.setOnClickListener(new OnClickListener() {
 			
@@ -848,10 +867,14 @@ public class MultiTalk extends Activity implements
 	}
 
 	public void startSpeak() {
-		mSpeakBtn.setTag(true);
-		VoiceEndpoint.api().setRecordingMute(mRoom, false);
-		spOn.play(musicOn, 1, 1, 0, 0, 1);
-		mSpeakBtn.setImageResource(R.drawable.mic_speaking);
+		if(!isTalking){
+			mSpeakBtn.setTag(true);
+			VoiceEndpoint.api().setRecordingMute(mRoom, false);
+			spOn.play(musicOn, 1, 1, 0, 0, 1);
+			mSpeakBtn.setImageResource(R.drawable.mic_speaking);
+			isTalking = true;
+		}
+		
 	}
 
 	public void stopSpeak() {
@@ -859,6 +882,7 @@ public class MultiTalk extends Activity implements
 		VoiceEndpoint.api().setRecordingMute(mRoom, true);
 		spOff.play(musicOff, 1, 1, 0, 0, 1);
 		mSpeakBtn.setImageResource(R.drawable.mic_normal);
+		isTalking = false;
 	}
 
 	public void usrTalkStart(long uid) {
