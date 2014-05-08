@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
@@ -155,9 +156,10 @@ public class UserManager implements UserManagerApi {
 	
 	@Override
 	public void queryContactFriend(List<String> contactMobiles){
-		List<String>encryptedList = new ArrayList<String>();
 		CloundServer.getInstance().setUserMgrCbk(mWeakRefUserMgrCbk!=null? mWeakRefUserMgrCbk.get():null);
-		try {
+		List<String>encryptedList = contactMobiles;
+		
+/*		try {
 			for(String mobile:contactMobiles) {
 				String encrypt = MD5Encrypt.getMD5(mobile);
 				encryptedList.add(encrypt);
@@ -165,14 +167,20 @@ public class UserManager implements UserManagerApi {
 		} catch (NoSuchAlgorithmException e) {
 			Log.e("UserManager","queryContactFriend: MD5 encrypt error");
 			e.printStackTrace();
-		}
+		}*/
 		
 		JSONArray jArray = new JSONArray();
 		for(String encryptMobile:encryptedList) {
 			jArray.put(JSONObject.quote(encryptMobile));
 		}
 		
-		String mobileStr = jArray.toString();
+		JSONObject jobj = new JSONObject();
+		try {
+			jobj.put("PHONELIST", jArray);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		String mobileStr = jobj.toString();
 				
 		CloundServer.getInstance().queryContactFriend(mobileStr.getBytes());
 		

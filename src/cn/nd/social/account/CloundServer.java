@@ -18,6 +18,7 @@ import cn.nd.social.account.business.BusinessEventRsp;
 import cn.nd.social.account.business.BusinessMeetingManager;
 import cn.nd.social.card.CardUtil;
 import cn.nd.social.card.CardUtil.CardData;
+import cn.nd.social.net.AccountInfoParser;
 import cn.nd.social.net.UserInfoCodec;
 import cn.nd.social.net.UserInfoCodec.NetUserInfo;
 import cn.nd.social.util.LogToFile;
@@ -156,7 +157,8 @@ public class CloundServer {
 	public void queryContactFriend(byte[] data) {
 		if(!mCARequest.queryContactFriend(data,mCbkDispatcher)) {
 			if(hasUserMgrCbk()) {
-				mWeakRefCbk.get().onGetUpdateUserInfoCallBack(-1, null, false, "网络不给力");				
+				//TODO:
+							
 			}
 		}
 	}
@@ -369,7 +371,10 @@ public class CloundServer {
 				break;
 				
 			case CAConstant.APP_EVENT_CHECK_PHONE_FRIEND_RSP:
-				if(msg.arg1 == CACallBack.RET_SUCCESS) {					
+				if(msg.arg1 == CACallBack.RET_SUCCESS) {
+					ArrayList<String>friendMobile = new ArrayList<String>();
+					ArrayList<String>notFriendMobiles = new ArrayList<String>();
+					AccountInfoParser.parseContactFriendInfo((String)msg.obj, friendMobile, notFriendMobiles);
 					if(hasUserMgrCbk()) {
 						//mWeakRefCbk.get().onQueryContactFriendCallBack((Long)msg.obj, true,"添加成功");
 					}

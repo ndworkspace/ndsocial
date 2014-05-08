@@ -37,8 +37,13 @@ public class NDCClient implements INDCClient {
 	public static final short MSG_CA_DEL_FRIEND_RESP	= 206;	
 	public static final short MSG_CA_QUERY_FRIEND_REQ	= 207;
 	public static final short MSG_CA_QUERY_FRIEND_RESP	= 208;	
-	public static final short MSG_CA_QUERY_FRIEND_INFO_REQ	= 209;
-	public static final short MSG_CA_QUERY_FRIEND_INFO_RESP	= 210;
+	
+	public static final short MSG_CA_PHONE_CHECK_REQ	= 209;
+	public static final short MSG_CA_PHONE_CHECK_RESP	= 210;
+	public static final short MSG_CA_QUERY_FRIEND_INFO_REQ	= 211;
+	public static final short MSG_CA_QUERY_FRIEND_INFO_RESP	= 212;
+	
+
 	
 	
 	public static final short MSG_CA_CARD_UPDATE_REQ	= 301;
@@ -387,7 +392,10 @@ public class NDCClient implements INDCClient {
 			break;			
 		case NDCClient.MSG_CA_DEL_ALIAS_RESP:
 			OnDelAlias(Msg, nBodySize);
-			break;			
+			break;
+		case NDCClient.MSG_CA_PHONE_CHECK_RESP:
+			onCheckPhoneFriend(Msg, nBodySize);
+			break;
 			
 		default:
 			break;				
@@ -718,7 +726,6 @@ public class NDCClient implements INDCClient {
 		ByteConv.Offset nOffset = new ByteConv.Offset();
 		int   nResult = ByteConv.getInt(data, nOffset);
 		String 	friendInfo = ByteConv.getString(data, nOffset, nLen-nOffset.value);
-		//TODO change the return type
 		mcb.OnMessage(INDCClient.RT_CA_CHECK_PHONE_FRIEND_RSP, nResult, friendInfo);
 	}
 	
