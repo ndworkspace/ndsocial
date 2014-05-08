@@ -11,11 +11,11 @@ public class CAProcessThread extends Thread {
 	private static final int[] RECONNECT_INTERVAL = {10,10};
 	private final static String TAG = "CAProcessThread";
 	
-	public static final String IP_ADDRESS="192.168.62.135";
+	//public static final String IP_ADDRESS="192.168.62.135";
 	
-	public static final short PORT = 6060;
-//	public static final String IP_ADDRESS="42.62.77.23";
-//	public static final short PORT = 6061;
+	//public static final short PORT = 6060;
+	public static final String IP_ADDRESS="42.62.77.23";
+	public static final short PORT = 6061;
 	 
 	
 	public static final byte NDC_CLIENT_VERSION = 2;
