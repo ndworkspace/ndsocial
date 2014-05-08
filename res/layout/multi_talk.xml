@@ -1,9 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/stack_two_bg"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:id="@+id/mrootlayout"
+    >
 
     <RelativeLayout
         android:id="@+id/multi_talk_top_layout"
@@ -82,5 +84,25 @@
             android:layout_gravity="bottom"
             android:visibility="invisible" />
     </FrameLayout>
+    
+     <RelativeLayout
+            android:id="@+id/rl_top_tool"
+            android:layout_width="fill_parent"
+            android:layout_height="44dip"
+            android:layout_gravity="bottom"
+            android:gravity="center_vertical" 
+            android:visibility="gone"
+            >
 
-</RelativeLayout>
+           <ImageView
+                android:id="@+id/btn_up_down"
+                android:layout_width="40dip"
+                android:layout_height="40dip"
+                android:layout_marginLeft="15dip"
+                android:background="@drawable/button_up"
+                android:textColor="#fff" />
+            
+        </RelativeLayout>
+
+</FrameLayout>
+

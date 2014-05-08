@@ -2,16 +2,13 @@ package cn.nd.social.account;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import com.nd.voice.meetingroom.manager.User;
-import com.nd.voice.meetingroom.manager.UserManagerCallBack;
 
 import NDCSdk.INDCClient;
 import NDCSdk.NDCClient;
 import android.os.Handler;
-import android.os.UserManager;
 import android.util.Log;
 import android.widget.Toast;
 import cn.nd.social.BuildConfig;
@@ -24,6 +21,9 @@ import cn.nd.social.net.UserInfoCodec;
 import cn.nd.social.net.UserInfoCodec.NetUserInfo;
 import cn.nd.social.util.LogToFile;
 import cn.nd.social.util.Utils;
+
+import com.nd.voice.meetingroom.manager.User;
+import com.nd.voice.meetingroom.manager.UserManagerCallBack;
 
 public class CloundServer {	
 	private INDCClient mCAClient;

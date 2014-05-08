@@ -188,9 +188,9 @@ public class HostSyncReadView  {
 		mPageText = (TextView)mRootView.findViewById(R.id.tv_pagenum);
 		mSwitchBtn = (ImageView)mRootView.findViewById(R.id.btn_switch);
 		mDocName = (TextView)mRootView.findViewById(R.id.tv_file_name);
-		mExit = mRootView.findViewById(R.id.iv_back);
+//		mExit = mRootView.findViewById(R.id.btn_close);
 		mReselectFile = mRootView.findViewById(R.id.btn_view_back);
-		mViewConnectUser = mRootView.findViewById(R.id.btn_view_user);
+//		mViewConnectUser = mRootView.findViewById(R.id.btn_close);
 		
 		mDocName.setText(FilePathHelper.getNameFromFilepath(mPath));
 	}
@@ -216,13 +216,13 @@ public class HostSyncReadView  {
 			}
 		});
 		
-		mExit.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				mHostListener.onExitSync();				
-			}
-		});
+//		mExit.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				mHostListener.onExitSync();				
+//			}
+//		});
 		
 		mReselectFile.setOnClickListener(new View.OnClickListener() {
 			
@@ -232,13 +232,13 @@ public class HostSyncReadView  {
 			}
 		});
 		
-		mViewConnectUser.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				mHostListener.showConnectedUserList();
-			}
-		});
+//		mViewConnectUser.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				mHostListener.showConnectedUserList();
+//			}
+//		});
 
 	}
 
@@ -320,7 +320,7 @@ public class HostSyncReadView  {
 	private AnimationSet getFlipPreAnim() {
 		if(mPreAnim == null) {
 			mPreAnim = (AnimationSet)AnimationUtils.loadAnimation(Utils.getAppContext(), R.anim.push_right_in);
-			mNextAnim.setDuration(300);
+			mPreAnim.setDuration(300);
 		}
 		return mPreAnim;
 	}

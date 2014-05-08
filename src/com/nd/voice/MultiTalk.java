@@ -21,18 +21,24 @@ import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
@@ -42,7 +48,8 @@ import cn.nd.social.account.usermanager.UserManager;
 import cn.nd.social.common.PopMenu;
 import cn.nd.social.common.PopMenuItem;
 import cn.nd.social.syncbrowsing.manager.MeetingSyncEnterReceiver;
-import cn.nd.social.syncbrowsing.meeting.activity.HostPageActivity;
+import cn.nd.social.syncbrowsing.meeting.activity.HostLayoutDelegate;
+import cn.nd.social.syncbrowsing.meeting.activity.HostPageFrameLayout;
 import cn.nd.social.syncbrowsing.ui.HostSyncActivity;
 import cn.nd.social.syncbrowsing.ui.SyncBrowserDialogActivity;
 
@@ -51,11 +58,13 @@ import com.nd.voice.chatroom.MultiTalkSettingView;
 import com.nd.voice.chatroom.MultiTalkSettingView.InterfaceForSetting;
 import com.nd.voice.meetingroom.activity.MeetingDetailActivity;
 import com.nd.voice.meetingroom.manager.MeetingDetailEntity;
+import com.nd.voice.meetingroom.manager.MeetingEntity;
 import com.nd.voice.meetingroom.manager.User;
 import com.nd.voice.meetingroom.manager.UserManagerApi;
 
 public class MultiTalk extends Activity implements
-		VoiceEndpoint.ConferenceCallback, InterfaceForSetting,SensorEventListener {
+		VoiceEndpoint.ConferenceCallback, InterfaceForSetting,
+		SensorEventListener, HostLayoutDelegate {
 
 	private Button mBackBtn;
 	private Button mMoreBtn;
@@ -69,6 +78,10 @@ public class MultiTalk extends Activity implements
 	private ImageView mBlurView;
 	private FrameLayout mScreenShot;
 	private TextView mTitleTV;
+	private HostPageFrameLayout mHostPageFrament;
+	private ViewGroup rootView;
+	
+	private View toolBar;
 
 	private SoundPool spOn;
 	private SoundPool spOff;
@@ -90,36 +103,39 @@ public class MultiTalk extends Activity implements
 	private int userIndex = 0;
 	private int userCount = 0;
 	private int[] indexArr;
-	private static int[] srcArr = { R.drawable.face1 , R.drawable.face2, R.drawable.face3,
-			R.drawable.face4};
+	private static int[] srcArr = { R.drawable.face1, R.drawable.face2,
+			R.drawable.face3, R.drawable.face4 };
 	public static MultiTalk mMultiAct;
 
-	private int mFaceId = 0; 
+	private int mFaceId = 0;
 	private boolean mMeetingMode = false;
-	private boolean mIsMeetingHost = false; 
-	private long []userIdArray = null;
+	private boolean mIsMeetingHost = false;
+	private long[] userIdArray = null;
 	private UserManagerApi mUserManager;
-	
+
+	private WakeLock mWakeLock;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		setContentView(R.layout.multi_talk);
+
+		rootView = (ViewGroup)findViewById(R.id.mrootlayout);
 		
 		indexArr = new int[MAX_MEMBER_SIZE];
 
 		Intent intent = getIntent();
 		mRoom = intent.getStringExtra("room_name");
 		mode = intent.getStringExtra("mode");
-		if(mode != null && mode.equals("meeting")) {
-			mMeetingMode = true;			
+		if (mode != null && mode.equals("meeting")) {
+			mMeetingMode = true;
 		}
-		if(mMeetingMode) {
-			initMeeting(intent);			
+		if (mMeetingMode) {
+			initMeeting(intent);
 		}
-		
-		//mLocalUsr = TabLauncherUI.VOICE_UID;
+
+		// mLocalUsr = TabLauncherUI.VOICE_UID;
 		mLocalUsr = mUserManager.getMyInfo().getUserid();
-		
 
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -136,16 +152,15 @@ public class MultiTalk extends Activity implements
 		VoiceEndpoint.api().setPlayoutMute(mRoom, true);
 		VoiceEndpoint.api().setRecordingMute(mRoom, true);
 
-		
 		if ("meeting".equals(mode)) {
-			if( MeetingDetailActivity.index != 0){
+			if (MeetingDetailActivity.index != 0) {
 				for (int i = 0; i < MeetingDetailActivity.index; i++) {
 					onConferenceMemberEnter(MeetingDetailActivity.usrHold[i]);
 				}
 			}
 			mTitleTV.setText(R.string.meetingroom);
-		}else{
-			if( EnterRoomActivity.index != 0){
+		} else {
+			if (EnterRoomActivity.index != 0) {
 				for (int i = 0; i < EnterRoomActivity.index; i++) {
 					onConferenceMemberEnter(EnterRoomActivity.usrHold[i]);
 				}
@@ -165,18 +180,19 @@ public class MultiTalk extends Activity implements
 	}
 
 	private MeetingSyncEnterReceiver mSyncEnterReceiver;
+
 	private void initMeeting(Intent intent) {
 		mFaceId = intent.getIntExtra("faceres", 0);
 		mIsMeetingHost = intent.getBooleanExtra("ishost", false);
-		
-		//userIdArray = intent.getLongArrayExtra("idarray");
+
+		// userIdArray = intent.getLongArrayExtra("idarray");
 		mUserManager = new UserManager();
-		mSyncEnterReceiver = new MeetingSyncEnterReceiver(this, MeetingDetailEntity.getMeetingIdByUid(mRoom));
-		registerReceiver(mSyncEnterReceiver, MeetingSyncEnterReceiver.getIntentFilter());
+		mSyncEnterReceiver = new MeetingSyncEnterReceiver(this,
+				MeetingDetailEntity.getMeetingIdByUid(mRoom));
+		registerReceiver(mSyncEnterReceiver,
+				MeetingSyncEnterReceiver.getIntentFilter());
 	}
-	
-	
-	
+
 	public void addLocalInfoView() {
 
 		for (int i = 0; i < 4; i++) {
@@ -188,21 +204,20 @@ public class MultiTalk extends Activity implements
 		int usrCircle = (int) getResources().getDimension(R.dimen.localusr_r);
 		int x = ((int) (mLocalUsr & 0x3)) % 4;
 		int faceRes = srcArr[x];
-		
-		//TODO: change implementation
-		if(mMeetingMode && mFaceId != 0) {
+
+		// TODO: change implementation
+		if (mMeetingMode && mFaceId != 0) {
 			faceRes = mFaceId;
 		}
-		
-/*		Bitmap userBp = initImageToCircle(faceRes, true);
-		mUserImg.setImageBitmap(userBp);
-		mBottomLayout.addView(mUserImg);
-		MarginLayoutParams mgParams = (MarginLayoutParams) mUserImg
-				.getLayoutParams();
-		mgParams.height = usrCircle * 2;
-		mgParams.width = usrCircle * 2;
-		mgParams.setMargins(center_x - usrCircle, center_y - usrCircle, 0, 0);
-		mUserImg.setLayoutParams(mgParams);*/
+
+		/*
+		 * Bitmap userBp = initImageToCircle(faceRes, true);
+		 * mUserImg.setImageBitmap(userBp); mBottomLayout.addView(mUserImg);
+		 * MarginLayoutParams mgParams = (MarginLayoutParams) mUserImg
+		 * .getLayoutParams(); mgParams.height = usrCircle * 2; mgParams.width =
+		 * usrCircle * 2; mgParams.setMargins(center_x - usrCircle, center_y -
+		 * usrCircle, 0, 0); mUserImg.setLayoutParams(mgParams);
+		 */
 
 		mSpeakBtn = new ImageView(this);
 		mSpeakBtn.setBackgroundColor(Color.TRANSPARENT);
@@ -213,8 +228,10 @@ public class MultiTalk extends Activity implements
 				.getLayoutParams();
 		speakParam.height = usrCircle * 3;
 		speakParam.width = usrCircle * 3;
-		speakParam.setMargins(center_x - speakParam.height/2, center_y - speakParam.width / 2, 0, 0);
-		//speakParam.setMargins(center_x + usrCircle / 2, center_y + usrCircle /2, 0, 0);
+		speakParam.setMargins(center_x - speakParam.height / 2, center_y
+				- speakParam.width / 2, 0, 0);
+		// speakParam.setMargins(center_x + usrCircle / 2, center_y + usrCircle
+		// /2, 0, 0);
 		mSpeakBtn.setLayoutParams(speakParam);
 		mSpeakBtn.setTag(false);
 
@@ -238,9 +255,11 @@ public class MultiTalk extends Activity implements
 		spOff = new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);
 		musicOff = spOff.load(this, R.raw.off, 1);
 
-		if(mMeetingMode && !mIsMeetingHost) {
+		if (mMeetingMode && !mIsMeetingHost) {
 			mMoreBtn.setVisibility(View.GONE);
 		}
+		
+		toolBar = findViewById(R.id.rl_top_tool);
 	}
 
 	public Bitmap initImageToCircle(int imgId, boolean isInRoom) {
@@ -250,15 +269,14 @@ public class MultiTalk extends Activity implements
 		return bp;
 	}
 
-	
 	private void finiMeeting() {
 		unregisterReceiver(mSyncEnterReceiver);
 	}
-	
+
 	@Override
 	protected void onDestroy() {
-		if(mMeetingMode) {
-			finiMeeting();		
+		if (mMeetingMode) {
+			finiMeeting();
 		}
 		mMultiAct = null;
 		VoiceEndpoint.leave(mRoom);
@@ -268,7 +286,8 @@ public class MultiTalk extends Activity implements
 	@Override
 	public void onBackPressed() {
 		if (isSettingShow) {
-			Animation transDown = AnimationUtils.loadAnimation(this, R.anim.push_bottom_out);
+			Animation transDown = AnimationUtils.loadAnimation(this,
+					R.anim.push_bottom_out);
 			mSettingView.startAnimation(transDown);
 			mSettingView.setVisibility(View.INVISIBLE);
 			mBlurView.setVisibility(View.INVISIBLE);
@@ -279,26 +298,116 @@ public class MultiTalk extends Activity implements
 			finish();
 		}
 	}
-	
-	private void showSyncBrowSerAcicty(){
-		Intent intent = new Intent(MultiTalk.this,SyncBrowserDialogActivity.class);
+
+	private void showSyncBrowSerAcicty() {
+		Intent intent = new Intent(MultiTalk.this,
+				SyncBrowserDialogActivity.class);
 		startActivityForResult(intent, RESULT_FIRST_USER);
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		if(requestCode == RESULT_FIRST_USER){
-			if(resultCode == RESULT_OK){
-				String filePath = data.getStringExtra(HostSyncActivity.FILE_ID_KEY);
-				//TODO
-				Intent intent = new Intent(this,HostPageActivity.class);
-				intent.putExtra(HostPageActivity.FILE_ID_KEY, filePath);
-				intent.putExtra("meetingid", mRoom);
-				startActivity(intent);
+		if (requestCode == RESULT_FIRST_USER) {
+			if (resultCode == RESULT_OK) {
+				String filePath = data
+						.getStringExtra(HostSyncActivity.FILE_ID_KEY);
+				showHostPageFrameLayout(filePath);
 			}
 		}
+	}
+
+	private void showHostPageFrameLayout(String filePath) {
+		// TODO Auto-generated method stub
+		if(mHostPageFrament == null){
+			mHostPageFrament = new HostPageFrameLayout(this);
+			mHostPageFrament.setDelegate(this);
+			rootView.addView(mHostPageFrament);
+			mHostPageFrament.setmMeetingId(MeetingEntity.getMeetingIdByUid(mRoom));
+			if(filePath != null){
+				mHostPageFrament.setmPath(filePath);
+			}
+			mHostPageFrament.showDoc();
+		}else{
+			Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_in);
+			animation.setAnimationListener(new AnimationListener() {
+				
+				@Override
+				public void onAnimationStart(Animation arg0) {
+					// TODO Auto-generated method stub
+					mHostPageFrament.setVisibility(View.VISIBLE);
+				}
+				
+				@Override
+				public void onAnimationRepeat(Animation arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void onAnimationEnd(Animation arg0) {
+					// TODO Auto-generated method stub
+					toolBar.setVisibility(View.GONE);
+				}
+			});
+			mHostPageFrament.startAnimation(animation);
+		}
+		
+	}
+	
+	private void hideHostPageFrameLayout(){
+		if(mHostPageFrament != null){
+			Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_out);
+			animation.setAnimationListener(new AnimationListener() {
+				
+				@Override
+				public void onAnimationStart(Animation arg0) {
+					// TODO Auto-generated method stub
+					toolBar.setVisibility(View.VISIBLE);
+				}
+				
+				@Override
+				public void onAnimationRepeat(Animation arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void onAnimationEnd(Animation arg0) {
+					// TODO Auto-generated method stub
+					mHostPageFrament.setVisibility(View.GONE);
+				}
+			});
+			mHostPageFrament.startAnimation(animation);
+		}
+	}
+	
+	private void closeHostPageFrameLayout(){
+		Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_out);
+		animation.setAnimationListener(new AnimationListener() {
+			
+			@Override
+			public void onAnimationStart(Animation animation) {
+				// TODO Auto-generated method stub
+				toolBar.setVisibility(View.GONE);
+			}
+			
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				// TODO Auto-generated method stub
+				rootView.removeView(mHostPageFrament);
+				mHostPageFrament = null;
+			}
+		});
+		
+		mHostPageFrament.startAnimation(animation);
 	}
 
 	private static Bitmap takeScreenShot(Activity activity) {
@@ -382,7 +491,6 @@ public class MultiTalk extends Activity implements
 		mDrawBg.removeView(view);
 	}
 
-
 	public int rCircle;
 
 	public class UsrConnectInRoom {
@@ -394,52 +502,46 @@ public class MultiTalk extends Activity implements
 		View talkView;
 		View nameView;
 	}
-	
 
 	private static int MAX_MEMBER_SIZE = 8;
-	static double []portion =  {
-		-0.866,  -0.5,
-		0.866,  -0.5,
-	    -0.5, -0.866,
-	    0.5,  -0.866,
-		-0.423,  -0.906,
-		0.423,   -0.906,		
-		-0.342, -0.940,		
-		0.342,  -0.940
-	};
-	
-	
-	
-	private Point getOffsetPoint(int which) {		
-		int index = which / 2;		
+	static double[] portion = { -0.866, -0.5, 0.866, -0.5, -0.5, -0.866, 0.5,
+			-0.866, -0.423, -0.906, 0.423, -0.906, -0.342, -0.940, 0.342,
+			-0.940 };
+
+	private Point getOffsetPoint(int which) {
+		int index = which / 2;
 		int circleR = (int) getResources().getDimension(CIRCLE_RADIUS[index]);
 		Point point = new Point();
-		point.x = (int) (circleR*portion[which*2]);
-		point.y = (int) (circleR*portion[which*2 + 1]);
+		point.x = (int) (circleR * portion[which * 2]);
+		point.y = (int) (circleR * portion[which * 2 + 1]);
 		return point;
 	}
-	
-	
+
 	// draw usr
 	public UsrConnectInRoom drawConnector(ImageView mImg, int which, int srcId,
 			long uid) {
 
 		int x, y, z;
-		
+
 		rCircle = (int) getResources().getDimension(R.dimen.little_circle_r);
 
-		/*		int circleR = (int) getResources().getDimension(CIRCLE_RADIUS[index]);
-		// int degree = UtilsForMultiTalk.getAngleByRandom(R, mScreenWidth);
-		// degree = (int) (degree * Math.PI / 180);
-		
-		int degree = 45;
-	
-		double cosV = circleR * Math.cos(degree);
-		double sinV = circleR * Math.sin(degree);*/
+		/*
+		 * int circleR = (int)
+		 * getResources().getDimension(CIRCLE_RADIUS[index]); // int degree =
+		 * UtilsForMultiTalk.getAngleByRandom(R, mScreenWidth); // degree =
+		 * (int) (degree * Math.PI / 180);
+		 * 
+		 * int degree = 45;
+		 * 
+		 * double cosV = circleR * Math.cos(degree); double sinV = circleR *
+		 * Math.sin(degree);
+		 */
 
-		int viewTalkHeight = (int) getResources().getDimension(R.dimen.connector_energy_bar_height);
-		int viewTalkWidth = (int) getResources().getDimension(R.dimen.connector_energy_bar_width);
-		
+		int viewTalkHeight = (int) getResources().getDimension(
+				R.dimen.connector_energy_bar_height);
+		int viewTalkWidth = (int) getResources().getDimension(
+				R.dimen.connector_energy_bar_width);
+
 		ImageView viewTalk = new ImageView(this);
 		if (which % 2 == 0) {
 			x = (int) (center_x + getOffsetPoint(which).x) - rCircle;
@@ -478,30 +580,33 @@ public class MultiTalk extends Activity implements
 		mDrawBg.addView(viewTalk);
 		MarginLayoutParams viewTalkParams = (MarginLayoutParams) viewTalk
 				.getLayoutParams();
-		
-		
-		
+
 		viewTalkParams.height = viewTalkHeight;
 		viewTalkParams.width = viewTalkWidth;
-		viewTalkParams.setMargins(z, y + mgParams.height - viewTalkHeight - 10, 0, 0);
+		viewTalkParams.setMargins(z, y + mgParams.height - viewTalkHeight - 10,
+				0, 0);
 		viewTalk.setLayoutParams(viewTalkParams);
 
-		if(mMeetingMode) {
+		if (mMeetingMode) {
 			User user = mUserManager.getUserInfoLocal(uid);
-			if(user != null && user.getUserName() != null) {
+			if (user != null && user.getUserName() != null) {
 				TextView tvName = new TextView(this);
 				tvName.setText(user.getNickName());
 				tvName.setGravity(Gravity.CENTER);
 				mDrawBg.addView(tvName);
 				MarginLayoutParams nameParam = (MarginLayoutParams) tvName
 						.getLayoutParams();
-				nameParam.height = (int) getResources().getDimension(R.dimen.connector_name_textview_height);
-				nameParam.width = (int) getResources().getDimension(R.dimen.connector_name_textview_width);
-				
-				nameParam.setMargins(x+ (mgParams.width -nameParam.width)/2, y + mgParams.height, 0, 0);
+				nameParam.height = (int) getResources().getDimension(
+						R.dimen.connector_name_textview_height);
+				nameParam.width = (int) getResources().getDimension(
+						R.dimen.connector_name_textview_width);
+
+				nameParam.setMargins(
+						x + (mgParams.width - nameParam.width) / 2, y
+								+ mgParams.height, 0, 0);
 				tvName.setLayoutParams(nameParam);
 				usr.nameView = tvName;
-			}	
+			}
 		}
 		usr.usrView = mImg;
 		usr.talkView = viewTalk;
@@ -514,7 +619,11 @@ public class MultiTalk extends Activity implements
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		mSensorManger.registerListener(this, mSensor,
-			    SensorManager.SENSOR_DELAY_NORMAL);
+				SensorManager.SENSOR_DELAY_NORMAL);
+		PowerManager pManager = ((PowerManager) getSystemService(POWER_SERVICE));
+		mWakeLock = pManager.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK
+				| PowerManager.ON_AFTER_RELEASE, "lock");
+		mWakeLock.acquire();
 		super.onResume();
 	}
 
@@ -536,54 +645,61 @@ public class MultiTalk extends Activity implements
 
 			@Override
 			public void onClick(View v) {
-				if("meeting".equals(mode)){
+				if ("meeting".equals(mode)) {
 					// TODO Auto-generated method stub
 					final PopMenu menu = new PopMenu(MultiTalk.this);
-					menu.addItem(new PopMenuItem(0, getString( R.string.sync_read), R.drawable.icon_file));
+					menu.addItem(new PopMenuItem(0,
+							getString(R.string.sync_read), R.drawable.icon_file));
 					menu.setOnItemClickListener(new OnItemClickListener() {
 						@Override
-						public void onItemClick(AdapterView<?> adapterView, View arg1,
-								int position, long arg3) { 
-							PopMenuItem item = (PopMenuItem) adapterView.getItemAtPosition(position);
+						public void onItemClick(AdapterView<?> adapterView,
+								View arg1, int position, long arg3) {
+							PopMenuItem item = (PopMenuItem) adapterView
+									.getItemAtPosition(position);
 							menu.dismiss();
 							showSyncBrowSerAcicty();
 						}
 					});
 					menu.showAsDropDown(mMoreBtn);
-				}else{
+				} else {
 					if (!isSettingShow) {
-//						final View content = getWindow().findViewById(android.R.id.content).getRootView();
-//						
-//						if (content.getWidth() > 0) {
-//						    Bitmap image = BlurBuilder.blur(content);
-//						    getWindow().setBackgroundDrawable(new BitmapDrawable(getResources(), image));
-//						} else {
-//							content.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-//						        @Override
-//						        public void onGlobalLayout() {
-//						            Bitmap image = BlurBuilder.blur(content);
-//						            getWindow().setBackgroundDrawable(new BitmapDrawable(getResources(), image));
-//						        }
-//						    });
-//						}
-						
-						
-//						Bitmap bmp = BlurBuilder.blur(mScreenShot);
-//						mBlurView.setImageBitmap(bmp);
-//						mBlurView.setVisibility(View.VISIBLE);
+						// final View content =
+						// getWindow().findViewById(android.R.id.content).getRootView();
+						//
+						// if (content.getWidth() > 0) {
+						// Bitmap image = BlurBuilder.blur(content);
+						// getWindow().setBackgroundDrawable(new
+						// BitmapDrawable(getResources(), image));
+						// } else {
+						// content.getViewTreeObserver().addOnGlobalLayoutListener(new
+						// OnGlobalLayoutListener() {
+						// @Override
+						// public void onGlobalLayout() {
+						// Bitmap image = BlurBuilder.blur(content);
+						// getWindow().setBackgroundDrawable(new
+						// BitmapDrawable(getResources(), image));
+						// }
+						// });
+						// }
+
+						// Bitmap bmp = BlurBuilder.blur(mScreenShot);
+						// mBlurView.setImageBitmap(bmp);
+						// mBlurView.setVisibility(View.VISIBLE);
 						mSettingView.setVisibility(View.VISIBLE);
-						Animation transUp = AnimationUtils.loadAnimation(MultiTalk.this, R.anim.push_bottom_in);
+						Animation transUp = AnimationUtils.loadAnimation(
+								MultiTalk.this, R.anim.push_bottom_in);
 						mSettingView.startAnimation(transUp);
 						isSettingShow = true;
-					}else{
-						Animation transDown = AnimationUtils.loadAnimation(MultiTalk.this, R.anim.push_bottom_out);
+					} else {
+						Animation transDown = AnimationUtils.loadAnimation(
+								MultiTalk.this, R.anim.push_bottom_out);
 						mSettingView.startAnimation(transDown);
 						mSettingView.setVisibility(View.INVISIBLE);
 						mBlurView.setVisibility(View.INVISIBLE);
 						isSettingShow = false;
 					}
 				}
-				
+
 			}
 		});
 
@@ -598,6 +714,15 @@ public class MultiTalk extends Activity implements
 				} else {
 					stopSpeak();
 				}
+			}
+		});
+		
+		toolBar.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				showHostPageFrameLayout(null);
 			}
 		});
 	}
@@ -627,13 +752,15 @@ public class MultiTalk extends Activity implements
 
 	@Override
 	public void onConferenceMemberEnter(long uid) {
-		if (mLocalUsr != uid && !mUsrInRoom.containsKey(uid)) {			
-/*			Toast.makeText(MultiTalk.this, "you come", Toast.LENGTH_SHORT)
-					.show();*/
+		if (mLocalUsr != uid && !mUsrInRoom.containsKey(uid)) {
+			/*
+			 * Toast.makeText(MultiTalk.this, "you come", Toast.LENGTH_SHORT)
+			 * .show();
+			 */
 
 			ImageView v = new ImageView(this);
 			int i = ((int) (uid & 0x3)); // user head will be uniform
-			int faceRes= srcArr[i];
+			int faceRes = srcArr[i];
 			userCount = mUsrInRoom.size();
 			if (userCount >= MAX_MEMBER_SIZE) {
 				Toast.makeText(MultiTalk.this, "Room is full of people",
@@ -641,9 +768,9 @@ public class MultiTalk extends Activity implements
 				return;
 			}
 			userIndex = getIndexOfWhich(userCount);
-			if(mMeetingMode) {
+			if (mMeetingMode) {
 				User user = mUserManager.getUserInfoLocal(uid);
-				if(user != null) {
+				if (user != null) {
 					faceRes = user.getDefaultFaceResource();
 				}
 			}
@@ -653,12 +780,11 @@ public class MultiTalk extends Activity implements
 			userCount = mUsrInRoom.size();
 
 		} else {
-			//Toast.makeText(MultiTalk.this, "I come", Toast.LENGTH_SHORT).show();
+			// Toast.makeText(MultiTalk.this, "I come",
+			// Toast.LENGTH_SHORT).show();
 		}
 
 	}
-	
-
 
 	private int getIndexOfWhich(int userCount) {
 
@@ -686,7 +812,7 @@ public class MultiTalk extends Activity implements
 				UsrConnectInRoom u = mUsrInRoom.get(uid);
 				removeSingleConnector(u.usrView);
 				removeSingleConnector(u.talkView);
-				if(u.nameView != null) {
+				if (u.nameView != null) {
 					removeSingleConnector(u.nameView);
 				}
 				indexArr[u.indexOfWhich] = 0;
@@ -697,8 +823,6 @@ public class MultiTalk extends Activity implements
 		}
 
 	}
-	
-	
 
 	@Override
 	public void onConferenceMediaOption(int cmd, int value) {
@@ -749,7 +873,7 @@ public class MultiTalk extends Activity implements
 		anim.stop();
 		anim.selectDrawable(0);
 	}
-	
+
 	@Override
 	public void onHonkListener(boolean isSelected) {
 		// TODO Auto-generated method stub
@@ -779,84 +903,85 @@ public class MultiTalk extends Activity implements
 
 	@Override
 	public void onVoiceSeekBarChange(int progress) {
-		//VoiceEndpoint.api().setSpeakerVolume(mRoom, progress);
+		// VoiceEndpoint.api().setSpeakerVolume(mRoom, progress);
 	}
 
 	@Override
 	public void onGainSeekBarChange(int progress) {
-		//VoiceEndpoint.api().setAudioGain(mRoom, progress);
+		// VoiceEndpoint.api().setAudioGain(mRoom, progress);
 	}
 
 	@Override
 	public void onSetUid(long uid, boolean success) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onDisconnect() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onDebug(String d) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onAccuracyChanged(Sensor arg0, int arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	private AudioManager mAudioManager;
 	private SensorManager mSensorManger;
 	private Sensor mSensor;
 	private int mOldVolume;
-	
-	private void initAudioManager(){
+
+	private void initAudioManager() {
 		mAudioManager = (AudioManager) this
-                .getSystemService(Context.AUDIO_SERVICE);
+				.getSystemService(Context.AUDIO_SERVICE);
 		mSensorManger = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		mSensor = mSensorManger.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-		//VoiceEndpoint.api().setSpeakerVolume(mRoom, 200);
-		//VoiceEndpoint.api().setAudioGain(mRoom, 350);
-		mOldVolume = mAudioManager
-				.getStreamVolume(AudioManager.STREAM_MUSIC);
+		// VoiceEndpoint.api().setSpeakerVolume(mRoom, 200);
+		// VoiceEndpoint.api().setAudioGain(mRoom, 350);
+		mOldVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 	}
-	
+
 	@Override
-	 protected void onPause() {
-	  mSensorManger.unregisterListener(this);
-	  super.onPause();
-	 }
-	
-	private void setHonkEnable(boolean isEnable){
+	protected void onPause() {
+		mSensorManger.unregisterListener(this);
+		super.onPause();
+		if (null != mWakeLock) {
+			mWakeLock.release();
+		}
+	}
+
+	private void setHonkEnable(boolean isEnable) {
 		VoiceEndpoint.api().setLoudspeaker(mRoom, isEnable);
 	}
-	
 
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		// TODO Auto-generated method stub
 		float range = event.values[0];
-		 
-	    if (range == mSensor.getMaximumRange()) {
-	    	setHonkEnable(true);
-	        Toast.makeText(this, "正常模式", Toast.LENGTH_LONG).show();
-	    } else {
-	    	setHonkEnable(false);
-	        Toast.makeText(this, "听筒模式", Toast.LENGTH_LONG).show();
-	    }
+
+		if (range == mSensor.getMaximumRange()) {
+			setHonkEnable(true);
+			Toast.makeText(this, "正常模式", Toast.LENGTH_LONG).show();
+		} else {
+			setHonkEnable(false);
+			Toast.makeText(this, "听筒模式", Toast.LENGTH_LONG).show();
+		}
 	}
-	
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 
 		boolean handled = true;
-		
+
 		AudioManager mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 		int currentVolume = mAudioManager
 				.getStreamVolume(AudioManager.STREAM_MUSIC);
@@ -883,6 +1008,24 @@ public class MultiTalk extends Activity implements
 
 		return handled;
 		// return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	public void onUpAction() {
+		// TODO Auto-generated method stub
+		showHostPageFrameLayout(null);
+	}
+
+	@Override
+	public void onDownAction() {
+		// TODO Auto-generated method stub
+		hideHostPageFrameLayout();
+	}
+
+	@Override
+	public void onCloseAction() {
+		// TODO Auto-generated method stub
+		closeHostPageFrameLayout();
 	}
 
 }
