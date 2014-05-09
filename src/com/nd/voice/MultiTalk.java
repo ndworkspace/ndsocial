@@ -803,7 +803,7 @@ public class MultiTalk extends Activity implements
 
 	@Override
 	public void onConferenceMemberEnter(long uid) {
-		if (mLocalUsr != uid) {
+		if (mLocalUsr != uid && !mUsrInRoom.containsKey(uid)) {
 			
 			ImageView v = new ImageView(this);
 			int i = ((int) (uid & 0x3)); // user head will be uniform
