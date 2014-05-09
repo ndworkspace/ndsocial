@@ -344,6 +344,7 @@
 	<string name="entermeeting">进入会议</string>
 	<string name="meetingdestoryed">会议已解散</string>
 	<string name="host">主持人</string>
+	<string name="submit">提交</string>
 	<string name="accepted">已接受</string>
 	<string name="reject">无法参加</string>
 	<string name="meetingfile">会议文件</string>

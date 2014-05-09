@@ -30,7 +30,7 @@ public class Feedback extends Activity {
 
 	private void setupViews() {
 		mContent = (EditText)findViewById(R.id.content);
-		mSendBtn = findViewById(R.id.tl_right_btn);
+		mSendBtn = findViewById(R.id.btn_submit);
 		mBackBtn = findViewById(R.id.back_btn);
 	}
 

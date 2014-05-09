@@ -30,58 +30,52 @@
             android:text="@string/advise"
             android:textColor="#ffffff"
             android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/tl_right_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginRight="10dp"            
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:paddingLeft="15dip"
-            android:paddingTop="15dip"
-            android:paddingBottom="15dip"
-            android:textSize="20dip"
-            android:paddingRight="20dip"
-            android:text="@string/send"
-            android:background="@drawable/title_btn_couple_r"/>
     </RelativeLayout>
     
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/large_padding"
+        android:layout_marginRight="@dimen/large_padding"
+        android:layout_marginTop="10dip"
         android:orientation="vertical" >
 
-        <LinearLayout
-            android:layout_width="fill_parent"
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/large_padding"
-            android:layout_marginRight="@dimen/large_padding"
-            android:layout_marginTop="20dip"
-            android:background="@drawable/input_bar_bg_active"
-            android:orientation="horizontal" >
+            android:text="还请各位客官多多提意见建议:)"
+            android:textSize="15dp" />
 
-            <EditText
-                android:id="@+id/content"
-                style="@style/NDEditText"
-                android:layout_width="0.0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:background="@null"
-                android:gravity="top"
-                android:singleLine="false"
-                android:textColor="@color/normal_text_color"
-                android:textColorHint="@color/hint_color_white_bg" />
-
-            <TextView
-                android:id="@+id/wordcount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right|center"
-                android:padding="2dip"
-                android:textColor="@color/hint_text_color"
-                android:textSize="@dimen/hint_text_size" />
-        </LinearLayout>
+        <EditText
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:maxLength="250"
+            android:gravity="top"
+            android:singleLine="false"
+            android:textColor="@color/normal_text_color"
+            android:textColorHint="@color/hint_color_white_bg" 
+            android:layout_marginTop="10dp"
+            android:background="@drawable/myborder"
+            android:padding="10dp"
+            android:textSize="15dp"
+            android:hint="您的每个意见建议对我们都很重要"
+            >
+        </EditText>
+        
+        <Button 
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/btn_submit"
+        android:textSize="17dp"
+        android:textColor="@color/white"
+        android:text="@string/submit"
+        android:background="@drawable/button_bottom"
+        />
     </LinearLayout>
-
+		
 </LinearLayout>
