@@ -804,11 +804,7 @@ public class MultiTalk extends Activity implements
 	@Override
 	public void onConferenceMemberEnter(long uid) {
 		if (mLocalUsr != uid) {
-			/*
-			 * Toast.makeText(MultiTalk.this, "you come", Toast.LENGTH_SHORT)
-			 * .show();
-			 */
-
+			
 			ImageView v = new ImageView(this);
 			int i = ((int) (uid & 0x3)); // user head will be uniform
 			int faceRes = srcArr[i];
@@ -831,8 +827,7 @@ public class MultiTalk extends Activity implements
 			userCount = mUsrInRoom.size();
 
 		} else {
-			// Toast.makeText(MultiTalk.this, "I come",
-			// Toast.LENGTH_SHORT).show();
+			//self comming
 		}
 
 	}
@@ -856,9 +851,6 @@ public class MultiTalk extends Activity implements
 	public void onConferenceMemberLeave(long uid) {
 
 		if (mLocalUsr != uid) {
-
-			Toast.makeText(MultiTalk.this, "you leave", Toast.LENGTH_SHORT)
-					.show();
 			if (mUsrInRoom.containsKey(uid)) {
 				UsrConnectInRoom u = mUsrInRoom.get(uid);
 				removeSingleConnector(u.usrView);
