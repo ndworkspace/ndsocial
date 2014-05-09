@@ -155,21 +155,22 @@ public class ContactListActivity extends Activity implements UserManagerCallBack
 			@Override
 			public void run() {
 				final List<MemberContact> list =  GetContacts.getPhoneContacts(ContactListActivity.this);
-				
-				mHandler.post(new Runnable() {
-					@Override
-					public void run() {
-						mContactManager.queryContactMembers(list);
-					}
-				});
+				mContactManager.queryContactMembers(list);
 			}
 		}).run();
 	}
 	
 	private void loadFromDB() {
-		mList.clear();
-		mList.addAll(ContactDBHelper.getInstance().getContacts());
-		adapter.notifyDataSetChanged();
+		runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				mList.clear();
+				mList.addAll(ContactDBHelper.getInstance().getContacts());
+				adapter.notifyDataSetChanged();
+			}
+		});
 	}
 
 	
