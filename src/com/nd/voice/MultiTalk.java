@@ -104,7 +104,7 @@ public class MultiTalk extends Activity implements
 	private String mode = null;
 	private boolean isSettingShow = false;
 
-	private static HashMap<Long, UsrConnectInRoom> mUsrInRoom = new HashMap<Long, UsrConnectInRoom>();
+	private HashMap<Long, UsrConnectInRoom> mUsrInRoom = new HashMap<Long, UsrConnectInRoom>();
 	private long mLocalUsr;
 
 	private int userIndex = 0;
