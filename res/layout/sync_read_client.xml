@@ -5,6 +5,12 @@
     android:background="#fff"
     android:orientation="vertical" >
 
+    <FrameLayout 
+        android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:background="#fff">
+    </FrameLayout>
+    
     <cn.nd.social.syncbrowsing.ui.ClientDocView
         android:id="@+id/doc_area"
         android:layout_width="fill_parent"

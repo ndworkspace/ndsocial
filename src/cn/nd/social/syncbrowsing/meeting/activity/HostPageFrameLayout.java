@@ -167,7 +167,7 @@ public class HostPageFrameLayout extends FrameLayout {
 		}, 2000);
 	}
 	
-	private void release() {
+	public void release() {
 		// TODO Auto-generated method stub
 		quitNetwork();
 		if(mHostController != null) {

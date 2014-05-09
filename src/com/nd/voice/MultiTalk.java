@@ -313,6 +313,9 @@ public class MultiTalk extends Activity implements
 			if(mClientPageFrament != null) {
 				mClientPageFrament.release();
 			}
+			if(mHostPageFrament != null) {
+				mHostPageFrament.release();
+			}
 			mMultiAct = null;
 			VoiceEndpoint.leave(mRoom);
 			finish();
