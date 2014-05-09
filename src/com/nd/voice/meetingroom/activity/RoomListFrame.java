@@ -28,6 +28,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.nd.social.R;
 import cn.nd.social.TabLauncherUI;
 import cn.nd.social.account.business.BusinessMeetingManager;
@@ -89,7 +90,7 @@ public class RoomListFrame extends AuthorizationFrame implements MeetingManagerC
 		setupView();
 		setupListener();
 		otherInit();
-		loadDataFromNet();
+//		loadDataFromNet();
 //		if(mUserManager.getMyInfo() == null){
 //			
 //		}
@@ -465,6 +466,8 @@ public class RoomListFrame extends AuthorizationFrame implements MeetingManagerC
 		dismissProgressDialog();
 		if(success){
 			reloadLocalData();
+		}else{
+			Toast.makeText(mActivity, msg, 1000).show();
 		}
 	}
 
@@ -547,5 +550,9 @@ public class RoomListFrame extends AuthorizationFrame implements MeetingManagerC
 		
 	}
 
-	
+	@Override
+	public void onFramentViewHide() {
+		super.onFramentViewHide();
+		dismissProgressDialog();
+	}
 }

@@ -51,6 +51,7 @@ public class GetContacts {
 				PHONES_PROJECTION, null, null, null);
 		
 		if (phoneCursor != null) {
+			Long tcontactid = null;
 			while (phoneCursor.moveToNext()) {
 				MemberContact cData = new MemberContact();
 				// 得到手机号码
@@ -65,7 +66,7 @@ public class GetContacts {
 
 				// 得到联系人ID
 				Long contactid = phoneCursor.getLong(PHONES_CONTACT_ID_INDEX);
-
+				
 				// 得到联系人头像ID
 //				Long photoid = phoneCursor.getLong(PHONES_PHOTO_ID_INDEX);
 
@@ -83,11 +84,15 @@ public class GetContacts {
 //					contactPhoto = BitmapFactory.decodeResource(context.getResources(),
 //							R.drawable.ic_launcher);
 //				}
-
-			    cData.setContactName(contactName);
-			    cData.setPhoneNumber(phoneNumber);
-			    cData.setContactid(contactid);
-			    contacts.add(cData);
+				if(contactid != tcontactid && GetContacts.isMobile(phoneNumber)){
+					tcontactid = contactid;
+					cData.setContactName(contactName);
+				    cData.setPhoneNumber(phoneNumber);
+				    cData.setContactid(contactid);
+				    contacts.add(cData);
+				}else{
+					continue;
+				}
 /*				mContactsName.add(contactName);
 				mContactsNumber.add(phoneNumber);
 				mContactsPhonto.add(contactPhoto);*/
@@ -95,6 +100,13 @@ public class GetContacts {
 			phoneCursor.close();
 		}
 		return contacts;
+	}
+	
+	public static boolean isMobile(String mobileString){
+		if(mobileString.length() == 11 && mobileString.startsWith("1")){
+			return true;
+		}
+		return false;
 	}
 	
 	public static void cacheMemberContact(List<MemberContact> contacts){
