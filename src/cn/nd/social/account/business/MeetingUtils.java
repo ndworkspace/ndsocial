@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import android.util.Log;
 import cn.nd.social.account.CloundServer;
 import cn.nd.social.account.usermanager.UserManager;
+import cn.nd.social.util.LogToFile;
 
 import com.nd.voice.meetingroom.manager.MeetingDetailEntity;
 import com.nd.voice.meetingroom.manager.MeetingEntity;
@@ -410,9 +411,9 @@ public class MeetingUtils {
 				}
 			}
 			
-		} catch (JSONException e) {			
+		} catch (JSONException e) {
+			LogToFile.e("MeetingUtils","getMyMeeting error," + jArrayMeetingList );
 			e.printStackTrace();
-			return null;
 		}
 		return entityList;
 	}
@@ -435,9 +436,9 @@ public class MeetingUtils {
 				}
 			}
 			
-		} catch (JSONException e) {			
+		} catch (JSONException e) {
+			LogToFile.e("MeetingUtils","getInvitedMeeting error," + jArrayMeetingList );
 			e.printStackTrace();
-			return null;
 		}
 		return entityList;
 	}
@@ -461,7 +462,7 @@ public class MeetingUtils {
 			
 		} catch (JSONException e) {			
 			e.printStackTrace();
-			return null;
+			LogToFile.e("MeetingUtils","getMeetingList error," + jArrayMeetingList );
 		}
 		return entityList;
 	}

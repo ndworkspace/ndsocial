@@ -316,8 +316,11 @@ public class MeetingDetailActivity extends Activity implements ConferenceCallbac
 	}
 
 	@Override
-	public void onJoinConference(boolean success) {
-		// TODO Auto-generated method stub
+	public void onJoinConference(boolean success) {	
+		if(!success) {
+			LogToFile.e("MeetingDetailActivity","onJoinConference fail");
+		}
+		
 		handler.removeMessages(0);
 		dismissProgressDialog();
 //		MultiTalk.mMultiAct.onJoinConference(success);

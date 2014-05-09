@@ -9,6 +9,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import cn.nd.social.util.LogToFile;
+
 import com.nd.voice.meetingroom.manager.User;
 
 public class VoiceEndpoint implements VoiceSDKCallback {	
@@ -184,6 +186,9 @@ public class VoiceEndpoint implements VoiceSDKCallback {
 	}
 	
 	public int onJoinConference(String conf, int retcode){
+		if(retcode != 0) {
+			LogToFile.e("VoiceEndPoint","onJoinConference error,retcode:" + retcode);
+		}
 		return onJoinConference(conf,retcode==0);
 	}
 

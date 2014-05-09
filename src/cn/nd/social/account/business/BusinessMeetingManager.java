@@ -192,11 +192,18 @@ public class BusinessMeetingManager implements MeetingManagerApi {
 	}
 	
 	public static void setMyMeetingList(List<MeetingEntity>list)  {
-		sMyList = list;
+		sMyList.clear();
+		if(list != null) {
+			sMyList.addAll(list);
+		} 
+		
 	}
 	
 	public static void setInvitedMeetingList(List<MeetingEntity>list)  {
-		sOtherList = list;
+		sOtherList.clear();
+		if(list != null) {
+			sOtherList.addAll(list);
+		}
 	}
 
 	@Override
