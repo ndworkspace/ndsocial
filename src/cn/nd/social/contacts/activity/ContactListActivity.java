@@ -109,7 +109,7 @@ public class ContactListActivity extends Activity implements UserManagerCallBack
 			}else{
 				btn_action.setEnabled(true);
 				if(contact.isFriend()){
-					btn_action.setText("已添加为好友");
+					btn_action.setText("已添加");
 					btn_action.setEnabled(false);
 				}else{
 					btn_action.setText("添加");
@@ -224,8 +224,9 @@ public class ContactListActivity extends Activity implements UserManagerCallBack
 		if(success){
 			Toast.makeText(this, "添加成功", 1000);
 			mWaitContact.setFriend(true);
-			ContactDBHelper.getInstance().save(mWaitContact);
-			loadFromDB();
+			mList.remove(mWaitContact);
+			mList.add(mWaitContact);
+			adapter.notifyDataSetChanged();
 			mUserManagerApi.getFriendList(mUserManagerApi.getMyInfo().getUserid());
 		}else{
 			Toast.makeText(this, msg, 1000);

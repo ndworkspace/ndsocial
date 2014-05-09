@@ -2,6 +2,8 @@ package cn.nd.social;
 
 import java.lang.ref.WeakReference;
 
+import com.activeandroid.query.Delete;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -12,6 +14,7 @@ import cn.nd.social.card.TabMyCard;
 import cn.nd.social.common.QuickActionBar;
 import cn.nd.social.common.QuickActionItem;
 import cn.nd.social.common.ShareThisApp;
+import cn.nd.social.contacts.manager.MemberContact;
 import cn.nd.social.tresure.PrivateTreasure;
 import cn.nd.social.ui.controls.HorizontalListView;
 import cn.nd.social.updater.UpdateInitiator;
@@ -139,6 +142,7 @@ public class TabActionBar {
 			}
 			//reset user information
 			CAUtils.resetUserInfo();
+			new Delete().from(MemberContact.class).execute();
 			Context appContext = Utils.getAppContext();
 			
 			Intent intent = new Intent(appContext,BootActivity.class);
