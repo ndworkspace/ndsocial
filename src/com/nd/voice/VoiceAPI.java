@@ -1,6 +1,7 @@
 package com.nd.voice;
 
 import java.nio.ByteBuffer;
+import android.content.Context;
 
 
 public class VoiceAPI {
@@ -39,21 +40,21 @@ public class VoiceAPI {
 		System.loadLibrary("voiceAPI");
 	}
 
-	public native int init(String host, short port, VoiceSDKCallback callback);
+	public native int init(Context context, String host, short port, VoiceSDKCallback callback);
 	public native int fini();
 	
 	public native int authorize(String uid, String session_id, String session_key );
-	public native int join(Object context, String conf);
+	public native int join(String conf);
 	public native int leave(String conf);
 	public native int setKeypressMode(String conf, boolean setup);
 	public native int notifyKeydown(String conf, boolean keydown);
 	public native int mediaOption(String conf, int cmd, int value);
 	
-	public native int recordStart(Object context);
+	public native int recordStart();
 	public native int recordStop();
 	
 	//should use direct ByteBuffer
-	public native int playStart(Object context, boolean loudspeaker, ByteBuffer buf);
+	public native int playStart(boolean loudspeaker, ByteBuffer buf);
 	public native int playStop();
 	
 //	public int setSpeakerVolume(String conf, int value) {

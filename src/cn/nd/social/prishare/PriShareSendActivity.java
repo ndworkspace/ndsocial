@@ -1626,27 +1626,8 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 		return true;
 	}
 
-	private static final int MAX_EDITABLE_LENGTH = 60;
-	public static final String USER_ID_KEY = "userid";
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		boolean hasHandled = true;
-		switch (item.getItemId()) {
-		case R.id.set_userId:
-			setUserId();
-			break;
-		default:
-			hasHandled = false;
-			break;
 
-		}
-		if (hasHandled) {
-			return true;
-		} else {
-			return super.onOptionsItemSelected(item);
-		}
-	}
 
 	@Override
 	public void onDestroy() {
@@ -1700,39 +1681,6 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 					}).show();
 
 	}
-	
-
-	private void setUserId() {
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		String userid = prefs.getString(USER_ID_KEY, android.os.Build.MODEL);
-		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-		final EditText numberText = new EditText(mContext);
-		numberText.setHint("input userid");
-		numberText.computeScroll();
-		numberText.setFilters(new InputFilter[] { new InputFilter.LengthFilter(
-				MAX_EDITABLE_LENGTH) });
-		numberText.setInputType(EditorInfo.TYPE_CLASS_TEXT);
-		numberText.setText(userid);
-		dialog.setIcon(R.drawable.ic_dialog_info_holo_light)
-				.setTitle(R.string.set_userid).setView(numberText)
-				.setPositiveButton(R.string.OK, new OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						PreferenceManager
-								.getDefaultSharedPreferences(PriShareSendActivity.this)
-								.edit()
-								.putString(USER_ID_KEY,
-										numberText.getText().toString())
-								.commit();
-					}
-				}).setNegativeButton(R.string.Cancel, new OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				}).show();
-	}
-
-
 	
 
 	private CellItemBase[] mItemArr;

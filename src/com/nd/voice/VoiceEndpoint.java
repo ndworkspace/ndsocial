@@ -10,6 +10,7 @@ import android.os.Message;
 import android.util.Log;
 
 import cn.nd.social.util.LogToFile;
+import cn.nd.social.util.Utils;
 
 import com.nd.voice.meetingroom.manager.User;
 
@@ -62,9 +63,17 @@ public class VoiceEndpoint implements VoiceSDKCallback {
 	public static VoiceEndpoint instance() {
 		if(instance_ == null) {
 			instance_ = new VoiceEndpoint();
-			instance_.init();
+			instance_.init(Utils.getAppContext());
 		}
 		return instance_;
+	}
+	
+	
+	public static void fini() {
+		if(instance_ != null) {
+			api().fini();
+			instance_ = null;
+		}
 	}
 	
 	public static VoiceAPI api() {
@@ -75,9 +84,9 @@ public class VoiceEndpoint implements VoiceSDKCallback {
 		instance().voiceAPI_.authorize(User.getMeetingUserId(userid), "", "");
 	}
 	
-	public static void join(Context ctx, String conf, ConferenceCallback callback) {
+	public static void join(String conf, ConferenceCallback callback) {
 		instance_.conf_callback_ = callback;
-		instance_.voiceAPI_.join(ctx, conf);
+		instance_.voiceAPI_.join(conf);
 	}
 	
 	public static void leave(String conf) {
@@ -85,7 +94,7 @@ public class VoiceEndpoint implements VoiceSDKCallback {
 		instance_.voiceAPI_.leave(conf);
 	}
 	
-	private int init() {
+	private int init(Context ctx) {
 		idMap = new HashMap<Short,String>();
         voiceAPI_ = new VoiceAPI();       
         voiceAPI_.load();
@@ -159,7 +168,7 @@ public class VoiceEndpoint implements VoiceSDKCallback {
         };
         
         //init voice api
-        voiceAPI_.init(VOICE_SERVER, VOICE_PORT, this);
+        voiceAPI_.init(ctx,VOICE_SERVER, VOICE_PORT, this);
         
 		return 0;
 	}

@@ -21,6 +21,7 @@ import cn.nd.social.services.WifiService.WifiServiceBinder;
 import cn.nd.social.updater.UpdateService;
 
 import com.activeandroid.ActiveAndroid;
+import com.nd.voice.VoiceEndpoint;
 
 
 public class SocialApplication extends Application {
@@ -92,8 +93,12 @@ public class SocialApplication extends Application {
 	private ServiceBinder mServiceBinder;
 	private WifiServiceBinder mWifiServiceBinder;
 	private ServiceConnection mServiceConn;
-	private void startLongRunService() {
-		
+	private boolean mIsServericeStarted = false;
+	public void startLongRunService() {
+		if(mIsServericeStarted ) {
+			return;
+		}
+		mIsServericeStarted = true;
 		mServiceConn = new ServiceConnection() {
 	        
 	        @Override
@@ -156,6 +161,8 @@ public class SocialApplication extends Application {
 	public void exit() {
 		
 		CloundServer.getInstance().fini();
+		
+		VoiceEndpoint.fini();
 				
 		try {
 			Intent intent = new Intent(this,UpdateService.class);
@@ -163,6 +170,7 @@ public class SocialApplication extends Application {
 			if(mServiceConn != null) {
 				unbindService(mServiceConn);
 				mServiceConn = null;
+				mIsServericeStarted = false;
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
