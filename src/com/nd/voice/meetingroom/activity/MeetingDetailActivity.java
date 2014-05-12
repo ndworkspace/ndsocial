@@ -118,7 +118,7 @@ public class MeetingDetailActivity extends Activity implements ConferenceCallbac
 	private void enterMeetingRoom() {
 		showProgressDialog();
 		VoiceEndpoint.setUID(TabLauncherUI.VOICE_UID);//UserTestManager.getInstance().getMyInfo().getUserid());
-		VoiceEndpoint.join(getApplicationContext(), mMeetingDetailEntity.getMeetingUid(), MeetingDetailActivity.this); 
+		VoiceEndpoint.join(mMeetingDetailEntity.getMeetingUid(), MeetingDetailActivity.this); 
 		handler.sendEmptyMessageDelayed(0, 10000);
 	}
 
@@ -176,7 +176,7 @@ public class MeetingDetailActivity extends Activity implements ConferenceCallbac
 				// TODO Auto-generated method stub
 				showProgressDialog();
 				VoiceEndpoint.setUID(mUserManager.getMyInfo().getUserid());//UserTestManager.getInstance().getMyInfo().getUserid());
-				VoiceEndpoint.join(getApplicationContext(), mMeetingDetailEntity.getMeetingUid(), MeetingDetailActivity.this); 
+				VoiceEndpoint.join(mMeetingDetailEntity.getMeetingUid(), MeetingDetailActivity.this); 
 				handler.sendEmptyMessageDelayed(0, 10000);
 			}
 		});

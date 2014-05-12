@@ -894,7 +894,7 @@ public class MultiTalk extends Activity implements
 		if(!isTalking){
 			mSpeakBtn.setTag(true);
 			VoiceEndpoint.api().setRecordingMute(mRoom, false);
-			spOn.play(musicOn, 1, 1, 0, 0, 1);
+			//spOn.play(musicOn, 1, 1, 0, 0, 1);
 			mSpeakBtn.setImageResource(R.drawable.mic_speaking);
 			isTalking = true;
 		}
@@ -904,7 +904,7 @@ public class MultiTalk extends Activity implements
 	public void stopSpeak() {
 		mSpeakBtn.setTag(false);
 		VoiceEndpoint.api().setRecordingMute(mRoom, true);
-		spOff.play(musicOff, 1, 1, 0, 0, 1);
+		//spOff.play(musicOff, 1, 1, 0, 0, 1);
 		mSpeakBtn.setImageResource(R.drawable.mic_normal);
 		isTalking = false;
 	}

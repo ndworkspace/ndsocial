@@ -36,12 +36,14 @@ public class BootActivity extends Activity {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);		
+		
+		earlyInit();
+		
 		setContentView(R.layout.appstart_welcome);
 		sSocialBoot = this;
 		userManager = new UserManager();
 		
-		CloundServer.getInstance().init();
 		
 		if(!androidVersionCheckPass()) {			
 			return;
@@ -56,7 +58,12 @@ public class BootActivity extends Activity {
 			initView();
 		}
 
-}
+	}
+	
+	private void earlyInit() {
+		CloundServer.getInstance().init();
+		SocialApplication.getAppInstance().startLongRunService();
+	}
 	
 	private boolean androidVersionCheckPass() {
 		if(Utils.isAndroidVersionGood()) {
@@ -93,7 +100,7 @@ public class BootActivity extends Activity {
 		if(true) {
 			Intent intent = new Intent(this, TabLauncherUI.class);
 			//comment out 2014_0127, not show login
-/*			Intent intent = new Intent(this, LoginActivity.class);
+/*			Intent intent) = new Intent(this, LoginActivity.class);
 			intent.putExtra(Utils.INTENT_STR_USRE_NAME,
 					SocialApplication.getUserName(mPrefs));*/
 			

@@ -80,7 +80,7 @@ public class EnterRoomActivity extends Activity implements ConferenceCallback{
 				mWaitBar.setVisibility(View.VISIBLE);
 				mTextWait.setText(R.string.entering);
 				VoiceEndpoint.setUID(TabLauncherUI.VOICE_UID);
-				VoiceEndpoint.join(getApplicationContext(), rName, EnterRoomActivity.this);            
+				VoiceEndpoint.join(rName, EnterRoomActivity.this);            
 
 				
 			}

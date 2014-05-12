@@ -16,7 +16,9 @@ import java.util.concurrent.locks.ReentrantLock;
 import android.content.Context;
 import android.media.AudioFormat;
 import android.media.AudioManager;
+import android.media.AudioRecord;
 import android.media.AudioTrack;
+import android.util.Log;
 
 class WebRtcAudioTrack {
     private AudioTrack _audioTrack = null;
@@ -298,10 +300,10 @@ class WebRtcAudioTrack {
     final String logTag = "WebRTC AD java";
 
     private void DoLog(String msg) {
-//        Log.d(logTag, msg);
+        Log.d(logTag, msg);
     }
 
     private void DoLogErr(String msg) {
-//        Log.e(logTag, msg);
+        Log.e(logTag, msg);
     }
 }
