@@ -85,7 +85,7 @@
             android:visibility="invisible" />
     </FrameLayout>
     
-     <RelativeLayout
+     <!-- <RelativeLayout
             android:id="@+id/rl_top_tool"
             android:layout_width="fill_parent"
             android:layout_height="44dip"
@@ -102,7 +102,7 @@
                 android:background="@drawable/button_up"
                 android:textColor="#fff" />
             
-        </RelativeLayout>
+        </RelativeLayout> -->
 
 </FrameLayout>
 

@@ -134,15 +134,15 @@ public class HostPageFrameLayout extends FrameLayout {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				mdelegate.get().onDownAction();
-//				mDownFlag = !mDownFlag;
-//				if(mDownFlag){
-//					btn_up_down.setBackgroundResource(R.drawable.button_up);
-//					mdelegate.get().onDownAction();
-//				}else{
-//					btn_up_down.setBackgroundResource(R.drawable.button_down);
-//					mdelegate.get().onUpAction();
-//				}
+//				mdelegate.get().onDownAction();
+				mDownFlag = !mDownFlag;
+				if(mDownFlag){
+					btn_up_down.setBackgroundResource(R.drawable.button_up);
+					mdelegate.get().onDownAction();
+				}else{
+					btn_up_down.setBackgroundResource(R.drawable.button_down);
+					mdelegate.get().onUpAction();
+				}
 			}
 		});
 		

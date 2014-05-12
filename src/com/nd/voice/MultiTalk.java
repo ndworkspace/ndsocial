@@ -2,6 +2,7 @@
 
 import java.util.HashMap;
 
+import android.animation.PropertyValuesHolder;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -49,10 +50,8 @@ import cn.nd.social.R;
 import cn.nd.social.account.usermanager.UserManager;
 import cn.nd.social.common.PopMenu;
 import cn.nd.social.common.PopMenuItem;
-//import cn.nd.social.syncbrowsing.manager.MeetingSyncEnterReceiver;
 import cn.nd.social.syncbrowsing.manager.SyncMsgFactory;
 import cn.nd.social.syncbrowsing.meeting.activity.ClientLayoutDelegate;
-import cn.nd.social.syncbrowsing.meeting.activity.ClientPageActivity;
 import cn.nd.social.syncbrowsing.meeting.activity.ClientPageFrameLayout;
 import cn.nd.social.syncbrowsing.meeting.activity.HostLayoutDelegate;
 import cn.nd.social.syncbrowsing.meeting.activity.HostPageFrameLayout;
@@ -67,6 +66,9 @@ import com.nd.voice.meetingroom.manager.MeetingDetailEntity;
 import com.nd.voice.meetingroom.manager.MeetingEntity;
 import com.nd.voice.meetingroom.manager.User;
 import com.nd.voice.meetingroom.manager.UserManagerApi;
+import com.nineoldandroids.animation.AnimatorSet;
+import com.nineoldandroids.animation.ObjectAnimator;
+//import cn.nd.social.syncbrowsing.manager.MeetingSyncEnterReceiver;
 
 public class MultiTalk extends Activity implements
 		VoiceEndpoint.ConferenceCallback, InterfaceForSetting,
@@ -270,7 +272,7 @@ public class MultiTalk extends Activity implements
 			mMoreBtn.setVisibility(View.GONE);
 		}
 		
-		toolBar = findViewById(R.id.rl_top_tool);
+		
 	}
 
 	public Bitmap initImageToCircle(int imgId, boolean isInRoom) {
@@ -347,6 +349,8 @@ public class MultiTalk extends Activity implements
 			mHostPageFrament = new HostPageFrameLayout(this);
 			mHostPageFrament.setDelegate(this);
 			rootView.addView(mHostPageFrament);
+			toolBar = findViewById(R.id.rl_top_tool);
+			
 			mHostPageFrament.setmMeetingId(MeetingEntity.getMeetingIdByUid(mRoom));
 			if(filePath != null){
 				mHostPageFrament.setmPath(filePath);
@@ -360,28 +364,35 @@ public class MultiTalk extends Activity implements
 				}
 			});
 		}else{
-			Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_in);
-			animation.setAnimationListener(new AnimationListener() {
-				
-				@Override
-				public void onAnimationStart(Animation arg0) {
-					// TODO Auto-generated method stub
-					mHostPageFrament.setVisibility(View.VISIBLE);
-				}
-				
-				@Override
-				public void onAnimationRepeat(Animation arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void onAnimationEnd(Animation arg0) {
-					// TODO Auto-generated method stub
-					toolBar.setVisibility(View.GONE);
-				}
-			});
-			mHostPageFrament.startAnimation(animation);
+			AnimatorSet animationSet = new AnimatorSet();
+			animationSet.playTogether(
+			        ObjectAnimator.ofFloat(mHostPageFrament, "translationY", mHostPageFrament.getHeight() - toolBar.getHeight(),0f,0f)
+			        );
+			animationSet.setDuration(1000);
+			animationSet.start();
+			
+//			Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_in);
+//			animation.setAnimationListener(new AnimationListener() {
+//				
+//				@Override
+//				public void onAnimationStart(Animation arg0) {
+//					// TODO Auto-generated method stub
+//					mHostPageFrament.setVisibility(View.VISIBLE);
+//				}
+//				
+//				@Override
+//				public void onAnimationRepeat(Animation arg0) {
+//					// TODO Auto-generated method stub
+//					
+//				}
+//				
+//				@Override
+//				public void onAnimationEnd(Animation arg0) {
+//					// TODO Auto-generated method stub
+//					toolBar.setVisibility(View.GONE);
+//				}
+//			});
+//			mHostPageFrament.startAnimation(animation);
 		}
 		
 	}
@@ -389,28 +400,34 @@ public class MultiTalk extends Activity implements
 	private void hideHostPageFrameLayout(){
 		mIsSyncShowing = false;
 		if(mHostPageFrament != null){
-			Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_out);
-			animation.setAnimationListener(new AnimationListener() {
-				
-				@Override
-				public void onAnimationStart(Animation arg0) {
-					// TODO Auto-generated method stub
-					toolBar.setVisibility(View.VISIBLE);
-				}
-				
-				@Override
-				public void onAnimationRepeat(Animation arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void onAnimationEnd(Animation arg0) {
-					// TODO Auto-generated method stub
-					mHostPageFrament.setVisibility(View.GONE);
-				}
-			});
-			mHostPageFrament.startAnimation(animation);
+			AnimatorSet animationSet = new AnimatorSet();
+			animationSet.playTogether(
+			        ObjectAnimator.ofFloat(mHostPageFrament, "translationY", 0f,mHostPageFrament.getHeight() - toolBar.getHeight(),mHostPageFrament.getHeight() - toolBar.getHeight())
+			        );
+			animationSet.setDuration(1000);
+			animationSet.start();
+//			Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_out);
+//			animation.setAnimationListener(new AnimationListener() {
+//				
+//				@Override
+//				public void onAnimationStart(Animation arg0) {
+//					// TODO Auto-generated method stub
+//					toolBar.setVisibility(View.VISIBLE);
+//				}
+//				
+//				@Override
+//				public void onAnimationRepeat(Animation arg0) {
+//					// TODO Auto-generated method stub
+//					
+//				}
+//				
+//				@Override
+//				public void onAnimationEnd(Animation arg0) {
+//					// TODO Auto-generated method stub
+//					mHostPageFrament.setVisibility(View.GONE);
+//				}
+//			});
+//			mHostPageFrament.startAnimation(animation);
 		}
 	}
 	
@@ -423,7 +440,7 @@ public class MultiTalk extends Activity implements
 			@Override
 			public void onAnimationStart(Animation animation) {
 				// TODO Auto-generated method stub
-				toolBar.setVisibility(View.GONE);
+//				toolBar.setVisibility(View.GONE);
 			}
 			
 			@Override
@@ -765,17 +782,17 @@ public class MultiTalk extends Activity implements
 //			}
 //		});
 		
-		toolBar.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				if(mClientPageFrament != null) {
-					showClientPageFrameLayout(false, null);
-				} else {
-					showHostPageFrameLayout(null);
-				}
-			}
-		});
+//		toolBar.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View arg0) {
+//				if(mClientPageFrament != null) {
+//					showClientPageFrameLayout(false, null);
+//				} else {
+//					showHostPageFrameLayout(null);
+//				}
+//			}
+//		});
 	}
 
 	public int getConnectCount() {
@@ -1145,6 +1162,7 @@ public class MultiTalk extends Activity implements
 		if(mClientPageFrament == null){
 			mClientPageFrament = new ClientPageFrameLayout(this);
 			rootView.addView(mClientPageFrament);
+			toolBar = findViewById(R.id.ll_tool);
 			mClientPageFrament.setDelegate(mClientSyncDelegate);
 			mClientPageFrament.laterInit(hasExtra, extras);
 			//这样点击事件就不会透到下一层view
@@ -1155,28 +1173,12 @@ public class MultiTalk extends Activity implements
 				}
 			});
 		}else{
-			Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_in);
-			animation.setAnimationListener(new AnimationListener() {
-				
-				@Override
-				public void onAnimationStart(Animation arg0) {
-					// TODO Auto-generated method stub
-					mClientPageFrament.setVisibility(View.VISIBLE);
-				}
-				
-				@Override
-				public void onAnimationRepeat(Animation arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void onAnimationEnd(Animation arg0) {
-					// TODO Auto-generated method stub
-					toolBar.setVisibility(View.GONE);
-				}
-			});
-			mClientPageFrament.startAnimation(animation);
+			AnimatorSet animationSet = new AnimatorSet();
+			animationSet.playTogether(
+			        ObjectAnimator.ofFloat(mClientPageFrament, "translationY", mClientPageFrament.getHeight() - toolBar.getHeight(),0f,0f)
+			        );
+			animationSet.setDuration(1000);
+			animationSet.start();
 		}
 		
 	}
@@ -1186,28 +1188,35 @@ public class MultiTalk extends Activity implements
 		mIsSyncShowing = false;
 		
 		if(mClientPageFrament != null){
-			Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_out);
-			animation.setAnimationListener(new AnimationListener() {
-				
-				@Override
-				public void onAnimationStart(Animation arg0) {
-					// TODO Auto-generated method stub
-					toolBar.setVisibility(View.VISIBLE);
-				}
-				
-				@Override
-				public void onAnimationRepeat(Animation arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void onAnimationEnd(Animation arg0) {
-					// TODO Auto-generated method stub
-					mClientPageFrament.setVisibility(View.GONE);
-				}
-			});
-			mClientPageFrament.startAnimation(animation);
+			AnimatorSet animationSet = new AnimatorSet();
+			animationSet.playTogether(
+			        ObjectAnimator.ofFloat(mClientPageFrament, "translationY", 0f,mClientPageFrament.getHeight() - toolBar.getHeight(),mClientPageFrament.getHeight() - toolBar.getHeight())
+			        );
+			animationSet.setDuration(1000);
+			animationSet.start();
+			
+//			Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_out);
+//			animation.setAnimationListener(new AnimationListener() {
+//				
+//				@Override
+//				public void onAnimationStart(Animation arg0) {
+//					// TODO Auto-generated method stub
+//					toolBar.setVisibility(View.VISIBLE);
+//				}
+//				
+//				@Override
+//				public void onAnimationRepeat(Animation arg0) {
+//					// TODO Auto-generated method stub
+//					
+//				}
+//				
+//				@Override
+//				public void onAnimationEnd(Animation arg0) {
+//					// TODO Auto-generated method stub
+//					mClientPageFrament.setVisibility(View.GONE);
+//				}
+//			});
+//			mClientPageFrament.startAnimation(animation);
 		}
 	}
 	
@@ -1225,7 +1234,7 @@ public class MultiTalk extends Activity implements
 			@Override
 			public void onAnimationStart(Animation animation) {
 				// TODO Auto-generated method stub
-				toolBar.setVisibility(View.GONE);
+//				toolBar.setVisibility(View.GONE);
 			}
 			
 			@Override

@@ -40,6 +40,8 @@ public class ClientPageFrameLayout extends FrameLayout {
 	
 	private ClientLayoutDelegate mDelegate;
 	
+	private boolean mDownFlag;
+	
 	public ClientPageFrameLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		mContext = context;
@@ -80,7 +82,7 @@ public class ClientPageFrameLayout extends FrameLayout {
 			onHandShake(0, pageCount, page, width, height);
 			mHandler.postDelayed(new Runnable() {
 				
-				@Override
+				@Override 
 				public void run() {
 					if(mClientController == null || !mClientController.isDocViewReady()) {
 						mHandler.postDelayed(this, 100);
@@ -102,7 +104,14 @@ public class ClientPageFrameLayout extends FrameLayout {
 			
 			@Override
 			public void onClick(View v) {
-				mDelegate.onDownAction();			
+				mDownFlag = !mDownFlag;
+				if(mDownFlag){
+					mBtnUpDown.setBackgroundResource(R.drawable.button_up);
+					mDelegate.onDownAction();
+				}else{
+					mBtnUpDown.setBackgroundResource(R.drawable.button_down);
+					mDelegate.onUpAction();
+				}	
 			}
 		});
 	}
