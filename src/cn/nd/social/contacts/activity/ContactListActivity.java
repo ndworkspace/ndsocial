@@ -141,14 +141,17 @@ public class ContactListActivity extends Activity implements UserManagerCallBack
 			Button btn_action = (Button) view.findViewById(R.id.btn_action);
 			if(!contact.isMember()){
 				btn_action.setText("邀请");
+				btn_action.setTextColor(0xff9EE4FF);
 				btn_action.setEnabled(true);
 			}else{
 				btn_action.setEnabled(true);
 				if(contact.isFriend()){
 					btn_action.setText("已添加");
+					btn_action.setTextColor(0xffCACCCC);
 					btn_action.setEnabled(false);
 				}else{
 					btn_action.setText("添加");
+					btn_action.setTextColor(0xff00FF9C);
 				}
 			}
 			btn_action.setOnClickListener(new OnClickListener() {
