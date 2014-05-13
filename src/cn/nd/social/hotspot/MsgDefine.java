@@ -84,6 +84,7 @@ public class MsgDefine {
 	public static final short MAIN_UI_HANDLER_SEND_FILE = 30005;
 	public static final short MAIN_UI_HANDLER_RECV_FILE_FINISH = 30006 ;
 	public static final short MAIN_UI_HANDLER_HOTSPOTCREATE = 30007;
+	public static final short MAIN_UI_HANDLER_SEND_PROGRESS = 30008;
 	
 	//Status of Message History in DB
 	public static final int STATUS_DO_NOTHING = 0;

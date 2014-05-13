@@ -4,7 +4,6 @@ package cn.nd.social.prishare;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,17 +11,13 @@ import java.util.Set;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
@@ -30,16 +25,11 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.os.Parcelable;
-import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.text.InputFilter;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,12 +39,10 @@ import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -67,7 +55,6 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.nd.dragdrop.DragSource;
 import cn.nd.social.R;
 import cn.nd.social.common.FlyAnimation;
 import cn.nd.social.common.VibratorController;
@@ -75,7 +62,6 @@ import cn.nd.social.hotspot.MsgDefine;
 import cn.nd.social.net.PrivateSwitcher;
 import cn.nd.social.net.WifiStateConstant;
 import cn.nd.social.prishare.component.AudioListViewAdapter;
-import cn.nd.social.prishare.component.ConnUserListAdapter;
 import cn.nd.social.prishare.component.FilesGridViewAdapter;
 import cn.nd.social.prishare.component.GalleryGridViewAdapter;
 import cn.nd.social.prishare.component.GridViewAdapter;
@@ -92,42 +78,16 @@ import cn.nd.social.prishare.items.FilesCellItem;
 import cn.nd.social.prishare.items.ImageCellItem;
 import cn.nd.social.qrcode.EncodingHandler;
 import cn.nd.social.sendfile.SendMutipleItem.SendSingleItemHandle;
+import cn.nd.social.util.BitmapUtils;
 import cn.nd.social.util.DimensionUtils;
+import cn.nd.social.util.UnitConverter;
 import cn.nd.social.util.Utils;
 
 import com.google.zxing.WriterException;
 
 
-public class PriShareSendActivity extends Activity implements DragSource.OnDragCompletedListener, InterfaceForMain{
-
-	// /////////////////////////////////////////////
-	private final static int TAB_COUNT = 5;
-	private final static int[] TAB_TITLE = { 
-										R.string.qe_main_pic, 
-										R.string.qe_main_audio,
-										R.string.qe_main_file, 
-										R.string.qe_main_app,										
-										R.string.qe_main_more
-									};
-
-	private final static int[] TAB_TITLE_LOGO = { 
-													R.drawable.pri_tab_gallery, 
-													R.drawable.pri_tab_music,
-													R.drawable.pri_tab_file,
-													R.drawable.pri_tab_app,													 
-													R.drawable.pri_tab_file 
-												};
-	
-	
-	private final static int GALLERY_INDEX = 0;
-	private final static int AUDIO_INDEX = 1;
-	private final static int APP_INDEX = 3;
-	private final static int FILE_INDEX = 2;
-	public final static int HISTORY_INDEX = 4;
-	
-	private final static int REQ_CODE_SET_EXPIRE_TIME = 100;
-	
-	private HashMap<String, View> mFileList = new HashMap<String, View>();	
+public class PriShareSendActivity extends Activity implements InterfaceForMain{	
+	private final static String TAG = "Main";
 
 	private RadioGroup mNavGroup;
 	private ImageView mNavIndicator;
@@ -145,17 +105,18 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 	private RelativeLayout mPageContainer;
 	
 	private int mCurrPage = 0;
-	private int currIndLeft = 0;	
+	private int currIndLeft = 0;
+	
 	private int mSelectedApps = 0;
 	private int mSelectedImgs = 0;
 	private int mSelectedAuds = 0;
+	
 	private Map<CellItemBase, View> mMultiMap = new HashMap<CellItemBase, View>();
+	private HashMap<String, View> mFileList = new HashMap<String, View>();
 
-	private RelativeLayout mNewTab;
 	private RelativeLayout mBodyContainer;
 	private View mWaitContainer;
 	private View mUserListContainer;
-	private ListView mConnUserListView;
 	
 		
 
@@ -163,29 +124,20 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 	private InterfaceHandlerForMain mInterHandForMain;
 	
 	private boolean mShowWaitingShare = false;	
-	// /////////////////////////////////////////////
-	private final static String TAG = "Main";
+
 	
-	public final static int INFINITE_TIME = -1;
+	
 	private ArrayList<AppCellItem> mCellList;
 
-	private GridView mGrid;
+	private GridView mAppGrid;
 	private GridView mGalleryGrid;
 	private GridView mFilesGrid;
 	private ListView mAudioList;
 	
-	private View mBackBtn;
-	
+	private View mBackBtn;	
 	private View mSendBtn;
-	
-
-	
-	private ConnUserListAdapter mUserListAdapter;
-
-	private GridViewAdapter mGridAdapter;
 
 	private int mScreenWidth;
-
 
 	private UIHandler mUiHandler;
 	private Handler mWorkerHandler;
@@ -193,26 +145,19 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 
 	private LayoutInflater mInflater;
 	
-	private FilesGridViewAdapter mFilesAdapter = null;
+	private GridViewAdapter mAppGridAdapter;
+	private FilesGridViewAdapter mFilesAdapter;
 	private AudioListViewAdapter mAudioListAdapter;
-
 	private GalleryGridViewAdapter mGalleryAdapter;
 	
-	private final static String ROOT_FILE_DIRECTORY = Environment
-										.getExternalStorageDirectory().getAbsolutePath();
-	private String mFilesPath = Environment.getExternalStorageDirectory()
-			.getAbsolutePath();
+	private String mFilesPath = Environment.getExternalStorageDirectory().getAbsolutePath();
 	
-	private boolean mUserListShowing = false;
-
-	private Context mContext = null;
+	private Context mContext;
 	public ArrayList<String> mConnectedUser = new ArrayList<String>();
 	
-
-	
 	private PrivateSwitcher mPrivateSwitcher;
-	public final static String KEY_HIDE_PRIVATE_HIDE = "show_enter_private_hint";
-
+	
+	
 	public ArrayList<String> getmConnectedUser() {
 		return mConnectedUser;
 	}
@@ -223,54 +168,40 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		mContext = this;
-
-		// 2014_0117 close mobile data add start
-		mPrivateSwitcher = new PrivateSwitcher();
-		mPrivateSwitcher.enterPrivateState();
-		// 2014_0117 close mobile data add end
-
+	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
+		
+		earlyInit();
+		
 		setContentView(R.layout.qe_main);
 
-		sMultiMode = false;
-		mInflater = LayoutInflater.from(this);
-		
-		DisplayMetrics metrics = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(metrics);
-		mScreenWidth = metrics.widthPixels;
-
-		initResourceRefs();
+		setupViews();
 
 		setupPager();
 
 		/* initialize variables */
 		initFuntion();
-		// ////////////////////////////////////////////
-		/**
-		 * pageTab
-		 */
-
-		mNavGroup = (RadioGroup) findViewById(R.id.qe_main_nav_content);
-		mNavIndicator = (ImageView) findViewById(R.id.qe_main_nav_indicator);
-		mIndicatorWidth = mScreenWidth / TAB_COUNT;
-		ViewGroup.LayoutParams cursorParam = mNavIndicator.getLayoutParams();
-		cursorParam.width = mIndicatorWidth;
-		mNavIndicator.setLayoutParams(cursorParam);
-
-		initNavigationGroup();
-		// ////////////////////////////////////////////
 		
-		//setupDragController(); //obsolete
+		initNavTab();
+		
 		registerEventListener();
 
+		initResourceLoader();
+		
+		PrivateSwitcher.showPrivateDialog(mContext,PriShareConstant.KEY_HIDE_PRIVATE_HIDE,R.string.enter_private_mode_hint);
+	}
 	
-		mWorkerThread = new HandlerThread("ResourceWorkerThread");
-		mWorkerThread.setPriority(Thread.MIN_PRIORITY);
-		mWorkerThread.start();
-		mWorkerHandler = new Handler(mWorkerThread.getLooper());
-		PrivateSwitcher.showPrivateDialog(mContext,KEY_HIDE_PRIVATE_HIDE,R.string.enter_private_mode_hint);
+	
+	private void earlyInit() {
+		// 2014_0117 close mobile data add start
+		mPrivateSwitcher = new PrivateSwitcher();
+		mPrivateSwitcher.enterPrivateState();
+		
+		mContext = this;
+		sMultiMode = false;
+		mInflater = LayoutInflater.from(this);
+		
+		mScreenWidth = DimensionUtils.getDisplayWidth();
 	}
 
 	private void initFuntion() {
@@ -279,28 +210,22 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 		mUiHandler = new UIHandler();
 		mInterHandForMain.setUIHandler(mUiHandler);
 	}
-
-	/**
-	 * obsolete
-	 * */
-/*	private void setDropTargets() {
-		//mDragController.addDropTarget((DropTarget) v);
-	}*/
-
-/*	private void setupDragController() {
-		mDragController = new DragController(this);
-		mDragLayer.setDragController(mDragController);
-		mDragController.setDragListener(mDragLayer);
-	} */
 	
-	private ArrayList<AppCellItem> mItemList;
+	private void initResourceLoader() {
+		mWorkerThread = new HandlerThread("ResourceWorkerThread");
+		mWorkerThread.setPriority(Thread.MIN_PRIORITY);
+		mWorkerThread.start();
+		mWorkerHandler = new Handler(mWorkerThread.getLooper());
+	}
+
+
 
 	class GetAppInfo implements Runnable {
 
 		@Override
 		public void run() {
-			mItemList = new ArrayList<AppCellItem>();
-			List<Map<String, Object>> listItems = getAPPInstalled(PriShareSendActivity.this);
+			ArrayList<AppCellItem> mItemList = new ArrayList<AppCellItem>();
+			List<Map<String, Object>> listItems = PriUtils.getAPPInstalled(PriShareSendActivity.this);
 			for (int i = 0; i < listItems.size(); i++) {
 				Map<String, Object> map = listItems.get(i);
 				mItemList.add(new AppCellItem((String) map.get("app_name"),
@@ -312,12 +237,10 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 			runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					hideWaiting(mPagerViews[APP_INDEX].v);
-					mGridAdapter = new GridViewAdapter(PriShareSendActivity.this,
-							R.layout.qe_app_cell, mCellList, 0); // set item
-																	// layout
-																	// here
-					mGrid.setAdapter(mGridAdapter);
+					hideWaiting(mPagerViews[PriShareConstant.APP_INDEX].v);
+					mAppGridAdapter = new GridViewAdapter(PriShareSendActivity.this,
+							R.layout.qe_app_cell, mCellList, 0); 
+					mAppGrid.setAdapter(mAppGridAdapter);
 
 				}
 			});
@@ -329,25 +252,14 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 
 		@Override
 		public void run() {
-			ArrayList<ImageCellItem> itemList = new ArrayList<ImageCellItem>();
-			Cursor cursor = getAllThumbNails(getApplicationContext());
-			if (cursor != null) {
-				cursor.moveToFirst();
-				while (cursor.moveToNext()) {
-					itemList.add(new ImageCellItem(cursor.getLong(0), null,
-							cursor.getString(1)));
-				}
-				cursor.close();
-			}
-			final ArrayList<ImageCellItem> cellList = itemList;
+			final ArrayList<ImageCellItem> cellList = PriUtils.getThumbList();
+			
 			runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					hideWaiting(mPagerViews[GALLERY_INDEX].v);
+					hideWaiting(mPagerViews[PriShareConstant.GALLERY_INDEX].v);
 					mGalleryAdapter = new GalleryGridViewAdapter(PriShareSendActivity.this,
-							R.layout.qe_gallery_cell, cellList); // set item
-																	// layout
-																	// here
+							R.layout.qe_gallery_cell, cellList); 
 					mGalleryGrid.setAdapter(mGalleryAdapter);
 
 				}
@@ -356,21 +268,8 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 		}
 
 	}
-
-	public class FileComparator implements Comparator<FilesCellItem> {
-		public int compare(FilesCellItem file1, FilesCellItem file2) {
-			if (file1.isDirectory() && !file2.isDirectory()) {
-				return -1;
-			}
-
-			if (!file1.isDirectory() && file2.isDirectory()) {
-				return 1;
-			}
-
-			return file1.getFileShortName().compareTo(file2.getFileShortName());
-		}
-	}
-
+	
+	
 	class GetFilesThumbnails implements Runnable {
 
 		@Override
@@ -378,7 +277,7 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 			ArrayList<FilesCellItem> itemList = new ArrayList<FilesCellItem>();
 
 			File f = new File(mFilesPath);
-			if (!mFilesPath.equals(ROOT_FILE_DIRECTORY)) {
+			if (!mFilesPath.equals(PriShareConstant.ROOT_FILE_DIRECTORY)) {
 
 				Drawable localDrawable = mContext.getResources().getDrawable(
 						R.drawable.zapya_data_folder_folder);
@@ -411,127 +310,42 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 				i++;
 			}
 
-			Collections.sort(itemList, new FileComparator());
+			Collections.sort(itemList, new PriUtils.FileComparator());
 
 			final ArrayList<FilesCellItem> cellList = itemList;
 			runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					hideWaiting(mPagerViews[FILE_INDEX].v);
+					hideWaiting(mPagerViews[PriShareConstant.FILE_INDEX].v);
 					mFilesAdapter = new FilesGridViewAdapter(PriShareSendActivity.this,
 							R.layout.qe_files_cell, cellList, 0, mFileList);
 
 					mFilesGrid.setAdapter(mFilesAdapter);
-
 				}
 			});
 		}
 	}
 
 	
-	public static Cursor getAllThumbNails(Context context) {
-		Cursor cursor = null;
-		if (Utils.isExternalStorageMounted()) {
-			ContentResolver cr = context.getContentResolver();
-			String[] projection = { MediaStore.Images.Thumbnails._ID,
-					MediaStore.Images.Media.DATA,
-					MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
-					MediaStore.Images.Media.DISPLAY_NAME, };
-			String selection = MediaStore.Images.Media.DATA + " like ? or "
-					+ MediaStore.Images.Media.DATA + " like ? or "
-					+ MediaStore.Images.Media.DATA + " like ?";
-			String[] selectionArg = new String[] { "%dcim%", "%pic%",
-					"%camera%" };
-
-			cursor = cr.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-					projection, selection, selectionArg, null);
-		}
-
-		return cursor;
-	}
-
-	
-
 	class GetAudioThumbnails implements Runnable {
 
 		@Override
 		public void run() {
-			ArrayList<AudioCellItem> itemList = new ArrayList<AudioCellItem>();
-			Cursor cursor = getAllAudio(getApplicationContext());
-			if (cursor != null) {
-				cursor.moveToFirst();
-				while (cursor.moveToNext()) {
-					itemList.add(new AudioCellItem(cursor.getLong(0), null,
-							cursor.getString(2), cursor.getString(3), cursor
-									.getString(1)));
-				}
-				cursor.close();
-			}
-			final ArrayList<AudioCellItem> cellList = itemList;
+			final ArrayList<AudioCellItem> cellList = PriUtils.getAudioItemList();
 			runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					hideWaiting(mPagerViews[AUDIO_INDEX].v);
+					hideWaiting(mPagerViews[PriShareConstant.AUDIO_INDEX].v);
 					mAudioListAdapter = new AudioListViewAdapter(PriShareSendActivity.this,
-							R.layout.qe_list_audio_item, cellList); // set item
-																	// layout
-																	// here
+							R.layout.qe_list_audio_item, cellList); 
 					mAudioList.setAdapter(mAudioListAdapter);
-
 				}
 			});
 
 		}
 
 	}
-
-	public static Cursor getAllAudio(Context context) {
-		Cursor cursor = null;
-		if (Utils.isExternalStorageMounted()) {
-			ContentResolver cr = context.getContentResolver();
-			String[] projection = { MediaStore.Audio.Media._ID,
-					MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.DATA,
-					MediaStore.Audio.Media.ARTIST,
-					MediaStore.Audio.Media.DURATION,
-					MediaStore.Audio.Media.DISPLAY_NAME };
-			/*
-			 * String selection = MediaStore.Audio.Media.DATA + " like ? or " +
-			 * MediaStore.Audio.Media.DATA + " like ?";
-			 */
-			// String[] selectionArg = new String[] { "%dcim%", "%music%" };
-			cursor = cr.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-					projection, null, null, null);
-		}
-
-		return cursor;
-	}
-
-	public static List<Map<String, Object>> getAPPInstalled(Context context) {
-
-		List<Map<String, Object>> listItems = new ArrayList<Map<String, Object>>();
-		Intent mainintent = new Intent(Intent.ACTION_MAIN, null);
-		mainintent.addCategory(Intent.CATEGORY_LAUNCHER);
-		PackageManager pm = context.getPackageManager();
-		List<PackageInfo> packageinfo = pm.getInstalledPackages(0);
-
-		int count = packageinfo.size();
-		for (int i = 0; i < count; i++) {
-			PackageInfo pinfo = packageinfo.get(i);
-			ApplicationInfo appInfo = pinfo.applicationInfo;
-			if ((appInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) { // ignore
-																		// system
-																		// app
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("app_logo", pinfo.applicationInfo.loadIcon(pm));
-				map.put("app_name", pinfo.applicationInfo.loadLabel(pm));
-				map.put("package_name", pinfo.applicationInfo.packageName);
-				map.put("app_dir", pinfo.applicationInfo.sourceDir);
-				listItems.add(map);
-			}
-		}
-		return listItems;
-	}
-
+	
 	private void showWaiting(View parent) {
 		parent.findViewById(R.id.gridprogresslay).setVisibility(View.VISIBLE);
 	}
@@ -548,10 +362,7 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 				onBackPressed();				
 			}
 		});
-		// ///////////////////////////////////////////
-		/**
-		 * Listeners Collections
-		 */
+
 		mPager.setOnPageChangeListener(new OnPageChangeListener() {
 
 			@Override
@@ -602,18 +413,12 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 				mShowWaitingShare = true;
 				toggleShareUserView(mShowWaitingShare);
 				mInterHandForMain.transWifiInfoIfNeed();
-				showQrCode();
-				
-				//Intent intent = new Intent(Main.this, SetTimeActivity.class);
-				//startActivityForResult(intent, REQ_CODE_SET_EXPIRE_TIME);
+				showQrCode();				
 			}
 		});
 
 		mShopCarImg.setOnClickListener(new ShopCarListener());
 		
-
-
-		// ///////////////////////////////////////////
 		mInterHandForMain.regReceiver();
 	}
 
@@ -656,7 +461,8 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 			mRadar.startAnimation(getRotateAnim());
 			mUserListContainer.setVisibility(View.VISIBLE);
 			mPageContainer.setVisibility(View.GONE);
-		} else {
+		} else {		
+			exitSend();
 			mInterHandForMain.stopTransWifiInfo();
 			mRadar.clearAnimation();
 			mPageContainer.setVisibility(View.VISIBLE);
@@ -666,74 +472,55 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 
 	
 	
-	private Animation rotateAnim;
-	private Animation userTurnOut;
+	private Animation mRotateAnim;
+	private Animation mTurnOutAnim;
 	
 	private Animation getRotateAnim() {
-		if(rotateAnim == null) {
-			rotateAnim = AnimationUtils.loadAnimation(PriShareSendActivity.this,
+		if(mRotateAnim == null) {
+			mRotateAnim = AnimationUtils.loadAnimation(PriShareSendActivity.this,
 					R.anim.radar_rotate_anim);
 		}
-		return rotateAnim;
+		return mRotateAnim;
 	}
 	
 	private Animation getUserTurnOutAnim() {
-		if(userTurnOut == null) {
-			userTurnOut = AnimationUtils.loadAnimation(this,
+		if(mTurnOutAnim == null) {
+			mTurnOutAnim = AnimationUtils.loadAnimation(this,
 					R.anim.radar_turn_out);
 		}
-		return userTurnOut;
+		return mTurnOutAnim;
 	}
 	
 	// /////////////////////////////////////////////////
-	/**
-	 * function collections
-	 */
-
-	private void toggleViewMode(boolean waitView) {
-		if (waitView) {
-			mNewTab.setVisibility(View.GONE);
-			mBodyContainer.setVisibility(View.GONE);
-			mShopCarImg.setVisibility(View.GONE);
-			mShopNum.setVisibility(View.GONE);
-			mCollectBtn.setVisibility(View.GONE);
-			mWaitContainer.setVisibility(View.VISIBLE);
-		} else {
-			mNewTab.setVisibility(View.VISIBLE);
-			mBodyContainer.setVisibility(View.VISIBLE);
-			mShopCarImg.setVisibility(View.VISIBLE);
-			mShopNum.setVisibility(View.VISIBLE);
-			mCollectBtn.setVisibility(View.VISIBLE);
-			mWaitContainer.setVisibility(View.GONE);
-		}
-	}
-
-
 	
 	/** Navigation Group Operation & decoration**/
 
 	class ViewHolder {		
 		RadioButton rb;
-		ImageView tv;
+		ImageView unsentHint;
 	}
 	
 	private int mCurrRbID ;
-	private ViewHolder []mNaviItem;
+	private ViewHolder []mNaviItem = new ViewHolder[PriShareConstant.TAB_TITLE.length];
 	
-	private void initNavigationGroup() {
-		mNavGroup.removeAllViews();
-		mNaviItem = new ViewHolder[TAB_TITLE.length];		
+	private void initNavTab() {
 		
+		mIndicatorWidth = mScreenWidth / PriShareConstant.TAB_COUNT;
+		ViewGroup.LayoutParams cursorParam = mNavIndicator.getLayoutParams();
+		cursorParam.width = mIndicatorWidth;
+		mNavIndicator.setLayoutParams(cursorParam);
+		
+		mNavGroup.removeAllViews();
 
-		for (int i = 0; i < TAB_TITLE.length; i++) {
+		for (int i = 0; i < PriShareConstant.TAB_TITLE.length; i++) {
 			mNaviItem[i] = new ViewHolder();
 			FrameLayout fl = (FrameLayout) mInflater.inflate(
 					R.layout.qe_nav_radiogroup_item,mNavGroup, false);
 			
 			mNaviItem[i].rb = (RadioButton) fl.findViewById(R.id.radio_button);
 			mNaviItem[i].rb.setId(i);
-			mNaviItem[i].rb.setText(TAB_TITLE[i]);
-			mNaviItem[i].rb.setCompoundDrawablesWithIntrinsicBounds(0, TAB_TITLE_LOGO[i], 0,
+			mNaviItem[i].rb.setText(PriShareConstant.TAB_TITLE[i]);
+			mNaviItem[i].rb.setCompoundDrawablesWithIntrinsicBounds(0, PriShareConstant.TAB_TITLE_LOGO[i], 0,
 					0);
 			ViewGroup.LayoutParams params = fl.getLayoutParams();
 			if( params != null) {
@@ -744,11 +531,12 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 						LayoutParams.MATCH_PARENT));
 			}
 
-			mNaviItem[i].tv = (ImageView)fl.findViewById(R.id.main_tab_unread_tv);
+			mNaviItem[i].unsentHint = (ImageView)fl.findViewById(R.id.main_tab_unread_tv);
 			
 			mNaviItem[i].rb.setOnClickListener(mRadioButtonListener);
 			mNavGroup.addView(fl);
 		}
+		
 		mNaviItem[0].rb.setChecked(true);
 		mCurrRbID = 0;
 	}
@@ -756,7 +544,7 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 	private View.OnClickListener mRadioButtonListener = new View.OnClickListener() {		
 		@Override
 		public void onClick(View v) {
-			if (mNaviItem[mCurrRbID].rb == ((RadioButton)v)) return;
+			if (mNaviItem[mCurrRbID].rb == v) return;
 			resetRadioBtn();
 			((RadioButton)v).setChecked(true);
 			mCurrRbID = ((RadioButton)v).getId();
@@ -766,8 +554,7 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 	
 	private void onCheckChange(int checkedId){
 		TranslateAnimation animation = new TranslateAnimation(
-				currIndLeft, ( mNavGroup
-						.getChildAt(checkedId)).getLeft(), 0f, 0f);
+				currIndLeft, ( mNavGroup.getChildAt(checkedId)).getLeft(), 0f, 0f);
 		animation.setInterpolator(new LinearInterpolator());
 		animation.setDuration(100);
 		animation.setFillAfter(true);
@@ -789,45 +576,121 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 	/////////////////////////////////////////////////////////
 	
 	private int mTimeToExpire = 5; // default time:5 secs
-
-	private int getExpireSec(String timeStr) {
-		if (timeStr == null || timeStr.equals("0")) {
-			return INFINITE_TIME;
+	
+	
+	private View mSendingProgress;
+	private AlertDialog mSendingDialog;
+	private ProgressBar mSendingProgressBar;
+	private ImageView mSendingIcon;
+	private TextView mFilenameView;
+	private View mCancelBtn;
+	
+	private void showSendingProgress() {
+		mShareSendingScreen.setVisibility(View.VISIBLE);
+		if(mSendingDialog == null) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+			mSendingProgress = mInflater.inflate(R.layout.pri_sending_progress_dialog,mBodyContainer,false);
+			
+			mSendingProgressBar =  (ProgressBar)mSendingProgress.findViewById(R.id.progress_bar);
+			mSendingIcon = (ImageView)mSendingProgress.findViewById(R.id.bg_cover);
+			mFilenameView = (TextView)mSendingProgress.findViewById(R.id.file_name);
+			mCancelBtn = mSendingProgress.findViewById(R.id.cancel);
+			
+			builder.setView(mSendingProgress);
+			mSendingDialog = builder.create();
+			mSendingDialog.setCancelable(false);
+			
+			mCancelBtn.setOnClickListener(new View.OnClickListener() {				
+				@Override
+				public void onClick(View v) {
+					hideSendingProgress();
+				}
+			});
+			
+		} 
+		mSendingDialog.show();
+	}
+	
+	private void hideSendingProgress() {
+		if(mSendingDialog != null) {
+			mSendingDialog.hide();
 		}
-		String[] arr = timeStr.split(",");
-		int hour = Integer.valueOf(arr[0]);
-		int min = Integer.valueOf(arr[1]);
-		int sec = Integer.valueOf(arr[2]);
-		return hour * 3600 + min * 60 + sec;
-	}
-
-	
-	private void startSend(String username) {
-		sendMultipleItem(username);
-		mShowWaitingShare = false;
-		toggleShareUserView(mShowWaitingShare);
 	}
 	
+	private void closeSendingProgress() {
+		mShareSendingScreen.setVisibility(View.GONE);
+		if(mSendingDialog != null) {
+			mSendingDialog.dismiss();
+			mSendingDialog = null;
+		}
+		mSendingProgress = null;
+		mSendingProgressBar = null;
+		mSendingIcon = null;
+		mFilenameView = null;
+	}
 	
+	private void onSendFinish() {
+		closeSendingProgress();
+	}
+	
+	private void onUpdateSendProgress(int progress,int subProgress) {
+		if(mSendingProgressBar != null) {
+			mSendingProgressBar.setProgress(progress);
+		}
+	}
+	
+	private void onSendItem(CellItemBase item) {
+		if(mSendingIcon == null) {
+			return;
+		}
+		
+		mFilenameView.setText(item.getFileShortName());
+		int type = item.getType();
+		switch(type) {
+		case CellItemBase.IMAGE_TYPE:
+			Bitmap bmp = BitmapUtils.decodeBitmapByFile(item.getItemPath(), 
+					UnitConverter.dpToPx(getResources(), 100),UnitConverter.dpToPx(getResources(), 100));
+			if(bmp != null) {
+				mSendingIcon.setImageBitmap(bmp);
+			} else {
+				mSendingIcon.setImageResource(R.drawable.pri_share_gallery);
+			}
+			break;
+			
+		case CellItemBase.APP_TYPE:
+			mSendingIcon.setImageDrawable(item.getItemIcon());
+			break;
+			
+		case CellItemBase.VIDEO_TYPE:
+			mSendingIcon.setImageResource(R.drawable.pri_share_music);
+			break;
+			
+		case CellItemBase.FILES_TYPE:
+			mSendingIcon.setImageResource(R.drawable.file_icon);
+			break;
+			
+		default:
+			break;
+		}
+		mSendingProgressBar.setProgress(0);
+	}
+	
+	
+		
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == REQ_CODE_SET_EXPIRE_TIME) {
+		if (requestCode == PriShareConstant.REQ_CODE_SET_EXPIRE_TIME) {
 			if (resultCode == RESULT_OK) {
 				String expireTime = data
 						.getStringExtra(SetTimeActivity.EXPIRE_TIME);
-				mTimeToExpire = getExpireSec(expireTime);
+				mTimeToExpire = PriUtils.getExpireSec(expireTime);
 			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	// /////////////////////////////////////////////////
-	/**
-	 * Class Collection
-	 * 
-	 * @author xls
-	 * 
-	 */
+
 	class ShopCarListener implements View.OnClickListener {
 
 		@Override
@@ -894,7 +757,7 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 
 						}
 						if (mFileList.isEmpty()) {
-							mNaviItem[FILE_INDEX].tv.setVisibility(View.GONE);
+							mNaviItem[PriShareConstant.FILE_INDEX].unsentHint.setVisibility(View.GONE);
 						}
 						getFileAysnc(mPagerViews[3].v);
 
@@ -948,20 +811,21 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 		}				
 		
 		int visible = mSelectedApps > 0 ? View.VISIBLE : View.GONE;
-		mNaviItem[APP_INDEX].tv.setVisibility(visible);
+		mNaviItem[PriShareConstant.APP_INDEX].unsentHint.setVisibility(visible);
 		
 		
 		visible = mSelectedImgs > 0 ? View.VISIBLE : View.GONE;
-		mNaviItem[GALLERY_INDEX].tv.setVisibility(visible);
+		mNaviItem[PriShareConstant.GALLERY_INDEX].unsentHint.setVisibility(visible);
 
 		visible = mSelectedAuds > 0 ? View.VISIBLE : View.GONE;
-		mNaviItem[AUDIO_INDEX].tv.setVisibility(visible);
+		mNaviItem[PriShareConstant.AUDIO_INDEX].unsentHint.setVisibility(visible);
 		
 	}
 
 	
 
 	public void clearSelectState() {
+		
 		Set<CellItemBase> itemSet = mMultiMap.keySet();
 		Set<String> fileSet = (Set<String>) mFileList.keySet();
 		for (CellItemBase it : itemSet) {
@@ -980,13 +844,14 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 				hold.chkBox.setChecked(false);
 			}
 		}
+		
 		mMultiMap.clear();
 		mFileList.clear();
+		
 		resetCounts();
-		for (int i = 0; i < TAB_TITLE.length; i++) {
-			mNaviItem[i].tv.setVisibility(View.GONE);
+		for (int i = 0; i < PriShareConstant.TAB_TITLE.length; i++) {
+			mNaviItem[i].unsentHint.setVisibility(View.GONE);
 		}
-
 		setMultiCount();
 	}
 	
@@ -1022,73 +887,57 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 						}).show();
 	}
 	
-	
-	SendSingleItemHandle mSigSendHandle = new SendSingleItemHandle() {
 
-		@Override
-		public void sendSingleItem(final String userName,
-				final String filePath, final String appName, int type) {
-			switch (type) {
-			case CellItemBase.IMAGE_TYPE: {
-				if (mTimeToExpire == INFINITE_TIME) {
-					mInterHandForMain.sendFile(userName, filePath, appName,
-							MsgDefine.FILE_TYPE_IMAGE);
-				} else {
-					mInterHandForMain.sendFile(userName, filePath, appName,
-							MsgDefine.FILE_TYPE_IMAGE,
-							MsgDefine.GRANT_FILE_AUTO_DESTROY, mTimeToExpire, 0);
-				}
-				break;
+	public void sendSingleItem(String userName, CellItemBase item) {
+
+		int type = item.getType();
+		String filePath = item.getItemPath();
+		String shortName = item.getFileShortName();
+
+		switch (type) {
+		case CellItemBase.IMAGE_TYPE: {
+			if (mTimeToExpire == PriShareConstant.INFINITE_TIME) {
+				mInterHandForMain.sendFile(userName, filePath, shortName,
+						MsgDefine.FILE_TYPE_IMAGE);
+			} else {
+				mInterHandForMain.sendFile(userName, filePath, shortName,
+						MsgDefine.FILE_TYPE_IMAGE,
+						MsgDefine.GRANT_FILE_AUTO_DESTROY, mTimeToExpire, 0);
 			}
-
-			case CellItemBase.APP_TYPE:
-				sendAppFile(userName,filePath,appName);
-				break;
-
-			case CellItemBase.VIDEO_TYPE:
-				mInterHandForMain.sendFile(userName, filePath, appName, MsgDefine.FILE_TYPE_MEDIA);
-				break;
-
-			default:
-				mInterHandForMain.sendFile(userName, filePath, appName,
-						MsgDefine.FILE_TYPE_UNKNOWN);
-				break;
-			}
-		}
-		
-
-
-		@Override
-		public void sendSingleItem(String userName, CellItemBase item) {
-			sendSingleItem(userName, item.getItemPath(),
-					item.getFileShortName(), item.getType());
+			break;
 		}
 
-		@Override
-		public void sendSingleItem(UserHead head, View v) {
-			CellItemBase item = ((GridViewAdapter.Holder) (v.getTag())).item;
-			sendSingleItem(head.getUserName(), item);
+		case CellItemBase.APP_TYPE:
+			sendAppFile(userName, filePath, shortName);
+			break;
+
+		case CellItemBase.VIDEO_TYPE:
+			mInterHandForMain.sendFile(userName, filePath, shortName,
+					MsgDefine.FILE_TYPE_MEDIA);
+			break;
+
+		default:
+			mInterHandForMain.sendFile(userName, filePath, shortName,
+					MsgDefine.FILE_TYPE_UNKNOWN);
+			break;
 		}
-
-
-	};
+	}
 
 	// /////////////////////////////////////////////////
 
 	private void dismissSendWaiting() {
 		mShowWaitingShare = false;
 		toggleShareUserView(mShowWaitingShare);
-		//toggleViewMode(waitViewOrNot);
 	}
 
-	private void initGridView(View parent) {
-		mGrid = (GridView) parent.findViewById(R.id.gridid);
+	private void initAppGrid(View parent) {
+		mAppGrid = (GridView) parent.findViewById(R.id.gridid);
 		setGridViewItemEvent();
 		mWorkerHandler.post(new GetAppInfo());
 		showWaiting(parent);
 	}
 
-	private void initGalleryGridView(View parent) {
+	private void initGalleryGrid(View parent) {
 		mGalleryGrid = (GridView) parent.findViewById(R.id.gridid);
 		mGalleryGrid.setNumColumns(3);
 		mGalleryGrid.setColumnWidth((mScreenWidth - 20) / 3);
@@ -1125,7 +974,7 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 	 * apptab
 	 */
 	void setGridViewItemEvent() {
-		mGrid.setOnItemClickListener(new OnItemClickListener() {
+		mAppGrid.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
@@ -1137,23 +986,23 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 					CheckBox cb = ((GridViewAdapter.Holder) view.getTag()).chkBox;
 					if (cb.isChecked()) {
 						cb.setChecked(false);
-						mMultiMap.remove(mGridAdapter.getItem(position));
-						mGridAdapter.getItem(position).setSelected(false);
-						setUnreadDots(mGridAdapter.getItem(position),false);
+						mMultiMap.remove(mAppGridAdapter.getItem(position));
+						mAppGridAdapter.getItem(position).setSelected(false);
+						setUnreadDots(mAppGridAdapter.getItem(position),false);
 						setMultiCount();
 						return;
 					} else {
 						cb.setChecked(true);
-						mGridAdapter.getItem(position).setSelected(true);
-						mMultiMap.put(mGridAdapter.getItem(position), view);
-						setUnreadDots(mGridAdapter.getItem(position),true);
+						mAppGridAdapter.getItem(position).setSelected(true);
+						mMultiMap.put(mAppGridAdapter.getItem(position), view);
+						setUnreadDots(mAppGridAdapter.getItem(position),true);
 						setMultiCount();
 					}
 
 				} else {
 					enterMutliSelectMode(view, position);
 				}
-
+				
 				startFlyAnimation(view);
 			}
 
@@ -1173,14 +1022,13 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				if (isMultiSelectMode()) {
-
+					
 					CheckBox cb = ((GalleryGridViewAdapter.Holder) view
 							.getTag()).chkBox;
 					if (cb.isChecked()) {
 						cb.setChecked(false);
 						mMultiMap.remove(mGalleryAdapter.getItem(position));
 						mGalleryAdapter.getItem(position).setSelected(false);
-						//tangtaotao change from mGridAdapter to mGalleryAdapter
 						setUnreadDots(mGalleryAdapter.getItem(position),false);
 						setMultiCount();
 						return;
@@ -1223,8 +1071,7 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 					if (isMultiSelectMode()) {
 						CheckBox cb = ((FilesGridViewAdapter.Holder) view
 								.getTag()).chkBox;
-						//tangtaotao@ND_20140220 checkbox comment out
-						//cb.setVisibility(View.VISIBLE);
+						
 						if (cb.isChecked()) {
 
 							cb.setChecked(false);
@@ -1235,7 +1082,7 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 							setMultiCount();
 							
 							if (mFileList.isEmpty()) {
-								mNaviItem[FILE_INDEX].tv.setVisibility(View.GONE);
+								mNaviItem[PriShareConstant.FILE_INDEX].unsentHint.setVisibility(View.GONE);
 							}
 							return;
 
@@ -1245,7 +1092,7 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 							mFileList.put(mFilesAdapter.getItem(position)
 									.getItemPath(), view);
 							if (mFileList.size() == 1) {
-								mNaviItem[FILE_INDEX].tv.setVisibility(View.VISIBLE);
+								mNaviItem[PriShareConstant.FILE_INDEX].unsentHint.setVisibility(View.VISIBLE);
 							}
 							mFilesAdapter.getItem(position).setSelected(true);
 							setMultiCount();
@@ -1308,10 +1155,10 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 		holder.chkBox.setChecked(true);
 		holder.item.setSelected(true);
 
-		if (mCurrPage == FILE_INDEX) {
+		if (mCurrPage == PriShareConstant.FILE_INDEX) {
 			mFileList.put(holder.item.getItemPath(), view);
 			if (mFileList.size() == 1) {
-				mNaviItem[FILE_INDEX].tv.setVisibility(View.VISIBLE);
+				mNaviItem[PriShareConstant.FILE_INDEX].unsentHint.setVisibility(View.VISIBLE);
 			}
 		} else {
 			mMultiMap.put(holder.item, view);
@@ -1322,37 +1169,34 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 
 	// //////////////////////////////////////////////////////
 
-	private void initResourceRefs() {
-
-		// //////////////////////////////////////////////
+	private void setupViews() {
 		mCollectBtn = (Button) findViewById(R.id.collect);
 		mShopCarImg = (ImageView) findViewById(R.id.shop_car);
 		mShopNum = (TextView) findViewById(R.id.shop_num);
 
-		mNewTab = (RelativeLayout) findViewById(R.id.qe_main_tab);
 		mBodyContainer = (RelativeLayout) findViewById(R.id.containerBody);
-		
-
 
 		mBackBtn = findViewById(R.id.back_btn);
 		
-		// //////////////////////////////////////////////
-		mPageContainer = (RelativeLayout) findViewById(R.id.drag_layer);
+		mPageContainer = (RelativeLayout) findViewById(R.id.drag_layer);		
 		
+		mUserListContainer = findViewById(R.id.container_connect);		
 		
-		mUserListContainer = findViewById(R.id.container_connect);
-		initShareUserPage(mUserListContainer);
+		mNavGroup = (RadioGroup) findViewById(R.id.qe_main_nav_content);
+		mNavIndicator = (ImageView) findViewById(R.id.qe_main_nav_indicator);
 		
+		initShareUserPage(mUserListContainer);		
 	}
 	
 	private View mTimeBtn;
 	private View mShareUserBack;
-	
+	private View mShareSendingScreen;
 	class UserAvatar {
 		ImageView headView = null;
 		String userName = null;
 		boolean empty = true;
 	}
+	
 	private final static int MAX_USER_NUM = 5;
 	private UserAvatar []mUserHeadArr = new UserAvatar[MAX_USER_NUM];
 	private TextView mWaitHint;
@@ -1366,6 +1210,8 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 		mSendBtn = parent.findViewById(R.id.share_user_send);
 		mTimeBtn = parent.findViewById(R.id.ll_timer);
 		mShareUserBack = parent.findViewById(R.id.share_user_back_btn);
+		mShareSendingScreen = parent.findViewById(R.id.share_user_sending);
+		mShareSendingScreen.setVisibility(View.GONE);
 		
 		mUserHeadArr[0].headView = (ImageView)parent.findViewById(R.id.userhead1);
 		mUserHeadArr[1].headView = (ImageView)parent.findViewById(R.id.userhead2);
@@ -1392,7 +1238,7 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(PriShareSendActivity.this, SetTimeActivity.class);
-				startActivityForResult(intent, REQ_CODE_SET_EXPIRE_TIME);				
+				startActivityForResult(intent, PriShareConstant.REQ_CODE_SET_EXPIRE_TIME);				
 			}
 		});
 		
@@ -1405,9 +1251,8 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 					Toast.makeText(mContext, "no user for sending", Toast.LENGTH_SHORT).show();
 					return;
 				}
-				mShowWaitingShare = false;
-				toggleShareUserView(mShowWaitingShare);
-				//toggleUserList(false);
+				//mShowWaitingShare = false;
+				//toggleShareUserView(mShowWaitingShare);
 			}
 		});
 		
@@ -1435,6 +1280,14 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 					mRadarBg.setImageResource(R.drawable.radar_bg);
 				}
 				return true;
+			}
+		});
+		
+		
+		mShareSendingScreen.setOnClickListener(new View.OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				showSendingProgress();			
 			}
 		});
 	}
@@ -1550,75 +1403,9 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 			mMultiMap.clear();
 			mFileList.clear();
 			resetCounts();
-			for (int i = 0; i < TAB_TITLE.length; i++) {
-				mNaviItem[i].tv.setVisibility(View.GONE);
-			}
 		}
-		if (multiMode) {
-			VibratorController.getController(this).vibrate();
-		}
+		
 		sMultiMode = multiMode;
-		int visible = multiMode ? View.VISIBLE : View.GONE;
-		if (mGrid != null && mGrid.getChildCount() > 0) {
-			for (int i = 0; i < mGrid.getChildCount(); i++) {
-				View v = mGrid.getChildAt(i);
-				GridViewAdapter.Holder holder = (GridViewAdapter.Holder) v
-						.getTag();
-				CheckBox cb = holder.chkBox;
-				//tangtaotao@ND_20140220 checkbox comment out
-				//cb.setVisibility(visible);
-				cb.setChecked(false);
-				holder.item.setSelected(false);
-			}
-			List<AppCellItem> itemSet = mGridAdapter.getData();
-			for (CellItemBase item : itemSet) {
-				item.setSelected(false);
-			}
-		}
-		if (mGalleryGrid != null && mGalleryGrid.getChildCount() > 0) {
-			for (int i = 0; i < mGalleryGrid.getChildCount(); i++) {
-				View v = mGalleryGrid.getChildAt(i);
-				GridViewAdapter.Holder holder = (GridViewAdapter.Holder) v
-						.getTag();
-				CheckBox cb = holder.chkBox;
-				//tangtaotao@ND_20140220 checkbox comment out
-				//cb.setVisibility(visible);
-				cb.setChecked(false);
-				holder.item.setSelected(false);
-			}
-			List<ImageCellItem> itemSet = mGalleryAdapter.getData();
-			for (CellItemBase item : itemSet) {
-				item.setSelected(false);
-			}
-		}
-
-		if (mAudioList != null && mAudioList.getChildCount() > 0) {
-			for (int i = 0; i < mAudioList.getChildCount(); i++) {
-				View v = mAudioList.getChildAt(i);
-				GridViewAdapter.Holder holder = (GridViewAdapter.Holder) v
-						.getTag();
-				CheckBox cb = holder.chkBox;
-				//tangtaotao@ND_20140220 checkbox comment out
-				//cb.setVisibility(visible);
-				cb.setChecked(false);
-				holder.item.setSelected(false);
-			}
-			List<AudioCellItem> itemSet = mAudioListAdapter.getData();
-			for (CellItemBase item : itemSet) {
-				item.setSelected(false);
-			}
-		}
-		if (mFilesGrid != null && mFilesGrid.getChildCount() > 0) {
-			for (int i = 0; i < mFilesGrid.getChildCount(); i++) {
-				View v = mFilesGrid.getChildAt(i);
-				GridViewAdapter.Holder holder = (GridViewAdapter.Holder) v
-						.getTag();
-				CheckBox cb = holder.chkBox;
-				//tangtaotao@ND_20140220 checkbox comment out
-				//cb.setVisibility(visible);
-			}
-		}
-
 	}
 
 	@Override
@@ -1627,16 +1414,13 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 	}
 
 
-
-
 	@Override
 	public void onDestroy() {
 		mInterHandForMain.onQuit();
-		// 2014_0117 recover mobile data add start
+		// recover mobile data
 		if (mPrivateSwitcher != null) {
 			mPrivateSwitcher.exitPrivateState();
 		}
-		// 2014_0117 recover mobile data add end
 		super.onDestroy();
 	}
 
@@ -1660,54 +1444,45 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 
 	
 	
-	private void showQuitDialog() {
-			new AlertDialog.Builder(mContext)
-			.setTitle(mContext.getString(R.string.hint))
-			.setMessage(R.string.quit_share_hint)
-			.setPositiveButton(R.string.yes,
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog,
-								int whichButton) {
-							mInterHandForMain.onQuit();
-							finish();
-						}
-					})
-			.setNegativeButton(R.string.no,
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog,
-								int whichButton) {
-							dialog.dismiss();
-						}
-					}).show();
-
+	private void showQuitDialog() {		
+		PriUtils.showQuitDialog(mContext,new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog,int whichButton) {
+				mInterHandForMain.onQuit();
+				finish();
+			}
+		});
 	}
 	
 
 	private CellItemBase[] mItemArr;
 	private int mItemIdx = 0;
+	private boolean mSendListPrepared = false;
 	
-
-
 	/**
 	 * send start
 	 * */
-	private void sendMultipleItem(String user) {
-		Set<CellItemBase> set = (Set<CellItemBase>) mMultiMap.keySet();
-		Set<String> fileSet = (Set<String>) mFileList.keySet();
-
-		mItemArr = new CellItemBase[set.size() + mFileList.size()];
+	private void sendMultipleItems(String user) {
+		
+		if(!mSendListPrepared) {			
+			Set<CellItemBase> set = (Set<CellItemBase>) mMultiMap.keySet();
+			Set<String> fileSet = (Set<String>) mFileList.keySet();
+	
+			mItemArr = new CellItemBase[set.size() + mFileList.size()];
+			
+			int i = 0;
+			for (CellItemBase item : set) {
+				mItemArr[i] = item;
+				i++;
+			}
+	
+			for (String item : fileSet) {
+				mItemArr[i] = FilesCellItem.getFilesCellItem(item);
+				i++;
+			}
+			mSendListPrepared  = true;
+		} 
 		mItemIdx = 0;
-		int i = 0;
-		for (CellItemBase item : set) {
-			mItemArr[i] = item;
-			i++;
-		}
-
-		for (String item : fileSet) {
-			mItemArr[i] = FilesCellItem.getFilesCellItem(item);
-			i++;
-		}
-
 		sendRemainings(user);
 	}
 	
@@ -1715,32 +1490,36 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 	 * continue send files
 	 * */
 	private void sendRemainings(String userName) {
-		if (mItemArr != null && mItemArr.length > mItemIdx) {
-			mSigSendHandle.sendSingleItem(userName, mItemArr[mItemIdx]);
-			mItemIdx++;
+		if (mItemArr != null && mItemIdx < mItemArr.length) {
+			sendSingleItem(userName, mItemArr[mItemIdx]);
+			onSendItem(mItemArr[mItemIdx]);
+			mItemIdx++;			
 		} else {
-			mItemArr = null;
-			mItemIdx = 0;
-			// after finish sending,we should clear the items selected before
-			clearSelectState();
+			onSendFinish();
 		}
 	}
-
+	
 	public void sendRemainingFiles(String userName) {
 		sendRemainings(userName);
 	}
-
-
-	@Override
-	public boolean onDropCompleted(View dragSource, View dropTarget,
-			boolean success) {
-		if (!success) {
-			enterMutliSelectMode(dragSource, -1);
-		} else {
-			mSigSendHandle.sendSingleItem((UserHead) dropTarget, dragSource);
+	
+	
+	private void startSend(String username) {
+		showSendingProgress();
+		sendMultipleItems(username);
+		
+		//mShowWaitingShare = false;
+		//toggleShareUserView(mShowWaitingShare);
+	}	
+	
+	private void exitSend() {
+		if(mSendListPrepared) {
+			clearSelectState();
+			mItemArr = null;
 		}
-		return false;
+		mSendListPrepared = false;				
 	}
+	
 
 
 	private NdPagerAdapter mPagerAdapter;
@@ -1748,23 +1527,23 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 
 	private PageView[] mPagerViews = new PageView[5];
 
-	public class PageView {
+	private class PageView {
 		Boolean isLoaded = false;
 		View v = null;
 	}
 
-	View loadView(int index) {
+	private View loadView(int index) {
 		View v;
-		if (index == GALLERY_INDEX) {
+		if (index == PriShareConstant.GALLERY_INDEX) {
 			v = mInflater.inflate(R.layout.qe_adapter_layout, null);
-			initGalleryGridView(v);
-		} else if (index == AUDIO_INDEX) {
+			initGalleryGrid(v);
+		} else if (index == PriShareConstant.AUDIO_INDEX) {
 			v = mInflater.inflate(R.layout.qe_adapter_layout, null);
 			initAudioListView(v);
-		} else if (index == APP_INDEX) {			
+		} else if (index == PriShareConstant.APP_INDEX) {			
 			v = mInflater.inflate(R.layout.qe_adapter_layout, null);
-			initGridView(v);
-		} else if (index == FILE_INDEX) {
+			initAppGrid(v);
+		} else if (index == PriShareConstant.FILE_INDEX) {
 			v = mInflater.inflate(R.layout.qe_adapter_layout, null);
 			initFilesGridView(v);
 
@@ -1826,28 +1605,6 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 		}
 	}
 
-
-	
-	private void toggleUserList(boolean show) {
-		mUserListShowing = show;
-		if(show) {
-			mUserListContainer.setVisibility(View.VISIBLE);
-			mUserListAdapter = new ConnUserListAdapter(mConnectedUser);
-			mUserListAdapter.setOnKickoutListener(new View.OnClickListener() {				
-				@Override
-				public void onClick(View v) {
-					String userName = (String)v.getTag();
-					mInterHandForMain.kickoutUser(userName);
-					mConnectedUser.remove(userName);
-					userKickedOutSingle(userName);
-				}
-			});
-			mConnUserListView.setAdapter(mUserListAdapter);
-		} else {
-			mUserListContainer.setVisibility(View.GONE);
-			mUserListAdapter = null;
-		}
-	}
 	
 	private void handleUserLogin(String userName) {
 		showUserHead(userName);
@@ -1858,9 +1615,11 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 
 		@Override
 		public void handleMessage(final Message msg) {
-			if (msg.what == MsgDefine.MAIN_UI_HANDLER_USER_LOGIN) {
-				handleUserLogin((String)msg.obj);
-			} else if (msg.what == MsgDefine.MAIN_UI_HANDLER_RECV_FILE_FINISH) {
+			switch (msg.what) {
+			case MsgDefine.MAIN_UI_HANDLER_USER_LOGIN:
+				handleUserLogin((String) msg.obj);
+				break;
+			case MsgDefine.MAIN_UI_HANDLER_RECV_FILE_FINISH: {
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
@@ -1876,10 +1635,18 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 								.show();
 					}
 				});
-			} else if(msg.what ==  MsgDefine.MAIN_UI_HANDLER_HOTSPOTCREATE) {
-				refreshConnectUI(msg.arg1);
 			}
-			super.handleMessage(msg);
+				break;
+				
+			case MsgDefine.MAIN_UI_HANDLER_HOTSPOTCREATE:
+				refreshConnectUI(msg.arg1);
+				break;
+				
+			case MsgDefine.MAIN_UI_HANDLER_SEND_PROGRESS:
+				onUpdateSendProgress(msg.arg1,msg.arg2);
+				break;
+			}
+
 		}
 
 	}
@@ -1903,10 +1670,8 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 	@Override
 	public void userKickedOutSingle(String name) {
 		hideUserHead(name);
-/*		if(mUserListAdapter != null) {
-			mUserListAdapter.notifyDataSetChanged();
-		}*/
 	}
+	
 	@Override
 	public void setMultiCount() {
 			int size = mMultiMap.size() + mFileList.size();
@@ -1919,15 +1684,12 @@ public class PriShareSendActivity extends Activity implements DragSource.OnDragC
 		String contentString = mInterHandForMain.getWifiInfoToTrans();
 		if (!contentString.equals("")) {
 			//show wifi info in QRCode;  image size:width * height = QR_IMAGE_SIZE * QR_IMAGE_SIZE
-			Bitmap qrCodeBitmap; 
 			try {
-				qrCodeBitmap = EncodingHandler.createQRCode(contentString, DimensionUtils.getQrCodeDimen());
+				Bitmap qrCodeBitmap = EncodingHandler.createQRCode(contentString, DimensionUtils.getQrCodeDimen());
 				mQrCode.setImageBitmap(qrCodeBitmap);
 			} catch (WriterException e) {
 				e.printStackTrace();
-			}
-			
+			}			
 		}
-	}	
-
+	}
 }

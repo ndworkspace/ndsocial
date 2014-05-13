@@ -15,6 +15,7 @@ import cn.nd.social.prishare.component.InterfaceHandlerForMain;
 
 public class CommonUtils {
 
+	private final static String TAG = "CommonnUtils";
 	/**
 	 * Draw the view into a bitmap.
 	 */
@@ -36,7 +37,7 @@ public class CommonUtils {
 		v.buildDrawingCache();
 		Bitmap cacheBitmap = v.getDrawingCache();
 		if (cacheBitmap == null) {
-			Log.e(InterfaceHandlerForMain.TAG, "failed getViewBitmap(" + v + ")",
+			Log.e(TAG, "failed getViewBitmap(" + v + ")",
 					new RuntimeException());
 			return null;
 		}

@@ -83,7 +83,7 @@ public class UpdateService extends WakefulIntentService {
 		} catch (Exception e) {
 			sUpdateStatus = 0;
 			sendUpdateCheckMsg(checkType, UPDATE_CHECK_FAIL);
-			Log.e("CWAC-Update", "Exception in applying update",e);
+			Log.i("CWAC-Update", "Exception in applying update",e);
 			// Log.e("CWAC-Update", "Exception in applying update", e);
 		}
 	}

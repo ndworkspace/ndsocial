@@ -30,6 +30,16 @@
             android:text="@string/private_share_line"
             android:textColor="#ffffff"
             android:textSize="20sp" />
+        
+         <Button
+            android:id="@+id/share_user_sending"
+            android:layout_width="40dip"
+            android:layout_height="40dip"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dip"
+            android:background="@drawable/qe_menu_item_share"
+            android:textColor="#fff" />
     </RelativeLayout>
 
     <RelativeLayout

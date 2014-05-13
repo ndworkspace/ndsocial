@@ -1,5 +1,7 @@
 package cn.nd.social.prishare.items;
 
+import java.io.File;
+
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -48,6 +50,10 @@ public class ImageCellItem extends CellItemBase {
 
 	@Override
 	public String getFileShortName() {
+		File f = new File(path);
+		if(f.exists()) {
+			return f.getName();
+		}
 		return "image"; // TODO : get short name
 	}
 }

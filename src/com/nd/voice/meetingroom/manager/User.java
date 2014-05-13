@@ -157,8 +157,14 @@ public class User implements Serializable{
 	}
 	
 	public static long getUserIdByUid(String uid){
-		String str = uid.substring(0, uid.length() - "@nd.social".length());
-		return Long.parseLong(str);
+		String postFix = "@nd.social";
+		if(uid.contains(postFix)) {
+			String str = uid.substring(0, uid.length() - "@nd.social".length());
+			return Long.parseLong(str);
+		} else {
+			return Long.parseLong(uid);
+		}
+		
 	}
 	
 	public static String getMeetingUserId(long userid){

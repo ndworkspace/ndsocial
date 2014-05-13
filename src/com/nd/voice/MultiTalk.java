@@ -345,6 +345,7 @@ public class MultiTalk extends Activity implements
 
 	private void showHostPageFrameLayout(String filePath) {
 		mIsSyncShowing = true;
+		mMoreBtn.setVisibility(View.GONE);
 		if(mHostPageFrament == null){
 			mHostPageFrament = new HostPageFrameLayout(this);
 			mHostPageFrament.setDelegate(this);
@@ -434,6 +435,7 @@ public class MultiTalk extends Activity implements
 	private void closeHostPageFrameLayout(){
 		
 		mIsSyncShowing = false;
+		mMoreBtn.setVisibility(View.VISIBLE);
 		Animation animation = AnimationUtils.loadAnimation(this, R.anim.push_bottom_out);
 		animation.setAnimationListener(new AnimationListener() {
 			

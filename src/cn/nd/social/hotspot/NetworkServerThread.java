@@ -11,7 +11,7 @@ import java.util.Set;
 
 import android.os.Handler;
 import android.util.Log;
-import cn.nd.social.prishare.PriShareSendActivity;
+import cn.nd.social.prishare.PriShareConstant;
 
 public class NetworkServerThread extends Thread {
 
@@ -149,7 +149,7 @@ public class NetworkServerThread extends Thread {
 			mFileSendThreadMap.put(userName, fileSendThread);
 		}
 
-		return fileSendThread.sendFileReq(userName, appName, fileName, fileType, 0, PriShareSendActivity.INFINITE_TIME, 0);
+		return fileSendThread.sendFileReq(userName, appName, fileName, fileType, 0, PriShareConstant.INFINITE_TIME, 0);
 	}
 
 	public boolean sendFile(String userName, String appName, String fileName, int fileType,

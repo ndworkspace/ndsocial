@@ -27,6 +27,8 @@ import cn.nd.social.net.ProtocolHandler;
 import cn.nd.social.net.ProtocolHandler.HandlerInterface;
 import cn.nd.social.net.WifiController;
 import cn.nd.social.net.WifiShareManager;
+import cn.nd.social.net.WifiStateConstant;
+import cn.nd.social.prishare.PriShareConstant;
 import cn.nd.social.prishare.PriShareSendActivity;
 import cn.nd.social.prishare.PriShareSendActivity.UIHandler;
 import cn.nd.social.prishare.component.MainHandler.MainMsgHandlerInterface;
@@ -54,16 +56,7 @@ import com.example.ofdmtransport.ModulationAudioRecord;
  */
 public class InterfaceHandlerForMain {
 
-	/** static variables **/
-	public static final int WIFI_TYPE_ERROR = -1;
-	public static final int WIFI_TYPE_NONE = 0;
-	public static final int WIFI_TYPE_HOTSPOT = 1;
-	public static final int WIFI_TYPE_CLIENT = 2;
-	public static final int WIFI_HOTSPOT_PENDING = 3;
-	public static final int WIFI_CONNECT_PENDING = 4;
-	
-
-	public final static String TAG = "Main";
+	private final static String TAG = "Main";
 
 	/** Member variables **/
 	private Activity mMainAct;
@@ -81,7 +74,7 @@ public class InterfaceHandlerForMain {
 
 	private ModulationAudioPlay mAudioPlay = null;
 	private ModulationAudioRecord mAudioRecorder = null;
-	private int mWifiType = WIFI_TYPE_NONE;
+	private int mWifiType = WifiStateConstant.WIFI_TYPE_NONE;
 	
 
 	NetworkProtocolImpl mNetProtocol;
@@ -113,10 +106,6 @@ public class InterfaceHandlerForMain {
 		filter.addAction(WifiShareManager.WIFIACTION_AP_CLOSED);
 		filter.addAction(WifiShareManager.WIFIACTION_AP_BREAK);
 		mMainAct.registerReceiver(mWifiMgrNotify, filter);
-/*		filter.addAction(WifiController.ACTION_HOTSPOT_EVENT_NOTIFY);
-		filter.addAction(WifiController.ACTION_WIFI_EVENT_NOTIFY);
-		filter.addAction(WifiController.ACTION_AP_STATE_CHANGE);
-		mMainAct.registerReceiver(mWifiEventNotify, filter);*/
 	}
 	
 	private void createHotspot() {		/* when hot spot open, notify the user by broadcast */
@@ -125,7 +114,7 @@ public class InterfaceHandlerForMain {
 			mPasswd = WifiController.genHotspotPasswd();
 		}
 		WifiShareManager.getShareInstance(mMainAct).createAPAsync(mHotspotName,mPasswd);
-		mWifiType = WIFI_HOTSPOT_PENDING;
+		mWifiType = WifiStateConstant.WIFI_HOTSPOT_PENDING;
 		if(mNetProtocol != null) {
 			mNetProtocol.cleanup();
 			mNetProtocol = null;
@@ -191,23 +180,12 @@ public class InterfaceHandlerForMain {
 		@Override
 		public void onHandlerMsgCreateHotSpot(Message msg) {
 			int result = msg.arg1;
-			if (result == 0) { // success
-				
-			} else {
-				Toast.makeText(mMainAct, "create hotspot failed",
-						Toast.LENGTH_LONG).show();
-			}
 		}
 
 		@Override
 		public void onHandlerMsgConnectWifi(Message msg) {
 			int result = msg.arg1;
-			if (result == 0) { // success
-				
-			} else {
-				Toast.makeText(mMainAct, "connect wifi failed",
-						Toast.LENGTH_LONG).show();
-			}
+
 		}
 
 		@Override
@@ -265,7 +243,7 @@ public class InterfaceHandlerForMain {
 		@Override
 		public void onUserLogin(Message msg) {
 			//ignore broadcast message for hotspot
-			if(mWifiType == WIFI_TYPE_HOTSPOT) {
+			if(mWifiType == WifiStateConstant.WIFI_TYPE_HOTSPOT) {
 				return;
 			}
 			String userName = (String) msg.obj;
@@ -296,44 +274,30 @@ public class InterfaceHandlerForMain {
 
 		@Override
 		public void onSyncShakehandAck(Message msg) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void onSyncShakehand(Message msg) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void onSyncPageBroadcast(Message msg) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void onSyncGetPageRequest(Message msg) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void onSyncGetPageAck(Message msg) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void onSyncActionBroadcast(Message msg) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void onSynActioncAck(Message msg) {
-			// TODO Auto-generated method stub
-
 		}
 
 		/** Sync End **/
@@ -371,11 +335,6 @@ public class InterfaceHandlerForMain {
 		@Override
 		public void onReceiveFileEnd(Message msg) {
 			NetworkServerThread.FileInfo info = (NetworkServerThread.FileInfo) msg.obj;
-
-			showInfo("file :" + info.fileName + " from " + info.userName
-					+ " has received, result " + msg.arg1 + ", grant type "
-					+ info.grantType + ", grant value " + info.grantValue
-					+ ", grant reserve " + info.grantReserve);
 			Long utcOfCurrent = System.currentTimeMillis();
 			recvOneFileFinish(info.userName, info.appName, info.fileName,
 					info.fileType, info.grantType, info.grantValue,
@@ -435,7 +394,7 @@ public class InterfaceHandlerForMain {
 	private void connectWifi(String ssid, String passwd) {
 		// clear the state
 		mConnectedUser.clear();
-		mWifiType = WIFI_CONNECT_PENDING;
+		mWifiType = WifiStateConstant.WIFI_CONNECT_PENDING;
 		WifiShareManager.getShareInstance(mMainAct).connectWifiAsync(ssid, passwd);
 	}
 
@@ -463,12 +422,12 @@ public class InterfaceHandlerForMain {
 	}
 
 	public void clearWifiState() {
-		if (mWifiType == WIFI_TYPE_HOTSPOT || mWifiType == WIFI_HOTSPOT_PENDING) {
+		if (mWifiType == WifiStateConstant.WIFI_TYPE_HOTSPOT || mWifiType == WifiStateConstant.WIFI_HOTSPOT_PENDING) {
 			WifiShareManager.getShareInstance(mMainAct).closeAp();
-		} else if (mWifiType == WIFI_TYPE_CLIENT) {
+		} else if (mWifiType == WifiStateConstant.WIFI_TYPE_CLIENT) {
 			WifiShareManager.getShareInstance(mMainAct).closeWifi();
 		}
-		mWifiType = WIFI_TYPE_NONE;
+		mWifiType = WifiStateConstant.WIFI_TYPE_NONE;
 	}
 
 	// original name: onUserLogin
@@ -491,7 +450,7 @@ public class InterfaceHandlerForMain {
 	private void userLogout(String name, int hotspotFlag) {
 		mConnectedUser.remove(name);
 
-		if (mWifiType == WIFI_TYPE_CLIENT && mConnectedUser.size() == 0) {
+		if (mWifiType == WifiStateConstant.WIFI_TYPE_CLIENT && mConnectedUser.size() == 0) {
 
 			if (mNetProtocol != null) {
 				mNetProtocol.cleanup();
@@ -529,7 +488,7 @@ public class InterfaceHandlerForMain {
 		mCurrentSendFile = fileName;
 		mCurrentSendUser = sendUser;
 
-		mMainClass.pagerChange(PriShareSendActivity.HISTORY_INDEX);
+		mMainClass.pagerChange(PriShareConstant.HISTORY_INDEX);
 
 		mCurrentSendFileIndex = mHisItemHelper.addItem("me", sendUser, appName,
 				fileName, fileSize, fileType, grantType, grantValue,
@@ -565,7 +524,7 @@ public class InterfaceHandlerForMain {
 				fileName,
 				"send",
 				MsgDefine.FILE_TYPE_UNKNOWN,
-				PriShareSendActivity.INFINITE_TIME,
+				PriShareConstant.INFINITE_TIME,
 				MsgDefine.STATUS_DO_NOTHING);
 	}
 
@@ -582,7 +541,7 @@ public class InterfaceHandlerForMain {
 		mCurrentRecvFile = fileName;
 		mCurrentRecvUser = recvUser;
 
-		mMainClass.pagerChange(PriShareSendActivity.HISTORY_INDEX);
+		mMainClass.pagerChange(PriShareConstant.HISTORY_INDEX);
 
 		String fileExtName = FilePathHelper.getExtFromFilename(fileName);
 		if (fileExtName.contentEquals("jpg")
@@ -721,8 +680,10 @@ public class InterfaceHandlerForMain {
 
 				mHisItemHelper.changeItemProgress(mCurrentSendFileIndex,
 						progress);
+				mUIHandler.sendMessage(mUIHandler.obtainMessage(MsgDefine.MAIN_UI_HANDLER_SEND_PROGRESS, progress, 0));
 
 				mPrivateHandler.postDelayed(this, 200);
+				
 			} else {
 				mPrivateHandler.removeCallbacks(this);
 			}
@@ -768,7 +729,7 @@ public class InterfaceHandlerForMain {
 		if (result == 0) {
 			mWifiType = type;
 			
-			if (type == WIFI_TYPE_HOTSPOT) {
+			if (type == WifiStateConstant.WIFI_TYPE_HOTSPOT) {
 				message.obj = "create wifi hotspot success";
 				message.what = MsgDefine.HANDLER_MSG_CREATE_HOTSPOT;
 				message.arg1 = 0;
@@ -785,14 +746,14 @@ public class InterfaceHandlerForMain {
 				mNetProtocol.cleanup();
 			}
 			mNetProtocol = new NetworkProtocolImpl(mPublicHandler,
-					mWifiType == WIFI_TYPE_HOTSPOT);
+					mWifiType == WifiStateConstant.WIFI_TYPE_HOTSPOT);
 
 			UserManagerSingleton singleton = UserManagerSingleton.getInstance();
 			singleton.addUserInfo(null, true);
 		} else if (result == 1) {
-			mWifiType = WIFI_TYPE_NONE;
+			mWifiType = WifiStateConstant.WIFI_TYPE_NONE;
 			
-			if (type == WIFI_TYPE_HOTSPOT) {				
+			if (type == WifiStateConstant.WIFI_TYPE_HOTSPOT) {				
 				message.obj = "create wifi hotspot timeout";
 				message.what = MsgDefine.HANDLER_NOTIFY_INFO;
 				mPrivateHandler.sendMessage(message);
@@ -809,7 +770,7 @@ public class InterfaceHandlerForMain {
 			}
 
 		} else {
-			mWifiType = WIFI_TYPE_NONE;
+			mWifiType = WifiStateConstant.WIFI_TYPE_NONE;
 			
 			message.obj = "wifi enable failed";
 			message.what = MsgDefine.HANDLER_MSG_CONNECT_WIFI;
@@ -820,8 +781,8 @@ public class InterfaceHandlerForMain {
 	}
 
 	private void onHotspotCreated() {
-		networkFinish(WIFI_TYPE_HOTSPOT, 0, "hotspot opened");
-		sendAPChangeMsg(WIFI_TYPE_HOTSPOT);
+		networkFinish(WifiStateConstant.WIFI_TYPE_HOTSPOT, 0, "hotspot opened");
+		sendAPChangeMsg(WifiStateConstant.WIFI_TYPE_HOTSPOT);
 	}
 	
 	
@@ -880,18 +841,18 @@ public class InterfaceHandlerForMain {
 				onHotspotCreated();
 			} else if(action.equals(WifiShareManager.WIFIACTION_AP_CREATE_ERROR)) {
 				LogToFile.e(TAG, "creat hotspot fail");
-				mWifiType = WIFI_TYPE_ERROR;
-				sendAPChangeMsg(WIFI_TYPE_ERROR);
+				mWifiType = WifiStateConstant.WIFI_TYPE_ERROR;
+				sendAPChangeMsg(WifiStateConstant.WIFI_TYPE_ERROR);
 				showWifiApCorrupt();
 			} else if(action.equals(WifiShareManager.WIFIACTION_AP_CREATE_TIMEOUT)) {
 				LogToFile.e(TAG, "creat hotspot timeout");
-				mWifiType = WIFI_TYPE_ERROR;
-				sendAPChangeMsg(WIFI_TYPE_ERROR);
+				mWifiType = WifiStateConstant.WIFI_TYPE_ERROR;
+				sendAPChangeMsg(WifiStateConstant.WIFI_TYPE_ERROR);
 				showWifiApCorrupt();
 			} else if(action.equals(WifiShareManager.WIFIACTION_AP_BREAK)) {
 				LogToFile.e(TAG, "creat hotspot timeout");
-				sendAPChangeMsg(WIFI_TYPE_ERROR);
-				mWifiType = WIFI_TYPE_ERROR;
+				sendAPChangeMsg(WifiStateConstant.WIFI_TYPE_ERROR);
+				mWifiType = WifiStateConstant.WIFI_TYPE_ERROR;
 				showWifiApCorrupt();
 			}
 
@@ -908,7 +869,7 @@ public class InterfaceHandlerForMain {
 			public void onClick(DialogInterface dialog, int arg1) {
 				dialog.dismiss();
 				createHotspot();
-				sendAPChangeMsg(WIFI_HOTSPOT_PENDING);
+				sendAPChangeMsg(WifiStateConstant.WIFI_HOTSPOT_PENDING);
 			}
 		});
 		fileDialog.setNegativeButton(R.string.exit_share,
@@ -961,13 +922,13 @@ public class InterfaceHandlerForMain {
 
 		stopRecvWifiInfo();
 
-		mWifiType = WIFI_TYPE_NONE;
+		mWifiType = WifiStateConstant.WIFI_TYPE_NONE;
 	}
 
 	public void quitCurrentGroupImp() {
 
 		if (mNetProtocol != null) {
-			int isHost = (mWifiType == WIFI_TYPE_HOTSPOT ? 1 : 0);
+			int isHost = (mWifiType == WifiStateConstant.WIFI_TYPE_HOTSPOT ? 1 : 0);
 			mNetProtocol.sendLogout(isHost);
 			try {
 				Thread.sleep(100);
@@ -982,13 +943,13 @@ public class InterfaceHandlerForMain {
 		stopTransWifiInfo();
 		stopRecvWifiInfo();
 
-		mWifiType = WIFI_TYPE_NONE;
+		mWifiType = WifiStateConstant.WIFI_TYPE_NONE;
 	}
 
 	
 	public void onQuit() {
 		if (mNetProtocol != null) {
-			int isHost = (mWifiType == WIFI_TYPE_HOTSPOT ? 1 : 0);
+			int isHost = (mWifiType == WifiStateConstant.WIFI_TYPE_HOTSPOT ? 1 : 0);
 			mNetProtocol.sendLogout(isHost);
 			try {
 				Thread.sleep(100);

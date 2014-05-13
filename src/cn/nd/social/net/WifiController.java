@@ -297,7 +297,7 @@ public class WifiController {
         	   }
     	   }
     	   
-    	   LogToFile.e("WifiController", "notifyWifiAPState :" + WifiApAdmin.isWifiApEnabled(mWifiManager));
+    	   //LogToFile.e("WifiController", "notifyWifiAPState :" + WifiApAdmin.isWifiApEnabled(mWifiManager));
        }
        
     }

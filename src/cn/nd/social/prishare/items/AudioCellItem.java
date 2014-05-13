@@ -60,6 +60,10 @@ public class AudioCellItem extends CellItemBase {
 
 	@Override
 	public String getFileShortName() {
+		File f = new File(path);
+		if(f.exists()) {
+			return f.getName();
+		}
 		return "audio"; // TODO : get short name
 	}
 	

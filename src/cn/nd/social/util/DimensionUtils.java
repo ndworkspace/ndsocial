@@ -15,8 +15,13 @@ public class DimensionUtils {
 	static {
 		sResource = Utils.getAppContext().getResources();
 		DisplayMetrics metrics = sResource.getDisplayMetrics();
-		sDisplayWidth = metrics.widthPixels;
-		sDisplayHeight = metrics.heightPixels;
+		if(metrics.widthPixels > metrics.heightPixels) {
+			sDisplayWidth = metrics.heightPixels;
+			sDisplayHeight = metrics.widthPixels;
+		} else {
+			sDisplayWidth = metrics.widthPixels;
+			sDisplayHeight = metrics.heightPixels;
+		}
 	}
 	public static int getQrCodeDimen() {
 		return (int) sResource.getDimension(R.dimen.qrcode_size);

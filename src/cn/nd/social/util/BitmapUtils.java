@@ -1,5 +1,6 @@
 package cn.nd.social.util;
 
+import java.io.File;
 import java.io.FileOutputStream;
 
 import android.graphics.Bitmap;
@@ -141,4 +142,32 @@ public class BitmapUtils {
 		int inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
 		return inSampleSize;
 	}
+	
+	
+	public static Bitmap decodeBitmapByFile(String path,int width,int height) {
+		Bitmap bmp = null;
+		if(path == null || !new File(path).exists()) {
+			return null;
+		}
+
+		BitmapFactory.Options opt = new BitmapFactory.Options();
+		opt.inJustDecodeBounds = true;
+		BitmapFactory.decodeFile(path, opt);
+		opt.inJustDecodeBounds = false;
+		opt.inPreferredConfig = Bitmap.Config.ARGB_8888;
+		opt.inPurgeable = true;
+		opt.inInputShareable = true;
+		opt.inSampleSize = calcSampleSize(opt,width,height);
+		try {
+			bmp = BitmapFactory.decodeFile(path, opt);
+		} catch(Exception e) {
+			Toast.makeText(Utils.getAppContext(), "decode bitmap error", Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
+		} catch(OutOfMemoryError e) {
+			Toast.makeText(Utils.getAppContext(), "out of memory", Toast.LENGTH_SHORT).show();
+			System.gc();
+		}
+		return bmp;
+	}
+	
 }

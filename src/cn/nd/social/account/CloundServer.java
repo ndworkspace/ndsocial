@@ -250,6 +250,8 @@ public class CloundServer {
 			if(mWeakRefCbk != null && mWeakRefCbk.get() != null) {
 				mWeakRefCbk.get().onGetFriendListCallBack(-1, null, false, "网络不给力");
 			}
+		} else {
+			mNeedUpdateCardDb = true;
 		}
 	}
 	

@@ -8,7 +8,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import cn.nd.social.R;
-import cn.nd.social.prishare.component.InterfaceHandlerForMain;
 
 public class PrivacyShareHistoryView {
 	private HistoryItemHelper mHisItemHelper;
@@ -50,7 +49,7 @@ public class PrivacyShareHistoryView {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Log.d(InterfaceHandlerForMain.TAG, "History item click posotion : " + position);
+				Log.d("PrivacyShareHistroyView", "History item click posotion : " + position);
 				if (position < 3) {
 					return;
 				}
@@ -63,7 +62,7 @@ public class PrivacyShareHistoryView {
 				HistoryItemHelper.ItemData data = mHisItemHelper
 						.getItem(position - 3);
 				if (data != null) {
-					Log.d(InterfaceHandlerForMain.TAG, "History item grant type : " + data.mGrantType
+					Log.d("PrivacyShareHistroyView", "History item grant type : " + data.mGrantType
 							+ " value : " + data.mGrantValue + " file name : "
 							+ data.mFileName);
 

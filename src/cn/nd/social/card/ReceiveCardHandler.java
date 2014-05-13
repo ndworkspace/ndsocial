@@ -17,7 +17,7 @@ import cn.nd.social.card.CardUtil.CardDataPacker;
 import cn.nd.social.data.MsgDBHelper;
 import cn.nd.social.data.MsgProviderSingleton;
 import cn.nd.social.hotspot.MsgDefine;
-import cn.nd.social.prishare.PriShareSendActivity;
+import cn.nd.social.prishare.PriShareConstant;
 
 /**
  * single instance
@@ -173,7 +173,7 @@ public class ReceiveCardHandler {
 				MsgDBHelper.NullValue,
 				"recv",
 				MsgDefine.FILE_TYPE_CARD,
-				PriShareSendActivity.INFINITE_TIME,
+				PriShareConstant.INFINITE_TIME,
 				MsgDefine.STATUS_DO_NOTHING);
 	}
 }
