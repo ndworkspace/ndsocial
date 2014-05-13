@@ -687,9 +687,7 @@ public class MultiTalk extends Activity implements
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				mMultiAct = null;
-				VoiceEndpoint.leave(mRoom);
-				finish();
+				onBackPressed();
 			}
 		});
 
