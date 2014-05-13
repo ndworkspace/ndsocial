@@ -180,10 +180,7 @@ public class InterfaceHandlerForMain {
 			String info = (String) msg.obj;
 			//showInfo("wifi info arrived : " + info);
 
-			if (mAudioRecorder != null) {
-				mAudioRecorder.stopRecord();
-				mAudioRecorder = null;
-			}
+			stopRecvWifiInfo();
 
 			String[] temp = null;
 			temp = info.split(" ");
@@ -420,6 +417,13 @@ public class InterfaceHandlerForMain {
 			mAudioPlay = null;
 		}
 	}
+	
+	private void stopRecvWifiInfo() {
+		if (mAudioRecorder != null) {
+			mAudioRecorder.stopRecord();
+			mAudioRecorder = null;
+		}
+	}
 
 	/** member function **/
 
@@ -427,10 +431,6 @@ public class InterfaceHandlerForMain {
 		Toast.makeText(mMainAct, info, Toast.LENGTH_LONG).show();
 	}
 
-	private void showUserName(String name) {
-		Toast.makeText(mMainAct, "user:" + name + " just login on",
-				Toast.LENGTH_LONG).show();
-	}
 
 	private void connectWifi(String ssid, String passwd) {
 		// clear the state
@@ -722,7 +722,7 @@ public class InterfaceHandlerForMain {
 				mHisItemHelper.changeItemProgress(mCurrentSendFileIndex,
 						progress);
 
-				mPrivateHandler.postDelayed(this, 100);
+				mPrivateHandler.postDelayed(this, 200);
 			} else {
 				mPrivateHandler.removeCallbacks(this);
 			}
@@ -922,17 +922,6 @@ public class InterfaceHandlerForMain {
 		fileDialog.create().show();
 	}
 
-//	private void connectToHotspot() {
-//		if (mAudioRecorder == null) {
-//			ModulationAudioRecord mAudioRecorder = new ModulationAudioRecord();
-//			mAudioRecorder.set(mPrivateHandler);
-//			mAudioRecorder.startRecord();
-//
-//			// todo : add timer for checking timeout
-//		} else {
-//			Log.e(TAG, "audio recorder object aleardy exists");
-//		}
-//	}
 
 	/** Utils Functions **/
 	
@@ -970,11 +959,7 @@ public class InterfaceHandlerForMain {
 		clearWifiState();
 		stopTransWifiInfo();
 
-		if (mAudioRecorder != null) {
-			mAudioRecorder.stopRecord();
-
-			mAudioRecorder = null;
-		}
+		stopRecvWifiInfo();
 
 		mWifiType = WIFI_TYPE_NONE;
 	}
@@ -994,14 +979,8 @@ public class InterfaceHandlerForMain {
 		}
 
 		clearWifiState();
-
 		stopTransWifiInfo();
-
-		if (mAudioRecorder != null) {
-			mAudioRecorder.stopRecord();
-
-			mAudioRecorder = null;
-		}
+		stopRecvWifiInfo();
 
 		mWifiType = WIFI_TYPE_NONE;
 	}
@@ -1017,14 +996,14 @@ public class InterfaceHandlerForMain {
 				e.printStackTrace();
 			}
 			mNetProtocol.cleanup();
+			mNetProtocol = null;
 		}
 		
-		clearWifiState();
-		mNetProtocol = null;
+		clearWifiState();		
 		stopTransWifiInfo();
 		if(mWifiMgrNotify !=null) {
-		mMainAct.unregisterReceiver(mWifiMgrNotify);
-		mWifiMgrNotify = null;
+			mMainAct.unregisterReceiver(mWifiMgrNotify);
+			mWifiMgrNotify = null;
 		}
 	}
 

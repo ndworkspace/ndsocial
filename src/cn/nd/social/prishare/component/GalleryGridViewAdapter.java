@@ -69,6 +69,14 @@ public class GalleryGridViewAdapter extends ArrayAdapter<ImageCellItem> {
 		Bitmap bm = Images.Thumbnails.getThumbnail(
 				mContext.getContentResolver(), item.getId(),
 				Images.Thumbnails.MICRO_KIND, null);
+		if(bm == null) {
+			bm = Images.Thumbnails.getThumbnail(
+					mContext.getContentResolver(), item.getId(),
+					Images.Thumbnails.MINI_KIND, null);
+		}
+		
+		//TODO: bm may still be null
+		
 		if(holder.bm != null && !holder.bm.isRecycled()) {
 			holder.bm.recycle();
 		}
