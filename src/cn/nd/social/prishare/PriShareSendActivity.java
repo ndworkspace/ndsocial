@@ -1515,7 +1515,6 @@ public class PriShareSendActivity extends Activity implements InterfaceForMain{
 	private void exitSend() {
 		if(mSendListPrepared) {
 			clearSelectState();
-			mItemArr = null;
 		}
 		mSendListPrepared = false;				
 	}
