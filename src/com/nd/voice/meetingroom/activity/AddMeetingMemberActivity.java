@@ -282,6 +282,13 @@ public class AddMeetingMemberActivity extends Activity implements MeetingManager
 			Toast.makeText(this, msg, 1000).show();
 		}
 	}
+
+	@Override
+	public void onAddMeetingDoc(String meetingId, String filename,
+			boolean success, String msg) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

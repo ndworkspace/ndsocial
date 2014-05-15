@@ -43,12 +43,16 @@ class WebRtcAudioRecord {
             DoLog(e.getMessage());
         }
 
-        _tempBufRec = new byte[2 * 480];
+        _tempBufRec = new byte[2 * 480];        
     }
 
     @SuppressWarnings("unused")
     private int InitRecording(int audioSource, int sampleRate) {
-        audioSource = AudioSource.VOICE_COMMUNICATION;
+        if (android.os.Build.BRAND.equals("Hisense")  || android.os.Build.BRAND.equals("hisense")) {
+        	//do nothing
+        } else {
+        	audioSource = AudioSource.VOICE_COMMUNICATION;
+        }
         // get the minimum buffer size that can be used
         int minRecBufSize = AudioRecord.getMinBufferSize(
             sampleRate,
@@ -88,7 +92,9 @@ class WebRtcAudioRecord {
             // DoLog("rec not initialized " + sampleRate);
             return -1;
         }
-
+        
+        int audioState = _audioRecord.getState();
+        sampleRate = _audioRecord.getSampleRate();
         // DoLog("rec sample rate set to " + sampleRate);
 
         return _bufferedRecSamples;

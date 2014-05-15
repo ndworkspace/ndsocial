@@ -270,6 +270,17 @@ public class CAUtils {
 		}
 		return str;
 	}
+	
+	public static String getHeartBeatMsg() {
+		JSONObject jobj = new JSONObject();
+		try {
+			jobj.put("time", System.currentTimeMillis());
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return jobj.toString();
+	}
 
 	
 }

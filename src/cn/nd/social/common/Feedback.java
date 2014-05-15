@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import cn.nd.social.R;
+import cn.nd.social.account.CloundServer;
+import cn.nd.social.account.netmsg.NetMsgUtils;
 
 public class Feedback extends Activity {
 	
@@ -60,7 +62,7 @@ public class Feedback extends Activity {
 	}
 	
 	private void sendFeedback(String text) {
-		
+		NetMsgUtils.sendFeedBack(text, 0);
 	}
 	
 	@Override

@@ -2,6 +2,7 @@ package cn.nd.social.syncbrowsing.manager;
 
 import cn.nd.social.account.CAConstant;
 import cn.nd.social.account.CloundServer;
+import cn.nd.social.account.netmsg.NetMsgUtils;
 import cn.nd.social.hotspot.NetworkServerThread;
 
 public class TestSyncHostNetImpl implements IHostSender{
@@ -97,7 +98,7 @@ public class TestSyncHostNetImpl implements IHostSender{
 	private void sendSyncMsg(byte []content, int msgId) {
 		if(SyncMsgFactory.ADD_JSON_HEADER) {
 			byte[] header = SyncMsgFactory.getSyncPacketHeader(mMeetingId);
-			byte []msg = SyncMsgFactory.contactHeadAndContent(header,content);			
+			byte []msg = NetMsgUtils.concateHeadAndContent(header,content);			
 			CloundServer.getInstance().sendSyncMsg(msg, msgId);
 		} else {
 			CloundServer.getInstance().sendSyncMsg(content, msgId);

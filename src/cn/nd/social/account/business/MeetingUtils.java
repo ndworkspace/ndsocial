@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import cn.nd.social.account.CloundServer;
+import cn.nd.social.account.netmsg.NetMsgUtils;
 import cn.nd.social.account.usermanager.UserManager;
 import cn.nd.social.util.LogToFile;
 
@@ -33,6 +34,7 @@ public class MeetingUtils {
 	public final static String MEETING_ACTION_ADD_MEMBER_REQ ="meeting-append-member";
 	
 	public final static String MEETING_ACTION_TRANSFER_REQ ="meeting-transfer";
+	public final static String MEETING_ACTION_ADD_DOCUMENT ="meeting-document";
 	
 	
 	
@@ -41,7 +43,12 @@ public class MeetingUtils {
 	public final static String MEETING_QUERY_ROOM_RSP ="meeting-query-response";
 	public final static String MEETING_CANCEL_RSP ="meeting-cancel-response";
 	
+	public final static String MEETING_ADD_DOCUMENT_RSP ="meeting-document-response";
+	
 	public final static String MEETING_ADD_MEMBER_RSP ="meeting-append-member-response";
+	
+	
+	
 	
 	
 	public final static String MEETING_TRANSFER_RECV_NOTIFY ="meeting-transfer-receive";
@@ -94,11 +101,11 @@ public class MeetingUtils {
 	
 	public final static String MEETING_KEY_BS_ACTION ="bs-action";
 	
+	public final static String MEETING_KEY_FILENAME ="filename";
+	
+	public final static String MEETING_KEY_FILEID ="fileid";
 	
 	
-	
-	
-	public final static String SEQUENCE_SEP = "-";
 	public final static String MEETING_QUERY_TYPE_ALL ="all";
 	public final static String MEETING_QUERY_TYPE_CREATE ="create";
 	public final static String MEETING_QUERY_TYPE_INVITE ="invite";
@@ -278,6 +285,25 @@ public class MeetingUtils {
 		}
 		public String msg;
 		public byte[] rawData;
+	}
+	
+	public static class FeedBackRsp extends MeetingRsp {
+		public FeedBackRsp(String act) {
+			super(act);
+		}
+		public String seqence;
+		public String msg;
+	}
+	
+	public static class AddDocRsp extends MeetingRsp {
+		public AddDocRsp(String act) {
+			super(act);
+		}
+		public String seqence;
+		public String result;
+		public String filename;
+		public String roomid;
+		public String fileid;
 	}
 	
 	public static class MeetingMemberInfo {
@@ -564,6 +590,14 @@ public class MeetingUtils {
 					rsp.idlist = jobj.getString(MEETING_KEY_IDLIST);
 					
 					meetingRsp = rsp;					
+				} else if(action.equals(MEETING_ADD_DOCUMENT_RSP)) {
+					AddDocRsp rsp = new AddDocRsp(action);
+					rsp.seqence = jobj.getString(MEETING_KEY_SEQUENCE);
+					rsp.filename = jobj.getString(MEETING_KEY_FILENAME);
+					rsp.roomid = jobj.getString(MEETING_KEY_ROOMID);
+					rsp.fileid = jobj.getString(MEETING_KEY_FILEID);
+					rsp.result = jobj.getString(MEETING_KEY_RESULT);
+					meetingRsp = rsp;	
 				}
 			} catch(JSONException e) {
 				Log.e(TAG, "ServerRspMsgFacotry error, JSONException:",e);
@@ -621,17 +655,6 @@ public class MeetingUtils {
 		return pairKey+":" + pairValue;
 	}
 	
-	public static String getSequceString(long pre,String post) {
-		if(post == null) {
-			return String.valueOf(pre) + SEQUENCE_SEP 
-					+ String.valueOf(System.currentTimeMillis());
-		} else {
-			return String.valueOf(pre) + SEQUENCE_SEP 
-					+ String.valueOf(System.currentTimeMillis()) + post;
-		}
-		
-	}
-	
 	public static String constructInvitation(String title,  String timeStr,
 						long hostid, String hostName, String sequence,long[] idList) {
 		StringBuilder strBuild = new StringBuilder("{");
@@ -660,7 +683,7 @@ public class MeetingUtils {
 		
 		//operation sequence
 		if(sequence == null || sequence.equals("") ) {
-			strBuild.append(buildJsonLikePairs(MEETING_KEY_SEQUENCE,getSequceString(hostid,"-add")));
+			strBuild.append(buildJsonLikePairs(MEETING_KEY_SEQUENCE,NetMsgUtils.getSequceString(hostid,"-add")));
 		} else {
 			strBuild.append(buildJsonLikePairs(MEETING_KEY_SEQUENCE,sequence));
 		}
@@ -691,7 +714,7 @@ public class MeetingUtils {
 		// operation sequence
 		if (sequence == null || sequence.equals("")) {
 			strBuild.append(buildJsonLikePairs(MEETING_KEY_SEQUENCE,
-					getSequceString(hostid, "-add")));
+					NetMsgUtils.getSequceString(hostid, "-add")));
 		} else {
 			strBuild.append(buildJsonLikePairs(MEETING_KEY_SEQUENCE, sequence));
 		}
@@ -718,7 +741,7 @@ public class MeetingUtils {
 	
 		//operation sequence
 		if(sequence == null || sequence.equals("") ) {
-			strBuild.append(buildJsonLikePairs(MEETING_KEY_SEQUENCE,getSequceString(hostid,"-cancel")));
+			strBuild.append(buildJsonLikePairs(MEETING_KEY_SEQUENCE,NetMsgUtils.getSequceString(hostid,"-cancel")));
 		} else {
 			strBuild.append(buildJsonLikePairs(MEETING_KEY_SEQUENCE,sequence));
 		}
@@ -743,7 +766,7 @@ public class MeetingUtils {
 	
 		//operation sequence
 		if(sequence == null || sequence.equals("") ) {
-			strBuild.append(buildJsonLikePairs(MEETING_KEY_SEQUENCE,getSequceString(hostid,"-listquery")));
+			strBuild.append(buildJsonLikePairs(MEETING_KEY_SEQUENCE,NetMsgUtils.getSequceString(hostid,"-listquery")));
 		} else {
 			strBuild.append(buildJsonLikePairs(MEETING_KEY_SEQUENCE,sequence));
 		}
@@ -753,6 +776,26 @@ public class MeetingUtils {
 		Log.i(TAG, "QueryMeeting:" + jstr);
 		return jstr;
 	}
+	
+	
+	public static String constructAddMeetingDoc(String fileName,String meetingId,String sequence) {
+		StringBuilder strBuild = new StringBuilder("{");
+		
+		strBuild.append(buildJsonLikePairs(ACTION,MEETING_ACTION_ADD_DOCUMENT));
+		strBuild.append(",");
+		
+		//query type
+		strBuild.append(buildJsonLikePairs(MEETING_KEY_FILENAME, fileName));
+		strBuild.append(",");
+
+		strBuild.append(buildJsonLikePairs(MEETING_KEY_SEQUENCE,sequence));
+
+		strBuild.append("}");
+		String jstr = strBuild.toString();
+		Log.i(TAG, "QueryMeeting:" + jstr);
+		return jstr;
+	}
+	
 	
 	public static String constructQueryMeetingByRoomId(String roomId,long hostid,String sequence) {
 		StringBuilder strBuild = new StringBuilder("{");
@@ -767,7 +810,7 @@ public class MeetingUtils {
 	
 		//operation sequence
 		if(sequence == null || sequence.equals("") ) {
-			strBuild.append(buildJsonLikePairs(MEETING_KEY_SEQUENCE,getSequceString(hostid,"-detailquery")));
+			strBuild.append(buildJsonLikePairs(MEETING_KEY_SEQUENCE,NetMsgUtils.getSequceString(hostid,"-detailquery")));
 		} else {
 			strBuild.append(buildJsonLikePairs(MEETING_KEY_SEQUENCE,sequence));
 		}
@@ -820,6 +863,9 @@ public class MeetingUtils {
 				TransferMsg transMsg = new TransferMsg(MEETING_TRANSFER_RECV_NOTIFY);
 				transMsg.rawData = data;
 				return transMsg;
+			} else if(action.equals(NetMsgUtils.ACTION_SUGGEST_RSP)){
+				FeedBackRsp suggestRsp = new FeedBackRsp(action);
+				return suggestRsp;
 			}
 			rsp = ServerRspMsgFacotry.getServerMsg(action,jstr);
 		} catch (JSONException e) {

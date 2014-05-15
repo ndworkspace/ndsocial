@@ -55,6 +55,8 @@ public class NDCClient implements INDCClient {
 	public static final short MSG_CAB_NOTIFY    		= 1003;
 	public static final short MSG_CAB_NOTIFY_ACK 		= 1004;
 	
+	
+	
 	private String mIp;
 	private short  mPort;
 	private INDCCallback mcb;	
@@ -146,10 +148,10 @@ public class NDCClient implements INDCClient {
 			
 		} catch(SocketTimeoutException soTimeout) {
 			Log.e("NDCClient","SendMsg SocketTimeoutException",soTimeout);
-			CloundServer.getInstance().reConnect();
+			onConnectBreak();
 			return false;
 		} catch(IOException e) {
-			CloundServer.getInstance().reConnect();
+			onConnectBreak();
 			Log.e("NDCClient","SendMsg socket IOException",e);
 			return false;
 		} catch(Exception e) {
@@ -725,6 +727,20 @@ public class NDCClient implements INDCClient {
 		int   nResult = ByteConv.getInt(data, nOffset);
 		String 	friendInfo = ByteConv.getString(data, nOffset, nLen-nOffset.value);
 		mcb.OnMessage(INDCClient.RT_CA_CHECK_PHONE_FRIEND_RSP, nResult, friendInfo);
+	}
+	
+	public boolean sendHeartBeat(byte[]data) {		
+		return SendMsg(INDCClient.BS_HEART_BEAT_MSG,data);
+	}
+	
+	
+	public void onHeartBeatMsg(byte[] data, int nLen) {
+		mcb.OnMessage(INDCClient.BS_HEART_BEAT_MSG, data, nLen);
+	}
+	
+	private void onConnectBreak() {
+		Integer breakObj =  INDCClient.MSG_CONNECTION_BREAK_NOTIFY;
+		mcb.OnNotify(INDCClient.MSG_CONNECTION_BREAK_NOTIFY, breakObj);
 	}
 	
 }

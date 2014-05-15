@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import cn.nd.social.account.CAConstant;
 import cn.nd.social.account.business.MeetingUtils;
+import cn.nd.social.account.netmsg.NetMsgUtils;
 import cn.nd.social.util.Utils;
 
 public class SyncMsgFactory {
@@ -111,22 +112,6 @@ public class SyncMsgFactory {
 	}
 	
 	
-	public static byte[] contactHeadAndContent(byte[]header,byte[]content) {
-		ByteArrayOutputStream bin = new ByteArrayOutputStream();   
-		DataOutputStream out = new DataOutputStream(bin);
-		try {
-			//out.writeInt(header.length);
-			out.write(header);
-			out.write("\r\n".getBytes());
-			out.writeInt(content.length);
-			out.write(content);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return bin.toByteArray();
-	}
-	
-	
 	public static void parseSyncPacket(byte []data,IClientNetMsgReceiver receiver) {
 		ByteArrayInputStream bin = new ByteArrayInputStream(data);   
 		DataInputStream in = new DataInputStream(bin);
@@ -144,7 +129,7 @@ public class SyncMsgFactory {
 					JSONObject jobj = new JSONObject(str);
 					roomid = jobj.getString(MeetingUtils.MEETING_KEY_ROOMID);
 					int headLen = jobj.toString().getBytes().length;
-					byte []head = new byte[headLen + "\r\n".length()];
+					byte []head = new byte[headLen + NetMsgUtils.JSON_SEP_STRING.length()];
 					in.read(head);
 					
 				} catch (JSONException e) {

@@ -515,4 +515,11 @@ public class MeetingDetailActivity extends Activity implements ConferenceCallbac
 		
 	}
 
+	@Override
+	public void onAddMeetingDoc(String meetingId, String filename,
+			boolean success, String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

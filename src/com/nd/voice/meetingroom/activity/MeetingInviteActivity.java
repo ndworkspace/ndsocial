@@ -295,5 +295,12 @@ public class MeetingInviteActivity extends Activity implements MeetingManagerCal
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void onAddMeetingDoc(String meetingId, String filename,
+			boolean success, String msg) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

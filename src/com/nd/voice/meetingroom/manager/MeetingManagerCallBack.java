@@ -17,5 +17,7 @@ public interface MeetingManagerCallBack {
 	public void onRefuseMeetingCallBack(String meetingId,boolean success,String msg);
 	
 	public void onAddMeetingMemberCallBack(String meetingId,boolean success,String msg);
+	
+	public void onAddMeetingDoc(String meetingId,String filename,boolean success,String msg);
 
 }

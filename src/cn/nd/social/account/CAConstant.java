@@ -40,6 +40,7 @@ public class CAConstant {
 	//business type: short
 	public static final short BS_MEETING	= 2012;
 	
+	
 	//public static final short BS_SYNC_READ	= BS_MEETING;
 	
 	//business type: short
@@ -89,6 +90,8 @@ public class CAConstant {
 	public static final int LOCAL_MSG_ID_MEETING_ACCEPT = 1007;
 	public static final int LOCAL_MSG_ID_MEETING_READ = 1008;
 	public static final int LOCAL_MSG_ID_MEETING_APPEND_MEMBER = 1009;
+	public static final int LOCAL_MSG_ID_ADD_DOC = 1010;
+	public static final int LOCAL_MSG_ID_SUGGEST = 1011;
 	
 	public static final int NETWOKR_ERROR_BS_MEETING_TYPE    = 100000;
 	

@@ -1,5 +1,6 @@
 package cn.nd.social.account.business;
 
+import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +11,8 @@ import cn.nd.social.account.CAConstant;
 import cn.nd.social.account.CloundServer;
 import cn.nd.social.account.business.MeetingUtils.BSMeetingNetworkError;
 import cn.nd.social.account.business.MeetingUtils.MeetingQueryType;
+import cn.nd.social.account.netmsg.NetMsgUtils;
+import cn.nd.social.util.DataFactory;
 
 import com.nd.voice.meetingroom.manager.MeetingEntity;
 import com.nd.voice.meetingroom.manager.MeetingManagerApi;
@@ -72,11 +75,13 @@ public class BusinessMeetingManager implements MeetingManagerApi {
 	@Override
 	public void getDetailByMeetingId(String roomId) {
 		long uid = CloundServer.getInstance().getUserId();
-		String sequence = MeetingUtils.getSequceString(uid,"-detailquery");
+		String sequence = NetMsgUtils.getSequceString(uid,"-detailquery");
+		sHashSeq.put(sequence, new WeakReference<MeetingManagerCallBack>(mMeetingMgrCbk));
 		String jstr = MeetingUtils.constructQueryMeetingByRoomId(roomId, uid, sequence);
+		
 		CloundServer.getInstance().sendMeetingMsg(jstr.getBytes(), 
 				CAConstant.LOCAL_MSG_ID_MEETING_QUERY_DETAIL, sequence);
-		sHashSeq.put(sequence, new WeakReference<MeetingManagerCallBack>(mMeetingMgrCbk));
+		
 	}
 
 	@Override
@@ -94,15 +99,16 @@ public class BusinessMeetingManager implements MeetingManagerApi {
 		if(hostname == null || hostname.equals("")) {
 			hostname = CloundServer.getInstance().getLogedUser();
 		}
-		String sequence = MeetingUtils.getSequceString(uid,"-add");
+		String sequence = NetMsgUtils.getSequceString(uid,"-add");
+		sHashSeq.put(sequence, new WeakReference<MeetingManagerCallBack>(mMeetingMgrCbk));		
+		sHashSeqTimestamp.put(sequence, timeStr);
+		
 		String jstr = MeetingUtils.constructInvitation(meetingEntity.getTitle(), timeStr, 
 																			uid,hostname,sequence,idList);
 		
 		CloundServer.getInstance().sendMeetingMsg(jstr.getBytes(), 
 				CAConstant.LOCAL_MSG_ID_MEETING_ADD, sequence);
-		sHashSeq.put(sequence, new WeakReference<MeetingManagerCallBack>(mMeetingMgrCbk));
-		
-		sHashSeqTimestamp.put(sequence, timeStr);
+
 		
 		Log.e(TAG,"add meeting:" + jstr);
 	}
@@ -111,11 +117,13 @@ public class BusinessMeetingManager implements MeetingManagerApi {
 	@Override
 	public void getMeetingList(String memberId) {
 		long uid = CloundServer.getInstance().getUserId();
-		String sequence = MeetingUtils.getSequceString(uid,"-listquery");
+		String sequence = NetMsgUtils.getSequceString(uid,"-listquery");
+		sHashSeq.put(sequence, new WeakReference<MeetingManagerCallBack>(mMeetingMgrCbk));
+		
 		String jstr = MeetingUtils.constructQueryMeeting(MeetingQueryType.ALL,uid, sequence);
 		CloundServer.getInstance().sendMeetingMsg(jstr.getBytes(), 
 				CAConstant.LOCAL_MSG_ID_MEETING_QUERY_ALL, sequence);		
-		sHashSeq.put(sequence, new WeakReference<MeetingManagerCallBack>(mMeetingMgrCbk));
+		
 	}
 	
 	@Override
@@ -209,11 +217,13 @@ public class BusinessMeetingManager implements MeetingManagerApi {
 	@Override
 	public void delMeetingEntity(String meetingId) {
 		long uid = CloundServer.getInstance().getUserId();
-		String sequence = MeetingUtils.getSequceString(uid,"-cancel" + "-roomid-" + meetingId);
+		String sequence = NetMsgUtils.getSequceString(uid,"-cancel" + "-roomid-" + meetingId);
+		sHashSeq.put(sequence, new WeakReference<MeetingManagerCallBack>(mMeetingMgrCbk));
+		
 		String jstr = MeetingUtils.constructCancelMeeting(meetingId, "empty-title",uid,sequence);
 		CloundServer.getInstance().sendMeetingMsg(jstr.getBytes(), 
 				CAConstant.LOCAL_MSG_ID_MEETING_CANCEL, sequence);
-		sHashSeq.put(sequence, new WeakReference<MeetingManagerCallBack>(mMeetingMgrCbk));
+		
 		
 		Log.e(TAG,"del meeting:" + jstr);
 	}
@@ -255,13 +265,32 @@ public class BusinessMeetingManager implements MeetingManagerApi {
 		
 		long uid = CloundServer.getInstance().getUserId();
 		String hostname = CloundServer.getInstance().getLogedUser();
-		String sequence = MeetingUtils.getSequceString(uid,null);
+		String sequence = NetMsgUtils.getSequceString(uid,null);
+		sHashSeq.put(sequence, new WeakReference<MeetingManagerCallBack>(mMeetingMgrCbk));
 		String jstr = MeetingUtils.constructAddMeetingMember(meetingId,uid,hostname,sequence,idList);
 		
 		CloundServer.getInstance().sendMeetingMsg(jstr.getBytes(), 
 				CAConstant.LOCAL_MSG_ID_MEETING_APPEND_MEMBER, sequence);
-		sHashSeq.put(sequence, new WeakReference<MeetingManagerCallBack>(mMeetingMgrCbk));		
+			
 	}
+	
+	
+	public void addMeetingDoc(String filePath,String meetingId) {
+		File f = new File(filePath);
+		String shortName = f.getName();
+		long uid = CloundServer.getInstance().getUserId();
+		String sequence = NetMsgUtils.getSequceString(uid,null);
+		sHashSeq.put(sequence, new WeakReference<MeetingManagerCallBack>(mMeetingMgrCbk));
+		
+		String jstr = MeetingUtils.constructAddMeetingDoc(shortName, meetingId, sequence);
+		byte[] fileData = DataFactory.getBytesFromFile(f);
+		byte[]data = NetMsgUtils.concateHeadAndContent(jstr.getBytes(), fileData);
+		
+		CloundServer.getInstance().sendMeetingMsg(data, 
+				CAConstant.LOCAL_MSG_ID_ADD_DOC, sequence);
+		
+	}
+	
 	
 	public static void onMeetingReqError(BSMeetingNetworkError errorInfo) {
 		MeetingManagerCallBack cbk = BusinessMeetingManager.getCbkFromBySeq(errorInfo.sequence);

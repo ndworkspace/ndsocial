@@ -420,6 +420,13 @@ public class RoomListActivity extends FragmentActivity implements MeetingManager
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void onAddMeetingDoc(String meetingId, String filename,
+			boolean success, String msg) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

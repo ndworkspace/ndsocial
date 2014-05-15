@@ -45,6 +45,14 @@ public interface INDCClient {
 	
 	public static final String RT_CA_CHECK_PHONE_FRIEND_RSP		= "on_check_phone_friend";
 	
+	
+	public static final int MSG_CONNECTION_BREAK_NOTIFY = 111111;
+
+	public static final short BS_ACCOUNT_MSG = 100;
+
+	public static final short BS_HEART_BEAT_MSG = 400;
+
+	
 	public boolean Init(String strIp, short nPort, INDCCallback cb, byte Version);
 	public void Process();
 	
@@ -64,5 +72,5 @@ public interface INDCClient {
 	public boolean UpdateBSCardInfo(String cardInfo);
 	public boolean QueryBSCardInfo(int userId);
 	public boolean checkPhoneFriend(byte[]data);
-	
+	public boolean sendHeartBeat(byte[]data);	
 }

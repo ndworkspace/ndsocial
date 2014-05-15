@@ -555,4 +555,11 @@ public class RoomListFrame extends AuthorizationFrame implements MeetingManagerC
 		super.onFramentViewHide();
 		dismissProgressDialog();
 	}
+
+	@Override
+	public void onAddMeetingDoc(String meetingId, String filename,
+			boolean success, String msg) {
+		// TODO Auto-generated method stub
+		
+	}
 }

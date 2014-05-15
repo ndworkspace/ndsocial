@@ -1,6 +1,7 @@
 package cn.nd.social.account;
 
 import NDCSdk.INDCCallback;
+import NDCSdk.INDCClient;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -33,6 +34,9 @@ public class CACallBack implements INDCCallback {
 
 	@Override
 	public void OnNotify(int notifyCode, Object notify) {
+		if(checkNetBreak(notifyCode,notify)) {
+			return;			
+		}
 		sendNetNotify(notifyCode, notify);
 	}
 	
@@ -95,5 +99,21 @@ public class CACallBack implements INDCCallback {
 		msg.obj  = data;		
 		cbkHandler.sendMessage(msg);
 		
+	}
+	
+	private boolean checkNetBreak(int notifyCode,Object notify) {
+		if(notifyCode == INDCClient.MSG_CONNECTION_BREAK_NOTIFY) {
+			try {
+				if((Integer)notify == INDCClient.MSG_CONNECTION_BREAK_NOTIFY) {
+					//reconnect to clound
+					CloundServer.getInstance().reConnect();
+					return true;
+				}
+			} catch(Exception e) {
+				
+			}
+			
+		}
+		return false;
 	}
 }

@@ -20,6 +20,12 @@ public class CAProcessThread extends Thread {
 	
 	public static final byte NDC_CLIENT_VERSION = 2;
 	
+	
+	private final static int  PROCESS_INTERVAL = 200;
+	
+	private final static int  BEAT_HEART_INTERVAL = 30*1000; //30s
+	
+	
 	boolean serverConnected = false;
 	private int connectTimes = 0;
 	private INDCCallback callback;
@@ -72,6 +78,7 @@ public class CAProcessThread extends Thread {
 	
 	@Override
 	public void run() {
+		int beatHeartCount = 0;
 		while (!mStopCAProc) {
 			if (!serverConnected) {
 				if(CAUtils.isNetworkConnected()) {
@@ -100,11 +107,37 @@ public class CAProcessThread extends Thread {
 			}
 			caclient.Process();
 			try {
-				Thread.sleep(200);
+				Thread.sleep(PROCESS_INTERVAL);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			
+			beatHeartCount++;
+			if(beatHeartCount * PROCESS_INTERVAL >= BEAT_HEART_INTERVAL) {
+				sendHeartBeatIfNeed();
+				beatHeartCount = 0;
+			}
 		}
+	}
+	
+	private boolean mWaitHeartBeatResult = false;
+	private void sendHeartBeatIfNeed() {
+		CARequest request = CloundServer.getInstance().getCARequest();
+		if(request != null) {
+			if(!mWaitHeartBeatResult) {
+				request.getRequestHandler().post(new Runnable() {						
+					@Override
+					public void run() {
+						mWaitHeartBeatResult = true;
+						caclient.sendHeartBeat(CAUtils.getHeartBeatMsg().getBytes());	
+						mWaitHeartBeatResult = false;
+					}
+				});
+			}
+		} else {
+			caclient.sendHeartBeat(CAUtils.getHeartBeatMsg().getBytes());
+		}
+
 	}
 
 }

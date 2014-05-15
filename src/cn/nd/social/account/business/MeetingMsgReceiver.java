@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.util.Log;
 import cn.nd.social.account.CloundServer;
+import cn.nd.social.account.business.MeetingUtils.AddDocRsp;
 import cn.nd.social.account.business.MeetingUtils.AddMeetingMemberRsp;
 import cn.nd.social.account.business.MeetingUtils.AddMeetingRsp;
 import cn.nd.social.account.business.MeetingUtils.CancelMeetingRsp;
@@ -128,6 +129,19 @@ public class MeetingMsgReceiver{
 					return;
 				}
 				meetingCbk.onDelMeetingentityCallBack(roomid, success, null);
+			} else if(action.equals(MeetingUtils.MEETING_ADD_DOCUMENT_RSP))  {
+				AddDocRsp addDocRsp = (AddDocRsp)rsp;
+				MeetingManagerCallBack meetingCbk = BusinessMeetingManager.getCbkFromBySeq(addDocRsp.action);
+				BusinessMeetingManager.removeCbkMap(addDocRsp.action);
+				
+				if(meetingCbk == null) {
+					Log.e(TAG,"onMeetingBusiness, MeetingManagerCallBack not set,action:"+ action);
+					return;
+				}
+				boolean success = "success".equals(addDocRsp.result);
+				
+				meetingCbk.onAddMeetingDoc(addDocRsp.roomid, addDocRsp.filename, success, null);
+				
 			} else {
 				MeetingEventNotify.onNotify(rsp);
 			}
